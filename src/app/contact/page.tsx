@@ -14,6 +14,7 @@ const Contact = () => {
   const [submitStatus, setSubmitStatus] = useState("");
 
   // Handle form input changes
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setFormData({
