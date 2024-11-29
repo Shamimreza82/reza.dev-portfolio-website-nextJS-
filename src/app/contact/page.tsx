@@ -14,7 +14,7 @@ const Contact = () => {
   const [submitStatus, setSubmitStatus] = useState("");
 
   // Handle form input changes
-  const handleChange = (e) => {
+  const handleChange = (e: { target: { name: any; value: any; }; }) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
@@ -23,7 +23,7 @@ const Contact = () => {
   };
 
   // Handle form submission (just for demo, actual submission will require a backend)
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     setIsSubmitting(true);
 
