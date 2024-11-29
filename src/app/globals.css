@@ -3,3 +3,149 @@
 @tailwind utilities;
 
 
+/* Neon Text Effect */
+.neon-text {
+    text-shadow: 
+      0 0 5px rgba(255, 0, 150, 0.7), 
+      0 0 10px rgba(255, 0, 150, 0.7), 
+      0 0 15px rgba(255, 0, 150, 0.7), 
+      0 0 20px rgba(0, 0, 255, 0.7), 
+      0 0 30px rgba(0, 0, 255, 0.7), 
+      0 0 40px rgba(0, 0, 255, 0.7);
+    animation: neon 1.5s ease-in-out infinite alternate;
+  }
+  
+  @keyframes neon {
+    0% {
+      text-shadow: 
+        0 0 5px rgba(255, 0, 150, 0.7), 
+        0 0 10px rgba(255, 0, 150, 0.7), 
+        0 0 15px rgba(255, 0, 150, 0.7), 
+        0 0 20px rgba(0, 0, 255, 0.7), 
+        0 0 30px rgba(0, 0, 255, 0.7), 
+        0 0 40px rgba(0, 0, 255, 0.7);
+    }
+    100% {
+      text-shadow: 
+        0 0 5px rgba(255, 0, 150, 1), 
+        0 0 10px rgba(255, 0, 150, 1), 
+        0 0 15px rgba(255, 0, 150, 1), 
+        0 0 20px rgba(0, 0, 255, 1), 
+        0 0 30px rgba(0, 0, 255, 1), 
+        0 0 40px rgba(0, 0, 255, 1);
+    }
+  }
+  
+  /* Neon Icon Effect */
+  .neon-icon {
+    color: rgba(255, 0, 150, 0.8);
+    transition: color 0.3s ease-in-out;
+  }
+  
+  .neon-icon:hover {
+    color: rgba(0, 0, 255, 1);
+    text-shadow: 
+      0 0 10px rgba(255, 0, 150, 1), 
+      0 0 20px rgba(0, 0, 255, 1);
+  }
+  
+  /* Service Card Styling */
+  .service-card {
+    background-color: rgba(0, 0, 0, 0.7); 
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0, 0, 255, 0.3);
+    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+  }
+  
+  .service-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 8px 30px rgba(0, 0, 255, 0.5);
+  }
+  
+  .icon-container {
+    display: inline-block;
+    padding: 15px;
+    border-radius: 50%;
+    background-color: rgba(255, 0, 150, 0.2);
+    margin-bottom: 10px;
+  }
+  
+  .service-icon {
+    font-size: 3rem;
+    color: rgba(255, 0, 150, 1);
+  }
+
+
+
+
+
+
+  /* Neon Text Effect */
+.neon-text {
+  text-shadow: 
+    0 0 5px rgba(255, 0, 150, 0.7), 
+    0 0 10px rgba(255, 0, 150, 0.7), 
+    0 0 15px rgba(255, 0, 150, 0.7), 
+    0 0 20px rgba(0, 0, 255, 0.7), 
+    0 0 30px rgba(0, 0, 255, 0.7), 
+    0 0 40px rgba(0, 0, 255, 0.7);
+  animation: neon 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes neon {
+  0% {
+    text-shadow: 
+      0 0 5px rgba(255, 0, 150, 0.7), 
+      0 0 10px rgba(255, 0, 150, 0.7), 
+      0 0 15px rgba(255, 0, 150, 0.7), 
+      0 0 20px rgba(0, 0, 255, 0.7), 
+      0 0 30px rgba(0, 0, 255, 0.7), 
+      0 0 40px rgba(0, 0, 255, 0.7);
+  }
+  100% {
+    text-shadow: 
+      0 0 5px rgba(255, 0, 150, 1), 
+      0 0 10px rgba(255, 0, 150, 1), 
+      0 0 15px rgba(255, 0, 150, 1), 
+      0 0 20px rgba(0, 0, 255, 1), 
+      0 0 30px rgba(0, 0, 255, 1), 
+      0 0 40px rgba(0, 0, 255, 1);
+  }
+}
+
+/* Blog Card Styling */
+.blog-card {
+  background-color: rgba(0, 0, 0, 0.8);
+  border-radius: 10px;
+  box-shadow: 0 4px 20px rgba(0, 0, 255, 0.3);
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+}
+
+.blog-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 8px 30px rgba(0, 0, 255, 0.5);
+}
+
+/* Blog Icon Styling */
+.blog-icon {
+  font-size: 3rem;
+  color: rgba(255, 0, 150, 1);
+  transition: color 0.3s ease-in-out;
+}
+
+.blog-icon:hover {
+  color: rgba(0, 0, 255, 1);
+  text-shadow: 
+    0 0 10px rgba(255, 0, 150, 1), 
+    0 0 20px rgba(0, 0, 255, 1);
+}
+
+/* Blog Link Styling */
+.blog-card a {
+  transition: color 0.3s ease-in-out;
+}
+
+.blog-card a:hover {
+  color: rgba(0, 0, 255, 1);
+}

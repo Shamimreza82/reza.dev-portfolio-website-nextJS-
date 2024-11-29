@@ -39,6 +39,11 @@ const Navber = () => {
             </Link>
           </li>
           <li>
+            <Link href="/blog">
+              <p className="hover:text-blue-400 transition">Blog</p>
+            </Link>
+          </li>
+          <li>
             <Link href="/contact">
               <p className="hover:text-blue-400 transition">Contact</p>
             </Link>
