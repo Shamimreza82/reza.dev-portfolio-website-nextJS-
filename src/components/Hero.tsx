@@ -18,18 +18,12 @@ const Hero = () => {
             using MongoDB, Express, React, Node.js, and Next.js.
           </p>
           <div className="mt-6">
-            <a
-              href="#projects"
-              className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
-            >
+            <button className="px-6 py-3 bg-blue-500 text-white rounded-lg shadow-lg-neon transition transform hover:scale-105 hover:bg-blue-600 text-shadow-neon">
               View My Work
-            </a>
-            <a
-              href="#contact"
-              className="ml-4 px-6 py-3 bg-gray-700 text-white rounded-lg shadow hover:bg-gray-600 transition"
-            >
+            </button>
+            <button className="ml-4 px-6 py-3 bg-gray-700 text-white rounded-lg shadow hover:bg-gray-600 transition">
               Get in Touch
-            </a>
+            </button>
           </div>
         </div>
       </section>

@@ -2,9 +2,37 @@
 
 import Link from "next/link";
 import React, { useState } from "react";
+import { IoIosCloseCircleOutline } from "react-icons/io";
 
 const Navber = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const navLink = [
+    {
+      path: "/",
+      name: "Home",
+    },
+    {
+      path: "/about",
+      name: "About",
+    },
+    {
+      path: "/projects",
+      name: "Projects",
+    },
+    {
+      path: "/services",
+      name: "Services",
+    },
+    {
+      path: "/blog",
+      name: "Blog",
+    },
+    {
+      path: "/contact",
+      name: "Contact",
+    },
+  ];
 
   return (
     <nav className="bg-slate-900 text-white py-4 px-6 shadow-md">
@@ -18,12 +46,15 @@ const Navber = () => {
 
         {/* Navigation Links */}
         <ul className="hidden md:flex space-x-8 text-lg">
-          <li>
-            <Link href="/">
-              <p className="hover:text-blue-400 transition">Home</p>
-            </Link>
-          </li>
-          <li>
+          {navLink.map((items) => (
+            <li key={items.name}>
+              <Link href={items.path}>
+                <p className="hover:text-blue-400 transition">{items.name}</p>
+              </Link>
+            </li>
+          ))}
+        </ul>
+        {/* <li>
             <Link href="/about">
               <p className="hover:text-blue-400 transition">About</p>
             </Link>
@@ -47,8 +78,7 @@ const Navber = () => {
             <Link href="/contact">
               <p className="hover:text-blue-400 transition">Contact</p>
             </Link>
-          </li>
-        </ul>
+          </li> */}
 
         {/* Mobile Menu Button */}
         <div className="md:hidden">
@@ -56,8 +86,26 @@ const Navber = () => {
             onClick={() => setIsOpen(!isOpen)}
             className="text-white hover:text-blue-400 transition"
           >
-            {isOpen ? "✕" : "☰"} {/* X for close, ☰ for open */}
+            {isOpen ? null : "☰"}
           </button>
+          <div
+            className={`fixed top-0 right-0 h-screen w-64 bg-slate-800 transform transition-transform duration-300 z-20 ${
+              isOpen ? "translate-x-0 " : "translate-x-full"
+            }`}
+          >
+            <button className="text-2xl w-full flex justify-end -mx-3 my-3" onClick={() => setIsOpen(false)}><IoIosCloseCircleOutline/></button>
+            <ul className="flex flex-col gap-1 p-4 ">
+              {navLink.map((items) => (
+                <li  key={items.name}>
+                  <Link href={items.path}>
+                    <p onClick={() => setIsOpen(false)} className="hover:text-blue-400 transition bg-slate-700 rounded-md pl-3 py-4 text-xl">
+                      {items.name}
+                    </p>
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
         </div>
       </div>
     </nav>

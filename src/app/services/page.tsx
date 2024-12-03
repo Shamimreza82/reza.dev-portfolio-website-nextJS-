@@ -5,7 +5,7 @@ const Services = () => {
     return (
         <section id="services" className="bg-slate-900 text-white py-20">
         <div className="container mx-auto px-6 text-center">
-          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500 neon-text">
+          <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500 ">
             My Services
           </h2>
           <p className="mt-4 text-lg text-gray-300">
