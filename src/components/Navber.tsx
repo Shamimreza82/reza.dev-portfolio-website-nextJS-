@@ -3,41 +3,22 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
-import { Menu, X, ChevronDown, Home, Info, FolderKanban, Briefcase, FileText, Mail, Moon, Sun } from "lucide-react"
+import { Menu, X, ChevronDown, Home, Info, FolderKanban, Briefcase, FileText, Mail } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [isScrolled, setIsScrolled] = useState(false)
-  const [isDarkMode, setIsDarkMode] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const pathname = usePathname()
 
-  // Handle scroll effect
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 10) {
-        setIsScrolled(true)
-      } else {
-        setIsScrolled(false)
-      }
-    }
-
-    window.addEventListener("scroll", handleScroll)
-    return () => window.removeEventListener("scroll", handleScroll)
-  }, [])
+  //
 
   // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false)
   }, [pathname])
 
-  // Toggle dark mode
-  const toggleDarkMode = () => {
-    setIsDarkMode(!isDarkMode)
-    document.documentElement.classList.toggle("dark")
-  }
 
   const navLinks = [
     {
@@ -80,13 +61,8 @@ const Navbar = () => {
   ]
 
   return (
-    <nav
-      className={cn(
-        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 text-white py-4 px-6",
-        isScrolled ? "bg-slate-900/95 backdrop-blur-sm shadow-lg" : "bg-slate-900",
-      )}
-    >
-      <div className="container mx-auto flex items-center justify-between">
+    <nav className="fixed justify-between z-50 w-full text-white py-4 lg:px-20 px-4 bg-slate-900/95 backdrop-blur-sm shadow-lg">
+      <div className="mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="text-2xl font-bold">
           <Link href="/">
@@ -175,13 +151,6 @@ const Navbar = () => {
           </ul>
 
           {/* Dark/Light Mode Toggle */}
-          <button
-            onClick={toggleDarkMode}
-            className="ml-2 p-2 rounded-full hover:bg-slate-800 transition-colors"
-            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {isDarkMode ? <Sun className="h-5 w-5 text-yellow-400" /> : <Moon className="h-5 w-5 text-slate-300" />}
-          </button>
 
           {/* CTA Button */}
           <Button className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white">Hire Me</Button>
@@ -190,13 +159,7 @@ const Navbar = () => {
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-4">
           {/* Dark/Light Mode Toggle - Mobile */}
-          <button
-            onClick={toggleDarkMode}
-            className="p-2 rounded-full hover:bg-slate-800 transition-colors"
-            aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
-          >
-            {isDarkMode ? <Sun className="h-5 w-5 text-yellow-400" /> : <Moon className="h-5 w-5 text-slate-300" />}
-          </button>
+
 
           <button
             onClick={() => setIsOpen(!isOpen)}

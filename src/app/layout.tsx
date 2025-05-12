@@ -1,6 +1,8 @@
 "use client"
+import { AuthProvider } from "@/components/auth-provider";
 import "./globals.css";
 import Navber from "@/components/Navber";
+import { Toaster } from "sonner";
 
 
 
@@ -21,9 +23,12 @@ export default function RootLayout({
         className={`antialiased bg-slate-900 text-white font-Roboto `}
       >
 
-        {/* <Cursor></Cursor> */}
-        <Navber></Navber>
-        {children}
+        <AuthProvider>
+          {/* <Cursor></Cursor> */}
+          <Navber></Navber>
+          {children}
+          <Toaster />
+        </AuthProvider>
 
       </body>
     </html>
