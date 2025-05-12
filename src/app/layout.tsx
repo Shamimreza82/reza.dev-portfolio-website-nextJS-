@@ -1,7 +1,7 @@
 "use client"
 import "./globals.css";
 import Navber from "@/components/Navber";
-import { SessionProvider } from "next-auth/react";
+
 
 
 
@@ -23,8 +23,8 @@ export default function RootLayout({
 
         {/* <Cursor></Cursor> */}
         <Navber></Navber>
-      <SessionProvider>  {children}</SessionProvider>
-    
+        {children}
+
       </body>
     </html>
   );

@@ -1,5 +1,7 @@
 "use client"
-import Hero from "@/components/Hero";
+
+import Banner from "@/components/homePage/Banner";
+
 
 
 export default function Home() {
@@ -7,8 +9,7 @@ export default function Home() {
 
   return (
     <div className="container mx-auto">
-      <Hero></Hero>
-
+      <Banner />
     </div>
   );
 }
