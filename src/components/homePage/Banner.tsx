@@ -1,13 +1,14 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion } from 'framer-motion';
 import { CodeBracketIcon, CommandLineIcon } from '@heroicons/react/24/outline';
-import bannerImage from '../../asset/photo/protfolio.jpg'; // Adjust the path as necessary
+import bannerImage1 from '../../asset/photo/protolio1.jpg'; // Adjust the path as necessary
+import StatusBadge from '../ui/status-badge';
 
 const Banner = () => {
   return (
-    <section className="flex flex-col md:flex-row  min-h-screen items-center px-4 py-12">
+    <section className="flex flex-col md:flex-row  min-h-screen items-center px-4 py-12 gap-5 md:gap-10 lg:gap-20 bg-gradient-to-b" >
       <div className="relative z-10 w-full max-w-4xl text-center md:text-left">
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.2 }}
@@ -18,40 +19,45 @@ const Banner = () => {
             <motion.div
               animate={{ rotate: 360 }}
               transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+              className="neon-light"
             >
               <CodeBracketIcon className="w-10 h-10 text-cyan-400/80 group-hover:text-cyan-300 transition-colors" />
             </motion.div>
-            <span className="text-lg md:text-xl font-mono text-cyan-400/80 group-hover:text-cyan-300 transition-colors">
+            <span className="text-lg md:text-xl font-mono text-cyan-400/80 group-hover:text-cyan-300 transition-colors neon-light">
               High-performance web experiences
             </span>
           </div>
 
           {/* Main Headline */}
-          <motion.h1 
+          <motion.h1
             className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-gray-100 leading-tight"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
+
             <span className="inline-block bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
-              Full Stack Developer
+              Hi,
+              <br />
+              I am Reza,
+              <br />Web developer
             </span>
             {/* You can add a second line here if needed */}
           </motion.h1>
 
           {/* Animated Description */}
-          <motion.p 
-            className="text-base sm:text-lg md:text-2xl text-gray-300 max-w-3xl mx-auto md:mx-0 leading-relaxed"
+          <motion.p
+            className="text-base sm:text-base md:text-xl text-gray-300 max-w-3xl mx-auto md:mx-0 leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            Hello! I’m Shamim Reza, <span className="text-cyan-300">a passionate full-stack developer</span> dedicated{' '}
+            <span className="text-cyan-300">Passionate full-stack developer</span> dedicated{' '}
             <span className="text-blue-300">to crafting seamless, high-performance web experiences.</span>
           </motion.p>
 
           {/* Interactive Tech Grid */}
-          <motion.div 
+          {/* <motion.div
             className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mt-8 md:mt-12"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -67,10 +73,10 @@ const Banner = () => {
                 <span className="font-medium text-gray-300 text-sm sm:text-base">{tech}</span>
               </motion.div>
             ))}
-          </motion.div>
+          </motion.div> */}
 
           {/* Dynamic CTA Section */}
-          <motion.div 
+          <motion.div
             className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10 md:mt-16 justify-center md:justify-start"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
@@ -100,15 +106,23 @@ const Banner = () => {
         </motion.div>
       </div>
       <div>
-        <motion.img
-            src={bannerImage.src}
+        <div className="relative  rounded-2xl lg:ml-28 ">
+          <motion.img
+            src={bannerImage1.src}
             alt="Portfolio"
-            className="w-full max-w-md mx-auto md:max-w-lg lg:max-w-xl rounded-2xl shadow-lg mt-8 md:mt-0"
+            className="max-w-md mx-auto w-80 md:max-w-lg lg:max-w-xl shadow-2xl shadow-cyan-500/50 rounded-2xl   mt-8 md:mt-0"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 1.2, ease: 'easeOut' }}
-            whileHover={{ scale: 1.03 }}
+            transition={{ duration: 1.02, delay: 1.2, ease: 'easeOut' }}
+            whileHover={{ scale: 1.01, rotate: 2 }}
           />
+        </div>
+        <div className='lg:ml-48 mt-8'>
+          <StatusBadge
+            text='Available for projects'
+            colorClass='bg-green-500'
+          />
+        </div>
       </div>
     </section>
   );

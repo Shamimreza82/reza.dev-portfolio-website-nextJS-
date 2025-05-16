@@ -3,6 +3,8 @@ import { AuthProvider } from "@/components/auth-provider";
 import "./globals.css";
 import Navber from "@/components/Navber";
 import { Toaster } from "sonner";
+import {Footer} from "@/components/homePage/Footer";
+
 
 
 
@@ -28,6 +30,8 @@ export default function RootLayout({
           <Navber></Navber>
           {children}
           <Toaster />
+          <Footer/>
+
         </AuthProvider>
 
       </body>
