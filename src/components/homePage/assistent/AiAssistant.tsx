@@ -1,7 +1,9 @@
 import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline'
 import { motion, AnimatePresence } from 'framer-motion'
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import AIChat from '../test-ai'
+// import reza from '@/asset/photo/reza.jpg'
+// import Image from 'next/image'
 
 // Common transitions
 const floatTransition = { duration: 4, repeat: Infinity, ease: 'easeInOut' }
@@ -13,7 +15,7 @@ const bubbleVariants = {
 }
 
 const presenceVariants = {
-  pulse: { scale: [1, 1.4, 1], opacity: [1, 0.6, 1], transition: { duration: 1.5, repeat: Infinity } },
+  pulse: { scale: [1, 1.4, 1], opacity: [1, 0.6, 1], transition: { duration: 2, repeat: Infinity } },
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -43,10 +45,15 @@ const AiAssistant = () => {
     }, 800)
   }
 
+
+  useEffect(() =>{
+    setOpen(true)
+  }, [])
+
   return (
-    <div ref={constraintsRef} className="fixed bottom-8 lg:right-8 right-4 z-50 flex flex-col items-end">
+    <div ref={constraintsRef} className="fixed bottom-8 lg:right-8 right-1 z-50 flex flex-col items-end">
       {/* Chat Panel */}
-      <AnimatePresence>
+      <AnimatePresence >
         {open && (
           // <motion.div
           //   className="mb-4 w-72 h-96 bg-white dark:bg-gray-800 rounded-xl shadow-2xl flex flex-col overflow-hidden"
@@ -92,9 +99,18 @@ const AiAssistant = () => {
           //     </button>
           //   </div>
           // </motion.div>
-          <AIChat/>
+          <motion.div
+            className=" bg-white dark:bg-gray-800 rounded-xl shadow-2xl flex flex-col overflow-hidden"
+            variants={panelVariants}
+            initial="hidden"
+            animate="visible"
+            exit="hidden"
+          >
+            <AIChat />
+          </motion.div>
+
         )
-        
+
         }
       </AnimatePresence>
 
@@ -112,11 +128,14 @@ const AiAssistant = () => {
         className="relative cursor-pointer"
         aria-label={open ? 'Close chat assistant' : 'Open chat assistant'}
       >
+        
         <motion.div
-          className="h-20 w-20 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center shadow-xl"
+          className="h-14 w-14 lg:h-24 lg:w-24 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center shadow-xl"
           variants={bubbleVariants}
         >
-          <ChatBubbleOvalLeftEllipsisIcon className="h-10 w-10 text-white" />
+          <ChatBubbleOvalLeftEllipsisIcon className="lg:h-14 lg:w-14 h-10 w-10 text-white animate-in" />
+          {/* <Image src={reza} height={50} width={50} alt='reza-image' className='rounded-full'></Image> */}
+          <p>{}</p>
         </motion.div>
         <motion.span
           className="absolute top-1 right-1 h-3 w-3 bg-green-400 rounded-full"
