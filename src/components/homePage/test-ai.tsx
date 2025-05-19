@@ -1,241 +1,181 @@
 "use client"
-import { useState, useEffect, useRef } from "react"
-import { io, type Socket } from "socket.io-client"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
-import { Card, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
-import { Loader2, Send, User, Zap } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Badge } from "@/components/ui/badge"
-import reza from "../../asset/photo/reza.jpg"
-import Image from "next/image"
+import { useState, useEffect, useRef } from "react";
+import { io, type Socket } from "socket.io-client";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardHeader, CardTitle, CardFooter } from "@/components/ui/card";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { Badge } from "@/components/ui/badge";
+import { cn } from "@/lib/utils";
+import { Send, User,Zap } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
+import reza from "../../asset/photo/reza.jpg";
 
 export default function AIChat() {
-  const [sessionId] = useState("456")
-  const [prompt, setPrompt] = useState("")
-  const [chat, setChat] = useState<{ from: "you" | "ai"; text: string }[]>([])
-  const [isConnected, setIsConnected] = useState(false)
-  const [isTyping, setIsTyping] = useState(false)
-  const socketRef = useRef<Socket>()
-  const scrollAreaRef = useRef<HTMLDivElement>(null)
+  const [sessionId] = useState("456");
+  const [prompt, setPrompt] = useState("");
+  const [chat, setChat] = useState<{ from: "you" | "ai"; text: string; time: string }[]>([]);
+  const [isConnected, setIsConnected] = useState(false);
+  const [isTyping, setIsTyping] = useState(false);
+  const socketRef = useRef<Socket>();
+  const scrollRef = useRef<HTMLDivElement>(null);
+
+  // Auto-scroll
+  useEffect(() => {
+    if (scrollRef.current) {
+      scrollRef.current.scrollTop = scrollRef.current.scrollHeight;
+    }
+  }, [chat, isTyping]);
+
+  // Connect socket
+ useEffect(() => {
+  const socket = io(process.env.NEXT_PUBLIC_API_URL!, { transports: ["websocket"] });
+  socketRef.current = socket;
+
+  socket.on("connect", () => setIsConnected(true));
+  socket.on("disconnect", () => setIsConnected(false));
+  socket.on("ai_response", ({ text }) => {
+    setIsTyping(false);
+    pushMessage("ai", text);
+  });
+  socket.on("ai_error", (errMsg) => {
+    setIsTyping(false);
+    pushMessage("ai", `Error: ${errMsg}`);
+  });
+
+  socket.emit("join_session", sessionId);
+
+  // cleanup must return void, so wrap the disconnect in a block
+  return () => {
+    socket.disconnect();
+  };
+}, [sessionId]);
+
+
 
 
   
-  // Auto-scroll to bottom when new messages arrive
-  useEffect(() => {
-    if (scrollAreaRef.current) {
-      const scrollContainer = scrollAreaRef.current.querySelector("[data-radix-scroll-area-viewport]")
-      if (scrollContainer) {
-        scrollContainer.scrollTop = scrollContainer.scrollHeight
-      }
-    }
-  }, [chat, isTyping])
-
-
-
-  useEffect(() => {
-    const socket = io(process.env.NEXT_PUBLIC_API_URL, {
-      transports: ["websocket"],
-    })
-    socketRef.current = socket
-
-    socket.on("connect", () => {
-      console.log("⚡️ Connected", socket.id)
-      setIsConnected(true)
-      socket.emit("join_session", sessionId)
-    })
-
-    socket.on("disconnect", () => {
-      setIsConnected(false)
-    })
-
-    socket.on("ai_response", ({ text }) => {
-      setIsTyping(false)
-      setChat((c) => [...c, { from: "ai", text }])
-    })
-
-    socket.on("ai_error", (errMsg) => {
-      console.error("AI error:", errMsg)
-      setIsTyping(false)
-      setChat((c) => [...c, { from: "ai", text: `Error: ${errMsg}` }])
-    })
-
-    return () => {
-      socket.disconnect()
-    }
-  }, [sessionId])
+  const pushMessage = (from: "you" | "ai", text: string) => {
+    const time = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    setChat((prev) => [...prev, { from, text, time }]);
+  };
 
   const send = async () => {
-    if (!prompt.trim()) return
+    if (!prompt.trim()) return;
+    pushMessage("you", prompt);
+    setPrompt("");
+    setIsTyping(true);
 
-    setChat((c) => [...c, { from: "you", text: prompt }])
-    setIsTyping(true)
-
-    // WebSocket
     if (socketRef.current?.connected) {
-      socketRef.current.emit("ask_ai", { sessionId, prompt })
+      socketRef.current.emit("ask_ai", { sessionId, prompt });
     } else {
-      // REST fallback
       try {
-        const response = await fetch("ask_ai", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ sessionId, prompt }),
-        })
-
-        const data = await response.json()
-
-        console.log(data.messages)
-
-        if (data.message) {
-          setIsTyping(false)
-          setChat((c) => [...c, { from: "ai", text: data.message }])
-        }
-      } catch (e) {
-        console.error(e)
-        setIsTyping(false)
-        setChat((c) => [...c, { from: "ai", text: "Sorry, there was an error processing your request." }])
+        const res = await fetch("/api/ask_ai", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ sessionId, prompt }) });
+        const { message } = await res.json();
+        setIsTyping(false);
+        pushMessage("ai", message);
+      } catch {
+        setIsTyping(false);
+        pushMessage("ai", "Sorry, something went wrong.");
       }
     }
-
-    setPrompt("")
-  }
+  };
 
   return (
-    <div className="max-w-3xl mx-auto p-4 ">
-      <Card className="flex flex-col shadow-lg border-t-4 border-t-emerald-500 lg:w-96 lg:h-96 h-[450px]">
-        <CardHeader className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-4">
-          <div className="flex justify-between items-center">
-            <CardTitle className="flex items-center gap-2 text-xl font-bold">
-               <Image src={reza}
-                        alt="image"
-                        width={40}
-                        height={40}
-                        className="rounded-full"></Image>
-              
-              Hi, i am Reza 
-            </CardTitle>
-            <Badge
-              variant={isConnected ? "default" : "destructive"}
-              className={cn("flex items-center gap-1.5", isConnected ? "bg-emerald-700" : "bg-red-600")}
-            >
-              <div
-                className={cn("w-2 h-2 rounded-full animate-pulse", isConnected ? "bg-emerald-300" : "bg-red-300")}
-              />
-              {isConnected ? "Connected" : "Disconnected"}
-            </Badge>
+    <div className="flex justify-center items-center h-full bg-gradient-to-br from-slate-100 rounded-2xl to-white">
+      <Card className="w-full max-w-md h-[600px] flex flex-col rounded-2xl shadow-2xl overflow-hidden">
+        <CardHeader className="bg-emerald-500 text-white flex items-center justify-between px-6 py-4">
+          <div className="flex items-center gap-3">
+            <Image src={reza} alt="Avatar" width={40} height={40} className="rounded-full" />
+            <CardTitle className="text-lg font-semibold">Ask me about your Project</CardTitle>
           </div>
+          <Badge variant={isConnected ? "outline" : "destructive"} className="text-sm">
+            {isConnected ? "Online" : "Offline"}
+          </Badge>
         </CardHeader>
 
-        <ScrollArea ref={scrollAreaRef}  className="flex-1 p-4 bg-slate-50 h-32">
-          <div className="space-y-4">
-            {chat.length === 0 ? (
-              <div className="text-center py-12">
-                <Zap size={40} className="mx-auto mb-3 text-emerald-500 opacity-50" />
-                <h3 className="text-lg font-medium text-slate-700">Start a conversation</h3>
-                <p className="text-sm text-slate-500 mt-1">Ask me anything and I ll respond in real-time</p>
-              </div>
-            ) : (
-              chat.map((message, index) => (
-                <div key={index} className={cn("flex", message.from === "you" ? "justify-end" : "justify-start")}>
-                  <div
-                    className={cn(
-                      "flex items-start gap-2 max-w-[80%]",
-                      message.from === "you" ? "flex-row-reverse" : "flex-row",
-                    )}
-                  >
-                    <div
-                      className={cn(
-                        "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center",
-                        message.from === "you" ? "bg-emerald-500" : "bg-slate-700",
-                      )}
-                    >
-                      {message.from === "you" ? (
-                        <User size={16} className="text-white" />
-                      ) : (
-                        // <Bot size={16} className="text-white" />
-                        <Image src={reza}
-                        alt="image"
-                        width={150}
-                        height={150}
-                        className="rounded-full"
-                        />
-                      )}
-                    </div>
-                    <div
-                      className={cn(
-                        "px-4 py-3 rounded-lg",
-                        message.from === "you"
-                          ? "bg-emerald-500 text-white rounded-tr-none"
-                          : "bg-white border border-slate-200 shadow-sm rounded-tl-none",
-                      )}
-                    >
-                      <div className="whitespace-pre-wrap">{message.text}</div>
-                    </div>
-                  </div>
-                </div>
-              ))
+        <ScrollArea ref={scrollRef} className="flex-1 bg-slate-50 p-4 space-y-4">
+          <AnimatePresence initial={false} mode="popLayout">
+            {chat.length === 0 && !isTyping && (
+              <motion.div
+                key="start"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="text-center text-gray-500 mt-10"
+              >
+                <Zap className="mx-auto mb-2" size={48} />
+                <p className="text-lg">Start a conversation</p>
+                <p className="text-sm">Ask me anything!</p>
+              </motion.div>
             )}
+
+            {chat.map(({ from, text, time }, idx) => (
+              <motion.div
+                key={idx}
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className={cn(
+                  "flex items-end gap-2 mt-6",
+                  from === "you" ? "justify-end" : "justify-start"
+                )}
+              >
+                {from === "ai" && (
+                  <Image src={reza} alt="Bot" width={32} height={32} className="rounded-full" />
+                )}
+                <div className={cn(
+                  "relative max-w-[75%] px-4 py-2",
+                  from === "you"
+                    ? "bg-emerald-500 text-white rounded-bl-2xl rounded-tr-2xl"
+                    : "bg-white border border-slate-200 rounded-br-2xl rounded-tl-2xl"
+                )}>
+                  <div className="whitespace-pre-wrap">{text}</div>
+                  <span className="absolute -bottom-5 right-2 text-xs text-gray-400 ">{time}</span>
+                </div>
+                {from === "you" && <User className="text-emerald-500" />}
+              </motion.div>
+            ))}
 
             {isTyping && (
-              <div className="flex justify-start">
-                <div className="flex items-start gap-2 max-w-[80%]">
-                  <div className="flex-shrink-0 w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center">
-                    <Image src={reza}
-                        alt="image"
-                        width={150}
-                        height={150}
-                        className="rounded-full"
-                        />
-                  </div>
-                  <div className="px-4 py-3 bg-white border border-slate-200 rounded-lg rounded-tl-none shadow-sm">
-                    <div className="flex items-center gap-1">
-                      <div
-                        className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "0ms" }}
-                      ></div>
-                      <div
-                        className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "150ms" }}
-                      ></div>
-                      <div
-                        className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
-                        style={{ animationDelay: "300ms" }}
-                      ></div>
-                    </div>
-                  </div>
+              <motion.div
+                key="typing"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="flex items-center gap-2"
+              >
+                <div className="h-8 w-8 bg-slate-200 rounded-full animate-pulse" />
+                <div className="flex gap-1">
+                  <div className="h-2 w-2 bg-slate-400 rounded-full animate-bounce" />
+                  <div className="h-2 w-2 bg-slate-400 rounded-full animate-bounce delay-150" />
+                  <div className="h-2 w-2 bg-slate-400 rounded-full animate-bounce delay-300" />
                 </div>
-              </div>
+              </motion.div>
             )}
-          </div>
+          </AnimatePresence>
         </ScrollArea>
 
-        <CardFooter className="p-4 border-t bg-white">
+        <CardFooter className="p-4 bg-white">
           <form
-            className="flex w-full gap-2"
-            onSubmit={(e) => {
-              e.preventDefault()
-              send()
-            }}
+            onSubmit={(e) => { e.preventDefault(); send(); }}
+            className="flex gap-2"
           >
             <Input
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               placeholder="Type your message..."
-              className="flex-1"
-              disabled={!isConnected}
+              autoFocus
+              onKeyDown={(e) => e.key === 'Enter' && !e.shiftKey && send()}
+              className="flex-1 resize-none h-10"
             />
-            <Button
-              type="submit"
-              disabled={!prompt.trim() || !isConnected}
-              className="bg-emerald-500 hover:bg-emerald-600"
-            >
-              {isTyping ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+            <Button type="submit" disabled={!prompt.trim() || !isConnected} className="px-4">
+              <Send />
             </Button>
           </form>
         </CardFooter>
       </Card>
     </div>
-  )
+  );
 }
