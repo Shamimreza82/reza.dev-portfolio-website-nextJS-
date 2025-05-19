@@ -1,7 +1,7 @@
 "use client"
 
 import Banner from "@/components/homePage/Banner";
-import About from "./about/page";
+import AiAssistant from "@/components/homePage/assistent/AiAssistant";
 
 
 
@@ -11,7 +11,7 @@ export default function Home() {
   return (
     <div className="container mx-auto">
       <Banner />
-      <About/>
+      <AiAssistant/>
     </div>
   );
 }

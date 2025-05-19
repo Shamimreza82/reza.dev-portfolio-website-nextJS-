@@ -27,7 +27,7 @@ export async function POST(request: Request) {
           message: "Login successful",
           user: {
             id: "user-123",
-            name: "John Doe",
+            name: "John Doe",  
             email: email,
           },
         },

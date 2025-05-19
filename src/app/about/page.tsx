@@ -1,8 +1,4 @@
-
-import TestAI from "@/components/homePage/test-ai";
-import React from "react";
-
-
+import AIChat from "@/components/homePage/test-ai";
 
 const AboutPage = () => {
   return (
@@ -16,7 +12,7 @@ const AboutPage = () => {
       resumeLink="https://drive.google.com/file/d/1Xk4v2x5Z3J6Q8g7q5z5z5z5z5z5z5z5/view?usp=sharing"
       skills={["JavaScript", "TypeScript", "React", "Node.js", "Express", "MongoDB", "PostgreSQL", "Prisma"]}
       /> */}
-      <TestAI/>
+    <AIChat/>
     </>
   );
 };

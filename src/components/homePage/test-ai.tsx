@@ -4,15 +4,15 @@ import { io, type Socket } from "socket.io-client"
 import { Input } from "@/components/ui/input"
 import { Button } from "@/components/ui/button"
 import { Card, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
-import { Loader2, Send, Bot, User, Zap } from "lucide-react"
+import { Loader2, Send, User, Zap } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { ScrollArea } from "@/components/ui/scroll-area"
 import { Badge } from "@/components/ui/badge"
-import reza from "../../asset/photo/protolio1.jpg"
+import reza from "../../asset/photo/reza.jpg"
 import Image from "next/image"
 
 export default function AIChat() {
-  const [sessionId] = useState("4")
+  const [sessionId] = useState("456")
   const [prompt, setPrompt] = useState("")
   const [chat, setChat] = useState<{ from: "you" | "ai"; text: string }[]>([])
   const [isConnected, setIsConnected] = useState(false)
@@ -20,6 +20,8 @@ export default function AIChat() {
   const socketRef = useRef<Socket>()
   const scrollAreaRef = useRef<HTMLDivElement>(null)
 
+
+  
   // Auto-scroll to bottom when new messages arrive
   useEffect(() => {
     if (scrollAreaRef.current) {
@@ -30,8 +32,10 @@ export default function AIChat() {
     }
   }, [chat, isTyping])
 
+
+
   useEffect(() => {
-    const socket = io(process.env.NEXT_PUBLIC_WS_URL || "http://localhost:4000", {
+    const socket = io(process.env.NEXT_PUBLIC_API_URL, {
       transports: ["websocket"],
     })
     socketRef.current = socket
@@ -74,7 +78,7 @@ export default function AIChat() {
     } else {
       // REST fallback
       try {
-        const response = await fetch("/ask_ai", {
+        const response = await fetch("ask_ai", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ sessionId, prompt }),
@@ -99,14 +103,18 @@ export default function AIChat() {
   }
 
   return (
-    <div className="max-w-3xl mx-auto p-4 h-[calc(100vh-2rem)]">
-      <Card className="h-full flex flex-col shadow-lg border-t-4 border-t-emerald-500">
+    <div className="max-w-3xl mx-auto p-4 ">
+      <Card className="flex flex-col shadow-lg border-t-4 border-t-emerald-500 lg:w-96 lg:h-96 h-[450px]">
         <CardHeader className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-4">
           <div className="flex justify-between items-center">
             <CardTitle className="flex items-center gap-2 text-xl font-bold">
-              <Bot size={24} />
+               <Image src={reza}
+                        alt="image"
+                        width={40}
+                        height={40}
+                        className="rounded-full"></Image>
               
-              Hi, i am Shamim Reza your personal assistent
+              Hi, i am Reza 
             </CardTitle>
             <Badge
               variant={isConnected ? "default" : "destructive"}
@@ -120,7 +128,7 @@ export default function AIChat() {
           </div>
         </CardHeader>
 
-        <ScrollArea ref={scrollAreaRef} className="flex-1 p-4 bg-slate-50">
+        <ScrollArea ref={scrollAreaRef}  className="flex-1 p-4 bg-slate-50 h-32">
           <div className="space-y-4">
             {chat.length === 0 ? (
               <div className="text-center py-12">
