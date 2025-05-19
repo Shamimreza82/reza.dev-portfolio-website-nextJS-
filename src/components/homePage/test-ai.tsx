@@ -89,13 +89,13 @@ export default function AIChat() {
   }
 
   return (
-    <div className="mx-auto">
-      <Card className="flex flex-col shadow-2xl border-t-4 border-t-teal-600 w-full max-w-md h-[500px]">
+    <div className="mx-auto ">
+      <Card className="flex flex-col shadow-2xl border-t-4 border-t-teal-600 w-full max-w-md h-[620px]">
         <CardHeader className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-2">
           <div className="flex justify-between items-center">
             <CardTitle className="flex items-center gap-2 text-xl font-bold">
               <Image src={reza} alt="Reza" width={40} height={40} className="rounded-full" />
-              Hi, i am Reza <br /> Ai Assistant
+              Hi, i am Reza, 
             </CardTitle>
             <Badge
               variant={isConnected ? "default" : "destructive"}
@@ -124,7 +124,7 @@ export default function AIChat() {
             <div className="text-center py-12">
               <Zap size={40} className="mx-auto mb-3 text-emerald-500 opacity-50" />
               <h3 className="text-lg font-medium text-slate-700">Start a conversation</h3>
-              <p className="text-sm text-slate-500 mt-1">Ask me anything and I’ll respond in real-time</p>
+              <p className="text-sm text-slate-500 mt-1">Ask me about your project i am your Ai Assistent</p>
             </div>
           ) : (
             chat.map((message, index) => {
@@ -161,7 +161,7 @@ export default function AIChat() {
                           : "bg-white border border-slate-200 shadow-sm rounded-tl-none"
                       )}
                     >
-                      <div className="whitespace-pre-wrap text-sm">{message.text}</div>
+                      <div className="whitespace-pre-wrap text-base">{message.text}</div>
                     </div>
                   </div>
                 </div>
@@ -193,10 +193,10 @@ export default function AIChat() {
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               disabled={!isConnected || isTyping}
-              className="flex-1 rounded-full border-gray-200 bg-gray-50 focus-visible:ring-emerald-500"
+              className="flex-1 rounded-full border-gray-200 bg-gray-50 p-6  focus-visible:ring-emerald-500"
             />
             <Button type="submit" size="icon" disabled={!prompt.trim() || !isConnected || isTyping} className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-md">
-              {isTyping ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-4 w-4" />}
+              {isTyping ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-8 w-8" />}
             </Button>
           </form>
         </CardFooter>

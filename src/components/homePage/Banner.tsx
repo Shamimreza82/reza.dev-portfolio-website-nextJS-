@@ -6,7 +6,7 @@ import StatusBadge from '../ui/status-badge';
 
 const Banner = () => {
   return (
-    <section className="flex flex-col md:flex-row  min-h-screen items-center px-4 py-12 gap-5 md:gap-10 lg:gap-20 bg-gradient-to-b" >
+    <section className="flex flex-col md:flex-row pt-24 min-h-screen items-center px-4 py-12 gap-5 md:gap-10 lg:gap-20 bg-gradient-to-b" >
       <div className="relative z-10 w-full max-w-4xl text-center md:text-left">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
