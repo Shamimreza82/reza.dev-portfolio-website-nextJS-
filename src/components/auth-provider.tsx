@@ -3,6 +3,7 @@
 import { createContext, useContext, useState, useEffect, type ReactNode } from "react"
 import { useRouter } from "next/navigation"
 import { User } from "@/types/auth"
+import { getCookie } from "@/utils/getCookie"
 
 
 interface AuthContextType {
@@ -17,33 +18,38 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined)
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [user, setUser] = useState<Omit<User, "password"> | null>(null)
+
   const [loading, setLoading] = useState(true)
   const router = useRouter()
 
+
+
+
+
   // Check if user is logged in on initial load
-useEffect(() => {
+  useEffect(() => {
     const checkAuth = async () => {
       try {
         // 1. Parse the cookie string to find your token (e.g. "authToken")
-        const match = document.cookie
-          .split('; ')
-          .find((row) => row.startsWith('authToken='))
-        const token = match ? match.split('=')[1] : null
+        setLoading(true)
+         const token = await getCookie('accessTokenAuth')
 
-        const response = await fetch('/api/auth/me', {
+        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`, {
           method: 'GET',
           headers: {
             // 2. Send it in Authorization header
             Authorization: token ? `Bearer ${token}` : '',
             'Content-Type': 'application/json',
           },
-          // 3. If you need cookies (e.g. HTTP-only session cookies) sent as well:
+          // // 3. If you need cookies (e.g. HTTP-only session cookies) sent as well:
           credentials: 'include',
         })
 
+
         if (response.ok) {
           const data = await response.json()
-          setUser(data.user)
+          console.log(data)
+          setUser(data.data)
         } else {
           console.warn('Auth check failed:', response.status)
         }
@@ -64,8 +70,9 @@ useEffect(() => {
     setLoading(true)
 
     try {
-      const response = await fetch("https://my-multi-server-production.up.railway.app/api/vi/auth/login", {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/login`, {
         method: "POST",
+        credentials: 'include',
         headers: {
           "Content-Type": "application/json",
         },
@@ -79,7 +86,6 @@ useEffect(() => {
 
       const data = await response.json()
       setUser(data.user)
-      router.push("/dashboard")
     } catch (error) {
       throw error
     } finally {
@@ -92,7 +98,7 @@ useEffect(() => {
     setLoading(true)
 
     try {
-      const response = await fetch(`${process.env.NEXT_PUBLIC_API as string}/auth/register`, {
+      const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL as string}/auth/register`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -118,7 +124,7 @@ useEffect(() => {
   // Logout function
   const logout = async () => {
     try {
-      await fetch("/api/auth/logout", {
+      await fetch(`${process.env.NEXT_PUBLIC_API_URL as string}/auth/logout`, {
         method: "POST",
       })
 

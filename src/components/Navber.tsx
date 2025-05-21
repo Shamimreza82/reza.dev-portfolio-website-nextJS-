@@ -3,16 +3,31 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
-import { Menu, X, ChevronDown, Home, Info, FolderKanban, Briefcase, FileText, Mail } from "lucide-react"
+import { Menu, X, ChevronDown } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
+import { useAuth } from "./auth-provider"
+import {
+  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
+  DropdownMenuGroup,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuPortal,
+  DropdownMenuSeparator,
+  DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+} from "./ui/dropdown-menu"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
   const pathname = usePathname()
+  const { user} = useAuth()
 
-  //
+
+
 
   // Close mobile menu when route changes
   useEffect(() => {
@@ -24,18 +39,15 @@ const Navbar = () => {
     {
       path: "/",
       name: "Home",
-      icon: <Home className="w-4 h-4 mr-2" />,
     },
 
     {
       path: "/projects",
       name: "Projects",
-      icon: <FolderKanban className="w-4 h-4 mr-2" />,
     },
     {
       path: "/services",
       name: "Services",
-      icon: <Briefcase className="w-4 h-4 mr-2" />,
       dropdown: [
         { path: "/services/web-development", name: "Web Development" },
         { path: "/services/app-development", name: "App Development" },
@@ -46,22 +58,22 @@ const Navbar = () => {
     {
       path: "/blog",
       name: "Blog",
-      icon: <FileText className="w-4 h-4 mr-2" />,
     },
     {
       path: "/about",
       name: "About",
-      icon: <Info className="w-4 h-4 mr-2" />,
     },
     {
       path: "/contact",
       name: "Contact",
-      icon: <Mail className="w-4 h-4 mr-2" />,
     },
   ]
 
+
+
+
   return (
-    <nav className="fixed justify-between z-50 w-full text-white py-4 lg:px-20 px-4 bg-slate-900/95 backdrop-blur-sm shadow-lg">
+    <nav className="fixed justify-between z-50 w-full text-white py-4 lg:px-20 px-4  backdrop-blur-sm shadow-lg">
       <div className="mx-auto flex items-center justify-between">
         {/* Logo */}
         <div className="text-2xl font-bold">
@@ -90,7 +102,6 @@ const Navbar = () => {
                           : "hover:text-emerald-400 hover:bg-slate-800",
                       )}
                     >
-                      {item.icon}
                       {item.name}
                       <ChevronDown
                         className={cn(
@@ -141,7 +152,6 @@ const Navbar = () => {
                           : "hover:text-emerald-400 hover:bg-slate-800",
                       )}
                     >
-                      {item.icon}
                       {item.name}
                     </p>
                   </Link>
@@ -153,7 +163,68 @@ const Navbar = () => {
           {/* Dark/Light Mode Toggle */}
 
           {/* CTA Button */}
-          <Button className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white">Hire Me</Button>
+          {
+            user ? <Link href='/dashboard'>
+              <DropdownMenu>
+                <DropdownMenuTrigger asChild>
+                   <Button className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white">Dashboard</Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-56">
+                  <DropdownMenuLabel>My Account</DropdownMenuLabel>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem>
+                      Profile
+                      <DropdownMenuShortcut>⇧⌘P</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      Billing
+                      <DropdownMenuShortcut>⌘B</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      Settings
+                      <DropdownMenuShortcut>⌘S</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>
+                      Keyboard shortcuts
+                      <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuGroup>
+                    <DropdownMenuItem>Team</DropdownMenuItem>
+                    <DropdownMenuSub>
+                      <DropdownMenuSubTrigger>Invite users</DropdownMenuSubTrigger>
+                      <DropdownMenuPortal>
+                        <DropdownMenuSubContent>
+                          <DropdownMenuItem>Email</DropdownMenuItem>
+                          <DropdownMenuItem>Message</DropdownMenuItem>
+                          <DropdownMenuSeparator />
+                          <DropdownMenuItem>More...</DropdownMenuItem>
+                        </DropdownMenuSubContent>
+                      </DropdownMenuPortal>
+                    </DropdownMenuSub>
+                    <DropdownMenuItem>
+                      New Team
+                      <DropdownMenuShortcut>⌘+T</DropdownMenuShortcut>
+                    </DropdownMenuItem>
+                  </DropdownMenuGroup>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>GitHub</DropdownMenuItem>
+                  <DropdownMenuItem>Support</DropdownMenuItem>
+                  <DropdownMenuItem disabled>API</DropdownMenuItem>
+                  <DropdownMenuSeparator />
+                  <DropdownMenuItem>
+                    Log out
+                    <DropdownMenuShortcut>⇧⌘Q</DropdownMenuShortcut>
+                  </DropdownMenuItem>
+                </DropdownMenuContent>
+              </DropdownMenu>
+             
+            </Link> : <Link href='/login'>
+              <Button className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white">Login</Button>
+            </Link>
+          }
         </div>
 
         {/* Mobile Menu Button */}
@@ -175,7 +246,7 @@ const Navbar = () => {
       {/* Mobile Menu Overlay */}
       {isOpen && (
         <div
-          className="fixed inset-0 bg-black bg-opacity-50 z-10"
+          className="fixed inset-0  bg-opacity-50 z-10"
           onClick={() => setIsOpen(false)}
           aria-hidden="true"
         />
@@ -184,7 +255,7 @@ const Navbar = () => {
       {/* Mobile Menu */}
       <div
         className={cn(
-          "fixed top-0 right-0 h-screen w-72 bg-slate-800 transform transition-transform duration-300 ease-in-out z-20 overflow-y-auto",
+          "fixed top-0 right-0 h-screen w-72 bg-gray-800 transform transition-transform duration-300 ease-in-out z-20 overflow-y-auto",
           isOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
@@ -214,7 +285,6 @@ const Navbar = () => {
                     )}
                   >
                     <span className="flex items-center">
-                      {item.icon}
                       {item.name}
                     </span>
                     <ChevronDown
@@ -259,7 +329,6 @@ const Navbar = () => {
                         : "hover:text-emerald-400 hover:bg-slate-700",
                     )}
                   >
-                    {item.icon}
                     {item.name}
                   </p>
                 </Link>

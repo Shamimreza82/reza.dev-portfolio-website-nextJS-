@@ -1,5 +1,6 @@
+
+
 import AIChat from '@/components/homePage/test-ai'
-import React from 'react'
 
 const Chat = () => {
   return (

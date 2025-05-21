@@ -45,9 +45,11 @@ const AiAssistant = () => {
     }, 800)
   }
 
-
-  useEffect(() =>{
+///chat ui true when render home page
+ useEffect(() => {
     setOpen(true)
+    const timer = setTimeout(() => setOpen(false), 2_000)
+    return () => clearTimeout(timer)
   }, [])
 
   return (
@@ -108,7 +110,6 @@ const AiAssistant = () => {
           >
             <AIChat />
           </motion.div>
-
         )
 
         }

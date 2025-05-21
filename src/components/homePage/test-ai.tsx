@@ -10,8 +10,9 @@ import { Badge } from "@/components/ui/badge"
 import reza from "../../asset/photo/reza.jpg"
 import Image from "next/image"
 
+
 export default function AIChat() {
-  const [sessionId] = useState("456")
+  const [sessionId] = useState(useGuestId())
   const [prompt, setPrompt] = useState("")
   const [chat, setChat] = useState<{ from: "you" | "ai"; text: string }[]>([])
   const [isConnected, setIsConnected] = useState(false)
@@ -20,6 +21,30 @@ export default function AIChat() {
   const scrollAreaRef = useRef<HTMLDivElement>(null)
   const lastMsgRef = useRef<HTMLDivElement>(null)
 
+
+
+// Example
+
+function useGuestId() {
+  const idRef = useRef<string | null>(null);
+  const [guestId, setGuestId] = useState<string | null>(null);
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      let persisted = localStorage.getItem('guestId');
+      if (!persisted) {
+        persisted = crypto.randomUUID();
+        localStorage.setItem('guestId', persisted);
+      }
+      idRef.current = persisted;
+      setGuestId(persisted);
+    }
+  }, []);
+
+  return guestId;
+}
+
+  
   
 
   // Auto-scroll into view for the latest message

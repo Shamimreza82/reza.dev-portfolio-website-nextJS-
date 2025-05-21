@@ -3,7 +3,7 @@ import { AuthProvider } from "@/components/auth-provider";
 import "./globals.css";
 import Navber from "@/components/Navber";
 import { Toaster } from "sonner";
-import {Footer} from "@/components/homePage/Footer";
+import { Footer } from "@/components/homePage/Footer";
 
 
 
@@ -22,18 +22,14 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`antialiased bg-slate-900 text-white font-Roboto `}
+        className={`antialiased font-Roboto `}
       >
-
         <AuthProvider>
-          {/* <Cursor></Cursor> */}
-          <Navber></Navber>
+          <Navber/>
           {children}
           <Toaster />
-          <Footer/>
-
+          <Footer />
         </AuthProvider>
-
       </body>
     </html>
   );
