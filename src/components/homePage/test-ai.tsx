@@ -60,7 +60,7 @@ function useGuestId() {
     socketRef.current = socket
 
     socket.on("connect", () => {
-      console.log("⚡️ Connected", socket.id)
+      console.log("⚡️Connected", socket.id)
       setIsConnected(true)
       socket.emit("join_session", sessionId)
     })
