@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
 import { useState, useEffect, useRef } from "react"
 import { io, type Socket } from "socket.io-client"
@@ -9,6 +10,7 @@ import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import reza from "../../asset/photo/reza.jpg"
 import Image from "next/image"
+import { useAuth } from "../auth-provider"
 
 
 export default function AIChat() {
@@ -23,10 +25,12 @@ export default function AIChat() {
   const lastMsgRef = useRef<HTMLDivElement>(null)
 
 
-  console.log(sessionId)
+  const { user } = useAuth()
+  console.log(user)
 
+  console.log(chat)
 
-// Example
+  // Example
 
 
   useEffect(() => {
@@ -42,8 +46,8 @@ export default function AIChat() {
   }, []);
 
 
-  
-  
+
+
 
   // Auto-scroll into view for the latest message
   useEffect(() => {
@@ -66,6 +70,7 @@ export default function AIChat() {
     socket.on("disconnect", () => setIsConnected(false))
     socket.on("ai_response", ({ text }) => {
       setIsTyping(false)
+
       setChat((c) => [...c, { from: "ai", text }])
     })
     socket.on("ai_error", (errMsg) => {
@@ -78,8 +83,6 @@ export default function AIChat() {
       socket.disconnect()
     }
   }, [sessionId])
-
-
 
 
 
@@ -107,7 +110,6 @@ export default function AIChat() {
         setChat((c) => [...c, { from: "ai", text: "Sorry, there was an error processing your request." }])
       }
     }
-
     setPrompt("")
   }
 
@@ -118,19 +120,19 @@ export default function AIChat() {
           <div className="flex justify-between items-center">
             <CardTitle className="flex items-center gap-2 text-xl font-bold">
               <Image src={reza} alt="Reza" width={40} height={40} className="rounded-full" />
-              Hi, i am Reza, 
+              Hi, i am Reza your ai agent,
             </CardTitle>
             <Badge
               variant={isConnected ? "default" : "destructive"}
               className={cn(
                 "flex items-center gap-1.5",
-                isConnected ? "bg-emerald-700" : "bg-red-600"
+                isConnected ? "bg-emerald-700 text-white" : "bg-red-600"
               )}
             >
               <div
                 className={cn(
                   "w-2 h-2 rounded-full animate-pulse",
-                  isConnected ? "bg-emerald-300" : "bg-red-300"
+                  isConnected ? "bg-emerald-300 " : "bg-red-300"
                 )}
               />
               {isConnected ? "Connected" : "Disconnected"}
@@ -184,7 +186,7 @@ export default function AIChat() {
                           : "bg-white border border-slate-200 shadow-sm rounded-tl-none"
                       )}
                     >
-                      <div className="whitespace-pre-wrap text-base">{message.text}</div>
+                      <div className="whitespace-pre-wrap text-base text-black">{message.text}</div>
                     </div>
                   </div>
                 </div>
@@ -216,10 +218,10 @@ export default function AIChat() {
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               disabled={!isConnected || isTyping}
-              className="flex-1 rounded-full border-gray-200 bg-gray-50 p-6  focus-visible:ring-emerald-500"
+              className="flex-1 rounded-full border-gray-200 bg-gray-50 p-6 text-black focus-visible:ring-emerald-500"
             />
-            <Button type="submit" size="icon" disabled={!prompt.trim() || !isConnected || isTyping} className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 hover:to-teal-700 shadow-md">
-              {isTyping ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-8 w-8" />}
+            <Button type="submit" size="icon" disabled={!prompt.trim() || !isConnected || isTyping} className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 text-white hover:to-teal-700 shadow-md">
+              {isTyping ? <Loader2 className="h-4 w-4 animate-spin " /> : <Send className="h-8 w-8" />}
             </Button>
           </form>
         </CardFooter>
