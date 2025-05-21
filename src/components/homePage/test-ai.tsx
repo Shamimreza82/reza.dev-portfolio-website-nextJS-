@@ -12,7 +12,8 @@ import Image from "next/image"
 
 
 export default function AIChat() {
-  const [sessionId] = useState(useGuestId())
+  const [sessionId, setSessionId] = useState("125")
+  const idRef = useRef<string | null>(null);
   const [prompt, setPrompt] = useState("")
   const [chat, setChat] = useState<{ from: "you" | "ai"; text: string }[]>([])
   const [isConnected, setIsConnected] = useState(false)
@@ -22,12 +23,11 @@ export default function AIChat() {
   const lastMsgRef = useRef<HTMLDivElement>(null)
 
 
+  console.log(sessionId)
+
 
 // Example
 
-function useGuestId() {
-  const idRef = useRef<string | null>(null);
-  const [guestId, setGuestId] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -37,12 +37,10 @@ function useGuestId() {
         localStorage.setItem('guestId', persisted);
       }
       idRef.current = persisted;
-      setGuestId(persisted);
+      setSessionId(persisted);
     }
   }, []);
 
-  return guestId;
-}
 
   
   
