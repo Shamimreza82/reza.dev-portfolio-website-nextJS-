@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client"
+
 import { useState, useEffect, useRef } from "react"
 import { io, type Socket } from "socket.io-client"
 import { Input } from "@/components/ui/input"
@@ -8,75 +9,64 @@ import { Card, CardHeader, CardTitle, CardFooter } from "@/components/ui/card"
 import { Loader2, Send, User, Zap } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
-import reza from "../../asset/photo/reza.jpg"
 import Image from "next/image"
-import { useAuth } from "../auth-provider"
+import ReactMarkdown from "react-markdown"
+import reza from "../../asset/photo/reza.jpg"
 
+type Message = {
+  from: "you" | "ai"
+  text: string
+  timestamp: string
+}
 
 export default function AIChat() {
   const [sessionId, setSessionId] = useState("125")
-  const idRef = useRef<string | null>(null);
+  const idRef = useRef<string | null>(null)
   const [prompt, setPrompt] = useState("")
-  const [chat, setChat] = useState<{ from: "you" | "ai"; text: string }[]>([])
+  const [chat, setChat] = useState<Message[]>([])
   const [isConnected, setIsConnected] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
   const socketRef = useRef<Socket>()
-  const scrollAreaRef = useRef<HTMLDivElement>(null)
   const lastMsgRef = useRef<HTMLDivElement>(null)
 
 
-  const { user } = useAuth()
-  console.log(user)
-
-  console.log(chat)
-
-  // Example
-
-
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      let persisted = localStorage.getItem('guestId');
+    if (typeof window !== "undefined") {
+      let persisted = localStorage.getItem("guestId")
       if (!persisted) {
-        persisted = crypto.randomUUID();
-        localStorage.setItem('guestId', persisted);
+        persisted = crypto.randomUUID()
+        localStorage.setItem("guestId", persisted)
       }
-      idRef.current = persisted;
-      setSessionId(persisted);
+      idRef.current = persisted
+      setSessionId(persisted)
     }
-  }, []);
+  }, [])
 
-
-
-
-
-  // Auto-scroll into view for the latest message
   useEffect(() => {
     lastMsgRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" })
   }, [chat, isTyping])
 
-
-
-
   useEffect(() => {
+    if (!sessionId) return
+
     const socket = io(process.env.NEXT_PUBLIC_API_URL!, { transports: ["websocket"] })
     socketRef.current = socket
 
     socket.on("connect", () => {
-      console.log("⚡️Connected", socket.id)
       setIsConnected(true)
       socket.emit("join_session", sessionId)
     })
 
     socket.on("disconnect", () => setIsConnected(false))
+
     socket.on("ai_response", ({ text }) => {
       setIsTyping(false)
-
-      setChat((c) => [...c, { from: "ai", text }])
+      addMessage("ai", text)
     })
+
     socket.on("ai_error", (errMsg) => {
-      console.error("AI error:", errMsg)
       setIsTyping(false)
-      setChat((c) => [...c, { from: "ai", text: `Error: ${errMsg}` }])
+      addMessage("ai", `Error: ${errMsg}`)
     })
 
     return () => {
@@ -84,12 +74,16 @@ export default function AIChat() {
     }
   }, [sessionId])
 
+  const getTimestamp = () => new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" })
 
+  const addMessage = (from: "you" | "ai", text: string) => {
+    setChat((prev) => [...prev, { from, text, timestamp: getTimestamp() }])
+  }
 
   const send = async () => {
     if (!prompt.trim()) return
 
-    setChat((c) => [...c, { from: "you", text: prompt }])
+    addMessage("you", prompt)
     setIsTyping(true)
 
     if (socketRef.current?.connected) {
@@ -104,90 +98,75 @@ export default function AIChat() {
         const data = await res.json()
         const text = data.message || "Sorry, there was an error processing your request."
         setIsTyping(false)
-        setChat((c) => [...c, { from: "ai", text }])
+        addMessage("ai", text)
       } catch {
         setIsTyping(false)
-        setChat((c) => [...c, { from: "ai", text: "Sorry, there was an error processing your request." }])
+        addMessage("ai", "Sorry, there was an error processing your request.")
       }
     }
     setPrompt("")
   }
 
   return (
-    <div className="mx-auto ">
-      <Card className="flex flex-col shadow-2xl border-t-4 border-t-teal-600 w-full max-w-md h-[620px]">
-        <CardHeader className="bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-2">
+    <div className="mx-auto">
+      <Card className="flex flex-col w-full max-w-md max-h-[620px]  shadow-lg">
+        <CardHeader className="bg-slate-800 py-2">
           <div className="flex justify-between items-center">
             <CardTitle className="flex items-center gap-2 text-xl font-bold">
               <Image src={reza} alt="Reza" width={40} height={40} className="rounded-full" />
-              Hi, i am Reza your ai agent,
+              Reza AI Agent
             </CardTitle>
             <Badge
               variant={isConnected ? "default" : "destructive"}
               className={cn(
                 "flex items-center gap-1.5",
-                isConnected ? "bg-emerald-700 text-white" : "bg-red-600"
+                isConnected ? "bg-green-600 text-white" : "bg-red-600 text-white"
               )}
             >
-              <div
-                className={cn(
-                  "w-2 h-2 rounded-full animate-pulse",
-                  isConnected ? "bg-emerald-300 " : "bg-red-300"
-                )}
-              />
+              <div className={cn("w-2 h-2 rounded-full animate-pulse", isConnected ? "bg-green-400" : "bg-red-400")} />
               {isConnected ? "Connected" : "Disconnected"}
             </Badge>
           </div>
         </CardHeader>
 
-        <div
-          ref={scrollAreaRef}
-          className="flex-1 p-2 bg-slate-50 overflow-y-auto touch-pan-y"
-          style={{ WebkitOverflowScrolling: "touch" }}
-        >
+        <div className="flex-1 p-3 overflow-y-auto bg-gray-850" style={{ WebkitOverflowScrolling: "touch" }}>
           {chat.length === 0 ? (
-            <div className="text-center py-12">
-              <Zap size={40} className="mx-auto mb-3 text-emerald-500 opacity-50" />
-              <h3 className="text-lg font-medium text-slate-700">Start a conversation</h3>
-              <p className="text-sm text-slate-500 mt-1">Ask me about your project i am your Ai Assistent</p>
+            <div className="text-center py-12 text-slate-400">
+              <Zap size={40} className="mx-auto mb-3 text-emerald-500 opacity-70" />
+              <h3 className="text-lg font-medium">Start a conversation</h3>
+              <p className="text-sm text-slate-500 mt-1">Ask me anything about your project or goals</p>
             </div>
           ) : (
             chat.map((message, index) => {
               const isLast = index === chat.length - 1
+              const isYou = message.from === "you"
               return (
                 <div
                   key={index}
                   ref={isLast ? lastMsgRef : undefined}
-                  className={cn("flex", message.from === "you" ? "justify-end" : "justify-start")}
+                  className={cn("mb-4 flex", isYou ? "justify-end" : "justify-start")}
                 >
-                  <div
-                    className={cn(
-                      "flex items-start gap-0.5 py-2 max-w-[90%]",
-                      message.from === "you" ? "flex-row-reverse" : "flex-row"
+                  <div className="flex items-end gap-2 max-w-[85%]">
+                    {!isYou && (
+                      <Image src={reza} alt="Reza" width={32} height={32} className="rounded-full" />
                     )}
-                  >
                     <div
                       className={cn(
-                        "flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center",
-                        message.from === "you" ? "bg-emerald-500" : "bg-slate-700"
+                        "p-3 rounded-2xl shadow-md max-w-full",
+                        isYou
+                          ? "bg-emerald-600 text-white rounded-tr-none"
+                          : "bg-gray-700 text-white border border-slate-600 rounded-tl-none"
                       )}
                     >
-                      {message.from === "you" ? (
-                        <User size={16} className="text-white" />
-                      ) : (
-                        <Image src={reza} alt="Reza" width={32} height={32} className="rounded-full" />
-                      )}
+                      <div className="prose-sm  max-w-full  text-gray-200">
+                        <ReactMarkdown  >{message.text}</ReactMarkdown>
+                      </div>
                     </div>
-                    <div
-                      className={cn(
-                        "p-2 rounded-2xl",
-                        message.from === "you"
-                          ? "bg-emerald-500 text-white rounded-tr-none"
-                          : "bg-white border border-slate-200 shadow-sm rounded-tl-none"
-                      )}
-                    >
-                      <div className="whitespace-pre-wrap text-base text-black">{message.text}</div>
-                    </div>
+                    {isYou && (
+                      <div className="w-8 h-8 bg-emerald-600 rounded-full flex items-center justify-center text-white">
+                        <User size={16} />
+                      </div>
+                    )}
                   </div>
                 </div>
               )
@@ -196,14 +175,16 @@ export default function AIChat() {
           {isTyping && (
             <div className="flex justify-start mt-2">
               <div className="flex items-start gap-2 max-w-[80%]">
-                <div className="flex-shrink-0 w-8 h-8 bg-slate-700 rounded-full flex items-center justify-center">
-                  <Image src={reza} alt="Reza" width={32} height={32} className="rounded-full" />
-                </div>
-                <div className="px-4 py-3 bg-white border border-slate-200 rounded-lg rounded-tl-none shadow-sm">
+                <Image src={reza} alt="Reza" width={32} height={32} className="rounded-full" />
+                <div className="px-4 py-3 bg-slate-700 border border-slate-600 rounded-lg rounded-tl-none shadow-sm">
                   <div className="flex items-center gap-1">
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                    <div className="w-2 h-2 bg-slate-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                    {[0, 150, 300].map((delay, i) => (
+                      <div
+                        key={i}
+                        className="w-2 h-2 bg-slate-400 rounded-full animate-bounce"
+                        style={{ animationDelay: `${delay}ms` }}
+                      />
+                    ))}
                   </div>
                 </div>
               </div>
@@ -211,17 +192,17 @@ export default function AIChat() {
           )}
         </div>
 
-        <CardFooter className="p-3 border-t border-gray-200 bg-white">
+        <CardFooter className="p-3 border-t border-slate-700 bg-slate-800">
           <form onSubmit={(e) => { e.preventDefault(); send() }} className="flex w-full gap-2">
             <Input
               placeholder="Type your message..."
               value={prompt}
               onChange={(e) => setPrompt(e.target.value)}
               disabled={!isConnected || isTyping}
-              className="flex-1 rounded-full border-gray-200 bg-gray-50 p-6 text-black focus-visible:ring-emerald-500"
+              className="flex-1 rounded-full border-slate-600 bg-slate-700 text-white placeholder-slate-400 focus-visible:ring-emerald-500"
             />
-            <Button type="submit" size="icon" disabled={!prompt.trim() || !isConnected || isTyping} className="rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 hover:from-emerald-600 text-white hover:to-teal-700 shadow-md">
-              {isTyping ? <Loader2 className="h-4 w-4 animate-spin " /> : <Send className="h-8 w-8" />}
+            <Button type="submit" size="icon" disabled={!prompt.trim() || !isConnected || isTyping} className="rounded-full bg-emerald-500 hover:bg-emerald-600 text-white shadow-md">
+              {isTyping ? <Loader2 className="h-4 w-4 animate-spin" /> : <Send className="h-6 w-6" />}
             </Button>
           </form>
         </CardFooter>
