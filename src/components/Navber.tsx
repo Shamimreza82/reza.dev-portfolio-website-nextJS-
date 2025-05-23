@@ -46,13 +46,11 @@ const Navbar = () => {
       name: "Projects",
     },
     {
-      path: "/services",
-      name: "Services",
+      path: "/aiTools",
+      name: "Ai Tools",
       dropdown: [
-        { path: "/services/web-development", name: "Web Development" },
-        { path: "/services/app-development", name: "App Development" },
-        { path: "/services/ui-design", name: "UI/UX Design" },
-        { path: "/services/consulting", name: "Consulting" },
+        { path: "/aiTools/pdfChat", name: "Chat With PDF" },
+       
       ],
     },
     {
