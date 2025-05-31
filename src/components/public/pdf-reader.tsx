@@ -1,297 +1,316 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-"use client"
+// /* eslint-disable @typescript-eslint/no-explicit-any */
+// "use client"
 
-import type React from "react"
+// import type React from "react"
 
-import { useState, useRef, useEffect } from "react"
-import { useChat } from "@ai-sdk/react"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
-import { Card, CardContent } from "@/components/ui/card"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { Badge } from "@/components/ui/badge"
-import { FileIcon, SendIcon, FileTextIcon, MessageSquareIcon, UploadIcon } from "lucide-react"
-import FancyLoading from "../small-component/FancyLoading"
-
-
+// import { useState, useRef, useEffect } from "react"
+// import { useChat } from "@ai-sdk/react"
+// import { Button } from "@/components/ui/button"
+// import { Input } from "@/components/ui/input"
+// import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
+// import { Card, CardContent } from "@/components/ui/card"
+// import { ScrollArea } from "@/components/ui/scroll-area"
+// import { Badge } from "@/components/ui/badge"
+// import { FileIcon, SendIcon, FileTextIcon, MessageSquareIcon, UploadIcon } from "lucide-react"
+// import FancyLoading from "../small-component/FancyLoading"
 
 
 
 
 
-export default function PDFChat() {
-    const [files, setFiles] = useState<FileList | null>(null)
-    const [activeTab, setActiveTab] = useState<string>("chat")
-    const [summary, setSummary] = useState<string>("")
-    const [prompth, setPrompth] = useState<string>('')
-    const fileInputRef = useRef<HTMLInputElement>(null)
-    const [aiResponce, setAiResponce] = useState<string>("")
-    const [loader, setLoader] = useState<boolean>(false)
-    const { messages } = useChat()
 
 
-    console.log(prompth)
 
-
-    useEffect(() => {
-        const main = async () => {
-            if (!files) return
-            const formData = new FormData()
-            Array.from(files).forEach((file) => {
-                formData.append("files", file)
-            })
-
-            const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/public/summrizer`, {
-                method: "POST",
-                body: formData
-            })
-            const res = await result.json()
-            console.log(res)
-            if (res.success) {
-                localStorage.setItem("pdfSession", JSON.stringify(res.data.id))
-            }
-        }
-        main()
-    }, [files])
+// export default function PDFChat() {
+//     const [files, setFiles] = useState<FileList | null>(null)
+//     const [activeTab, setActiveTab] = useState<string>("chat")
+//     const [summary, setSummary] = useState<string>("")
+//     const [prompth, setPrompth] = useState<string>('')
+//     const fileInputRef = useRef<HTMLInputElement>(null)
+//     const [aiResponce, setAiResponce] = useState<string>("")
+//     const [loader, setLoader] = useState<boolean>(false)
+//     const { messages } = useChat()
 
 
 
 
+//     useEffect(() => {
+//         const main = async () => {
+//             if (!files) return
+//             const formData = new FormData()
+//             Array.from(files).forEach((file) => {
+//                 formData.append("files", file)
+//             })
 
-    const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
-        setFiles(e.target.files)
-    }
-
-
-
-    const handleChatSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
-        setLoader(true)
-        try {
-            const id = localStorage.getItem("pdfSession")
-
-            if (!id) {
-                console.error("No PDF session ID found in localStorage.")
-                return
-            }
-
-            const payload = {
-                id: JSON.parse(id),
-                prompth
-            }
-
-            const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/public/summrizer/chat`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            })
-
-            const res = await result.json()
-            setAiResponce(res.data.text)
-
-            setLoader(false)
-
-        } catch (error) {
-            console.log(error)
-        }
-
-    }
+//             const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/public/summrizer`, {
+//                 method: "POST",
+//                 body: formData
+//             })
+//             const res = await result.json()
+//             console.log(res)
+//             if (res.success) {
+//                 localStorage.setItem("pdfSession", JSON.stringify(res.data.id))
+//             }
+//         }
+//         main()
+//     }, [files])
 
 
 
 
 
-    const generateSummary = () => {
-        if (!files) return
-
-        // In a real implementation, this would call an API endpoint to generate a summary
-        setSummary(
-            "This is a placeholder for the PDF summary. In a real implementation, this would be generated by calling your API with the PDF file.",
-        )
-        setActiveTab("summary")
-    }
+//     const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
+//         setFiles(e.target.files)
+//     }
 
 
 
+//     const handleChatSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+//         e.preventDefault()
+//         setLoader(true)
+
+//         try {
+//             const id = localStorage.getItem("pdfSession")
+
+//             if (!id) {
+//                 console.error("No PDF session ID found in localStorage.")
+//                 return
+//             }
+
+//             const payload = {
+//                 id: JSON.parse(id),
+//                 prompth
+//             }
+      
+//             const result = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/public/summrizer/chat`, {
+//                 method: "POST",
+//                 headers: {
+//                     "Content-Type": "application/json"
+//                 },
+//                 body: JSON.stringify(payload)
+//             })
+
+//             const res = await result.json()
+//             setAiResponce(res.data.text)
+
+//             setLoader(false)
+
+//         } catch (error) {
+//             console.log(error)
+//         }
+//     }
 
 
-    const clearFiles = () => {
-        setFiles(null)
-        if (fileInputRef.current) {
-            fileInputRef.current.value = ""
-        }
-    }
 
-    return (
-        <div className="flex flex-col min-h-screen  pt-24">
-            <header className="border-b py-4 px-6 text-white">
-                <div className="max-w-7xl mx-auto flex justify-between items-center">
-                    <h1 className="text-2xl font-bold ">PDF Chat & Summarizer</h1>
-                    <div className="flex items-center gap-2">
-                        <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
-                            <UploadIcon className="h-4 w-4 mr-2" />
-                            Upload PDF
-                        </Button>
-                        <input
-                            type="file"
-                            accept=".pdf"
-                            className="hidden"
-                            onChange={handleFileChange}
-                            ref={fileInputRef}
-                            multiple
-                        />
-                    </div>
-                </div>
-            </header>
 
-            <main className="flex-1 p-6 max-w-7xl mx-auto w-full">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-[calc(100vh-12rem)]">
-                    {/* PDF Preview Section */}
-                    <Card className="md:col-span-1 overflow-hidden">
-                        <div className="bg-gray-100 p-4 border-b flex justify-between items-center">
-                            <h2 className="font-semibold flex items-center">
-                                <FileIcon className="h-4 w-4 mr-2" />
-                                PDF Document
-                            </h2>
-                            {files && (
-                                <Button variant="ghost" size="sm" onClick={clearFiles}>
-                                    Clear
-                                </Button>
-                            )}
-                        </div>
-                        <CardContent className="p-0 h-full">
-                            {files ? (
-                                <div className="h-full">
-                                    {Array.from(files).map((file, index) => (
-                                        <div key={index} className="p-4">
-                                            <iframe
-                                                src={URL.createObjectURL(file)}
-                                                className="w-full h-[calc(100vh-20rem)]"
-                                                title={file.name}
-                                            />
-                                        </div>
-                                    ))}
-                                </div>
-                            ) : (
-                                <div className="flex flex-col items-center justify-center h-[calc(100vh-20rem)] p-6 text-center">
-                                    <div className="bg-gray-100 p-6 rounded-full mb-4">
-                                        <FileTextIcon className="h-10 w-10 text-gray-400" />
-                                    </div>
-                                    <h3 className="text-lg font-medium mb-2">No PDF uploaded</h3>
-                                    <p className="text-gray-500 mb-4">Upload a PDF to start chatting or get a summary</p>
-                                    <Button onClick={() => fileInputRef.current?.click()}>
-                                        <UploadIcon className="h-4 w-4 mr-2" />
-                                        Upload PDF
-                                    </Button>
-                                </div>
-                            )}
-                        </CardContent>
-                    </Card>
 
-                    {/* Chat and Summary Section */}
-                    <Card className="md:col-span-2 flex flex-col">
-                        <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
-                            <div className="bg-gray-100 p-2 border-b">
-                                <TabsList className="w-full grid grid-cols-2">
-                                    <TabsTrigger value="chat" className="flex items-center">
-                                        <MessageSquareIcon className="h-4 w-4 mr-2" />
-                                        Chat with PDF
-                                    </TabsTrigger>
-                                    <TabsTrigger value="summary" className="flex items-center">
-                                        <FileTextIcon className="h-4 w-4 mr-2" />
-                                        Summary
-                                    </TabsTrigger>
-                                </TabsList>
-                            </div>
+//     const generateSummary = () => {
+//         if (!files) return
 
-                            <TabsContent value="chat" className="flex-1 flex flex-col p-0 m-0">
-                                <ScrollArea className="flex-1 p-4">
-                                    {messages.length > 0 ? (
-                                        <div className="space-y-4">
-                                            {messages.map((message: any) => (
-                                                <div
-                                                    key={message.id}
-                                                    className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
-                                                >
-                                                    <div
-                                                        className={`max-w-[80%] rounded-lg p-3 ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
-                                                            }`}
-                                                    >
-                                                        <div className="flex items-center mb-1">
-                                                            <Badge variant={message.role === "user" ? "outline" : "secondary"} className="text-xs">
-                                                                {message.role === "user" ? "You" : "AI"}
-                                                            </Badge>
-                                                        </div>
-                                                        <p className="whitespace-pre-wrap">{message.content}</p>
-                                                        {message.experimental_attachments?.map((index: any) => (
-                                                            <div key={index} className="mt-2">
-                                                                <Badge className="text-xs">PDF Attached</Badge>
-                                                            </div>
-                                                        ))}
-                                                    </div>
-                                                </div>
-                                            ))}
-                                        </div>
-                                    ) : (
-                                        <div className="flex flex-col items-center justify-center h-full text-center p-6">
-                                            {/* <div className="bg-gray-100 p-6 rounded-full mb-4">
-                                                <Bot className="h-6 w-6 text-gray-400" />
-                                            </div> */}
-                                            {loader ? <FancyLoading/> : <h3 className="text-lg font-medium mb-2">{aiResponce}</h3>}
-                                            {/* <p className="text-gray-500 mb-4">Upload a PDF and start asking questions about it</p> */}
-                                        </div>
-                                    )}
-                                </ScrollArea>
+//         // In a real implementation, this would call an API endpoint to generate a summary
+//         setSummary(
+//             "This is a placeholder for the PDF summary. In a real implementation, this would be generated by calling your API with the PDF file.",
+//         )
+//         setActiveTab("summary")
+//     }
 
-                                <div className="p-4 border-t">
-                                    <form onSubmit={handleChatSubmit} className="flex gap-2">
-                                        <Input
 
-                                            onChange={(e) => setPrompth(e.target.value)}
-                                            placeholder="Ask a question about the PDF..."
-                                            disabled={!files}
-                                            className="flex-1"
-                                        />
-                                        <Button type="submit" disabled={!files}>
-                                            <SendIcon className="h-4 w-4" />
-                                            <span className="sr-only">Send</span>
-                                        </Button>
-                                    </form>
-                                </div>
-                            </TabsContent>
 
-                            <TabsContent value="summary" className="flex-1 flex flex-col p-0 m-0">
-                                <div className="p-4 border-b flex justify-between items-center">
-                                    <h3 className="font-medium">PDF Summary</h3>
-                                    <Button variant="outline" size="sm" onClick={generateSummary} disabled={!files}>
-                                        Generate Summary
-                                    </Button>
-                                </div>
-                                <ScrollArea className="flex-1 p-4">
-                                    {summary ? (
-                                        <div className="prose max-w-none">
-                                            <p>{summary}</p>
-                                        </div>
-                                    ) : (
-                                        <div className="flex flex-col items-center justify-center h-full text-center p-6">
-                                            <div className="bg-gray-100 p-6 rounded-full mb-4">
-                                                <FileTextIcon className="h-10 w-10 text-gray-400" />
-                                            </div>
-                                            <h3 className="text-lg font-medium mb-2">No summary yet</h3>
-                                            <p className="text-gray-500 mb-4">
-                                                Upload a PDF and click Generate Summary to create a summary
-                                            </p>
-                                        </div>
-                                    )}
-                                </ScrollArea>
-                            </TabsContent>
-                        </Tabs>
-                    </Card>
-                </div>
-            </main>
-        </div>
-    )
-}
+
+
+//     const clearFiles = () => {
+//         setFiles(null)
+//         if (fileInputRef.current) {
+//             fileInputRef.current.value = ""
+//         }
+//     }
+
+//     return (
+//         <div className="flex flex-col min-h-screen  pt-24">
+//             <header className="border-b py-4 px-6 text-white">
+//                 <div className="max-w-7xl mx-auto flex justify-between items-center">
+//                     <h1 className="text-2xl font-bold ">PDF Chat & Summarizer</h1>
+//                     <div className="flex items-center gap-2">
+//                         <Button variant="outline" size="sm" onClick={() => fileInputRef.current?.click()}>
+//                             <UploadIcon className="h-4 w-4 mr-2" />
+//                             Upload PDF
+//                         </Button>
+//                         <input
+//                             type="file"
+//                             accept=".pdf"
+//                             className="hidden"
+//                             onChange={handleFileChange}
+//                             ref={fileInputRef}
+//                             multiple
+//                         />
+//                     </div>
+//                 </div>
+//             </header>
+
+//             <main className="flex-1 p-6 max-w-7xl mx-auto w-full">
+//                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6 h-[calc(100vh-12rem)]">
+//                     {/* PDF Preview Section */}
+//                     <Card className="md:col-span-1 overflow-hidden">
+//                         <div className="bg-gray-100 p-4 border-b flex justify-between items-center">
+//                             <h2 className="font-semibold flex items-center">
+//                                 <FileIcon className="h-4 w-4 mr-2" />
+//                                 PDF Document
+//                             </h2>
+//                             {files && (
+//                                 <Button variant="ghost" size="sm" onClick={clearFiles}>
+//                                     Clear
+//                                 </Button>
+//                             )}
+//                         </div>
+//                         <CardContent className="p-0 h-full">
+//                             {files ? (
+//                                 <div className="h-full">
+//                                     {Array.from(files).map((file, index) => (
+//                                         <div key={index} className="p-4">
+//                                             <iframe
+//                                                 src={URL.createObjectURL(file)}
+//                                                 className="w-full h-[calc(100vh-20rem)]"
+//                                                 title={file.name}
+//                                             />
+//                                         </div>
+//                                     ))}
+//                                 </div>
+//                             ) : (
+//                                 <div className="flex flex-col items-center justify-center h-[calc(100vh-20rem)] p-6 text-center">
+//                                     <div className="bg-gray-100 p-6 rounded-full mb-4">
+//                                         <FileTextIcon className="h-10 w-10 text-gray-400" />
+//                                     </div>
+//                                     <h3 className="text-lg font-medium mb-2">No PDF uploaded</h3>
+//                                     <p className="text-gray-500 mb-4">Upload a PDF to start chatting or get a summary</p>
+//                                     <Button onClick={() => fileInputRef.current?.click()}>
+//                                         <UploadIcon className="h-4 w-4 mr-2" />
+//                                         Upload PDF
+//                                     </Button>
+//                                 </div>
+//                             )}
+//                         </CardContent>
+//                     </Card>
+
+//                     {/* Chat and Summary Section */}
+//                     <Card className="md:col-span-2 flex flex-col">
+//                         <Tabs value={activeTab} onValueChange={setActiveTab} className="flex-1 flex flex-col">
+//                             <div className="bg-gray-100 p-2 border-b">
+//                                 <TabsList className="w-full grid grid-cols-2">
+//                                     <TabsTrigger value="chat" className="flex items-center">
+//                                         <MessageSquareIcon className="h-4 w-4 mr-2" />
+//                                         Chat with PDF
+//                                     </TabsTrigger>
+//                                     <TabsTrigger value="summary" className="flex items-center">
+//                                         <FileTextIcon className="h-4 w-4 mr-2" />
+//                                         Summary
+//                                     </TabsTrigger>
+//                                 </TabsList>
+//                             </div>
+
+//                             <TabsContent value="chat" className="flex-1 flex flex-col p-0 m-0">
+//                                 <ScrollArea className="flex-1 p-4">
+//                                     {messages.length > 0 ? (
+//                                         <div className="space-y-4">
+//                                             {messages.map((message: any) => (
+//                                                 <div
+//                                                     key={message.id}
+//                                                     className={`flex ${message.role === "user" ? "justify-end" : "justify-start"}`}
+//                                                 >
+//                                                     <div
+//                                                         className={`max-w-[80%] rounded-lg p-3 ${message.role === "user" ? "bg-primary text-primary-foreground" : "bg-muted"
+//                                                             }`}
+//                                                     >
+//                                                         <div className="flex items-center mb-1">
+//                                                             <Badge variant={message.role === "user" ? "outline" : "secondary"} className="text-xs">
+//                                                                 {message.role === "user" ? "You" : "AI"}
+//                                                             </Badge>
+//                                                         </div>
+//                                                         <p className="whitespace-pre-wrap">{message.content}</p>
+//                                                         {message.experimental_attachments?.map((index: any) => (
+//                                                             <div key={index} className="mt-2">
+//                                                                 <Badge className="text-xs">PDF Attached</Badge>
+//                                                             </div>
+//                                                         ))}
+//                                                     </div>
+//                                                 </div>
+//                                             ))}
+//                                         </div>
+//                                     ) : (
+//                                         <div className="flex flex-col items-center justify-center h-full text-center p-6">
+//                                             {/* <div className="bg-gray-100 p-6 rounded-full mb-4">
+//                                                 <Bot className="h-6 w-6 text-gray-400" />
+//                                             </div> */}
+//                                             {loader ? (
+//                                                 <FancyLoading />
+//                                             ) : (
+//                                                 (() => {
+//                                                     const parsed = parseAIResponse(aiResponce);
+//                                                     return (
+//                                                         <div>
+//                                                             {parsed.intro && <p>{parsed.intro}</p>}
+//                                                             {Array.isArray(parsed.items) && parsed.items.length > 0 && (
+//                                                                 <ul>
+//                                                                     {parsed.items.map((item: any, idx: number) => (
+//                                                                         <li key={idx}>{item}</li>
+//                                                                     ))}
+//                                                                 </ul>
+//                                                             )}
+//                                                         </div>
+//                                                     );
+//                                                 })()
+//                                             )}
+//                                             {/* <p className="text-gray-500 mb-4">Upload a PDF and start asking questions about it</p> */}
+//                                         </div>
+//                                     )}
+//                                 </ScrollArea>
+
+//                                 <div className="p-4 border-t">
+//                                     <form onSubmit={handleChatSubmit} className="flex gap-2">
+//                                         <Input
+
+//                                             onChange={(e) => setPrompth(e.target.value)}
+//                                             placeholder="Ask a question about the PDF..."
+//                                             disabled={!files}
+//                                             className="flex-1"
+//                                         />
+//                                         <Button type="submit" disabled={!files}>
+//                                             <SendIcon className="h-4 w-4" />
+//                                             <span className="sr-only">Send</span>
+//                                         </Button>
+//                                     </form>
+//                                 </div>
+//                             </TabsContent>
+
+//                             <TabsContent value="summary" className="flex-1 flex flex-col p-0 m-0">
+//                                 <div className="p-4 border-b flex justify-between items-center">
+//                                     <h3 className="font-medium">PDF Summary</h3>
+//                                     <Button variant="outline" size="sm" onClick={generateSummary} disabled={!files}>
+//                                         Generate Summary
+                                        
+//                                     </Button>
+//                                 </div>
+//                                 <ScrollArea className="flex-1 p-4">
+//                                     {summary ? (
+//                                         <div className="prose max-w-none">
+                                            
+//                                         </div>
+//                                     ) : (
+//                                         <div className="flex flex-col items-center justify-center h-full text-center p-6">
+//                                             <div className="bg-gray-100 p-6 rounded-full mb-4">
+//                                                 <FileTextIcon className="h-10 w-10 text-gray-400" />
+//                                             </div>
+//                                             <h3 className="text-lg font-medium mb-2">No summary yet</h3>
+//                                             <p className="text-gray-500 mb-4">
+//                                                 Upload a PDF and click Generate Summary to create a summary
+//                                             </p>
+//                                         </div>
+//                                     )}
+//                                 </ScrollArea>
+//                             </TabsContent>
+//                         </Tabs>
+//                     </Card>
+//                 </div>
+//             </main>
+//         </div>
+//     )
+// }
