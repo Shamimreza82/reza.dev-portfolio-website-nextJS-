@@ -89,8 +89,7 @@ export default function AIChat() {
       socket.off("ai_error", handleAiError)
       socket.disconnect()
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [sessionId])
+  }, [sessionId, ])
 
   const addMessage = (from: "you" | "ai", text: string) => {
     setChat((prev) => [...prev, { from, text }])
