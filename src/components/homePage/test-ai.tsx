@@ -89,7 +89,7 @@ export default function AIChat() {
       socket.off("ai_error", handleAiError)
       socket.disconnect()
     }
-  }, [sessionId, ])
+  }, [sessionId])
 
   const addMessage = (from: "you" | "ai", text: string) => {
     setChat((prev) => [...prev, { from, text }])
@@ -127,7 +127,7 @@ export default function AIChat() {
   return (
     <div className="mx-auto">
       {/* ✨ DESIGN: Using richer background color and subtle border */}
-      <Card className="flex flex-col w-full max-w-md max-h-[700px] h-[700px] bg-slate-900 border-slate-700 shadow-2xl shadow-emerald-500/10">
+      <Card className="flex flex-col w-full max-w-md max-h-[450px]  bg-slate-900 border-slate-700 shadow-2xl shadow-emerald-500/10">
         {/* ✨ DESIGN: Added gradient and border for a premium header feel */}
         <CardHeader className="bg-gradient-to-br from-slate-800 to-slate-900 p-4 border-b border-slate-700">
           <div className="flex justify-between items-center">

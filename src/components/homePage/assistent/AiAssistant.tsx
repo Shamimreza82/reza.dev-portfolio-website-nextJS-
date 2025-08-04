@@ -10,7 +10,7 @@ const floatTransition = { duration: 4, repeat: Infinity, ease: 'easeInOut' }
 
 // Animation variants
 const bubbleVariants = {
-  float: { y: [0, -15, 0], transition: floatTransition },
+  float: { y: [0, -10, 0], transition: floatTransition },
   hover: { scale: 1.1, transition: { type: 'spring', stiffness: 300 } },
 }
 
@@ -48,7 +48,7 @@ const AiAssistant = () => {
 ///chat ui true when render home page
  useEffect(() => {
     setOpen(true)
-    const timer = setTimeout(() => setOpen(false), 2_000)
+    const timer = setTimeout(() => setOpen(false), 5000)
     return () => clearTimeout(timer)
   }, [])
 
