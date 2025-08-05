@@ -3,8 +3,6 @@ import React from 'react';
 
 const Blog = () => {
 
-
-
     return (
         <section id="blogs" className="bg-slate-900 text-white py-20">
         {/* <div className="container mx-auto px-6 text-center">
@@ -34,7 +32,7 @@ const Blog = () => {
         </div> */}
          <div className="min-h-screen bg-slate-900 text-white">
       <header className="py-10 text-center">
-        <h1 className="text-4xl font-bold">Our Latest Blogs</h1>
+        <h1 className="text-4xl font-bold">Blogs</h1>
         <p className="text-gray-400 mt-2">Stay updated with our recent posts</p>
       </header>
 

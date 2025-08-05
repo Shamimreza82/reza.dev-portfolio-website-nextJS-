@@ -1,12 +1,16 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { motion } from 'framer-motion';
-import { CodeBracketIcon, CommandLineIcon } from '@heroicons/react/24/outline';
+import { CodeBracketIcon} from '@heroicons/react/24/outline';
 import bannerImage1 from '../../asset/photo/protolio1.jpg'; // Adjust the path as necessary
 import StatusBadge from '../ui/status-badge';
+import Link from 'next/link';
+
 
 const Banner = () => {
   return (
     <section className="flex  flex-col md:flex-row pt-24 min-h-screen items-center px-4 py-12 gap-5 md:gap-10 lg:gap-20 bg-gradient-to-b" >
+
+
       <div className="relative z-10 w-full max-w-4xl text-center md:text-left">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
@@ -82,26 +86,29 @@ const Banner = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
+            <Link className='flex justify-center' href={'https://drive.google.com/file/d/1V4v3cIAmBX7VvkypTz9QRATk5lOtsi7A/view?usp=sharing'} target='_blank'>
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               className="px-8 sm:px-10 py-4 bg-gradient-to-br from-cyan-500 to-blue-600 text-gray-950 rounded-xl font-bold flex items-center gap-2 sm:gap-3 group relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-              <CommandLineIcon className="w-5 h-5 sm:w-6 sm:h-6" />
-              <span className="text-sm sm:text-base">Hire me</span>
+              <span className="text-sm sm:text-base">Resume</span>
             </motion.button>
+            </Link>
 
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              className="px-8 sm:px-10 py-4 border-2 border-cyan-500/30 bg-gray-900/50 text-cyan-300 rounded-xl font-bold backdrop-blur-sm hover:border-cyan-400/60 transition-all relative overflow-hidden"
-            >
-              <div className="absolute inset-0 bg-cyan-500/10 opacity-0 hover:opacity-100 transition-opacity" />
-              <span className="text-sm sm:text-base bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <Link href='/projects' className="text-sm sm:text-base bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="px-8 sm:px-10 py-4 border-2 border-cyan-500/30 bg-gray-900/50 text-cyan-300 rounded-xl font-bold backdrop-blur-sm hover:border-cyan-400/60 transition-all relative overflow-hidden"
+              >
+                <div className="absolute inset-0 bg-cyan-500/10 opacity-0 hover:opacity-100 transition-opacity" />
+
                 View my work
-              </span>
-            </motion.button>
+
+              </motion.button>
+            </Link>
           </motion.div>
         </motion.div>
       </div>

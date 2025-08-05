@@ -1,3 +1,8 @@
+import bloodDobation from '@/asset/projects/blood.jpg'
+import ECommerce from '@/asset/projects/ecommerce.jpg'
+
+
+
 export const data = {
   services: [
     {
@@ -87,28 +92,28 @@ export const data = {
   
   projects: [
     {
-      title: "E-Commerce Platform",
-      description: "Full-stack e-commerce solution with Next.js frontend and Node.js microservices",
-      techStack: ["Next.js", "Node.js", "MongoDB", "Prisma", "TailwindCSS"],
-      liveUrl: "https://example-ecommerce.com",
+      title: "Blood Donation Application (Life Lines)",
+      description: "A platform connecting blood donors with those in need.",
+      techStack: ["React", "Node.js", "MongoDB", "Mongoose", "TailwindCSS"],
+      liveUrl: "https://blood-donation-28936.web.app/",
       codeUrl: "https://github.com/yourusername/ecommerce-platform",
-      image: "/projects/ecommerce.jpg"
+      image: bloodDobation
     },
     {
-      title: "Task Management API",
-      description: "REST API for task management system with JWT authentication and PostgreSQL",
+      title: "E-commerce",
+      description: "REST API for E-commerce system with JWT authentication and PostgreSQL",
       techStack: ["Node.js", "Express", "PostgreSQL", "Prisma", "JWT"],
-      liveUrl: "https://api.taskmanager.example.com",
-      codeUrl: "https://github.com/yourusername/task-api",
-      image: "/projects/task-api.jpg"
+      liveUrl: "https://e-commerce-fronend-alpha.vercel.app/",
+      codeUrl: "https://github.com/Shamimreza82/e-commerce-fronend",
+      image: ECommerce
     },
-    {
-      title: "Portfolio Website",
-      description: "Modern portfolio built with Next.js 15 and Shadcn UI components",
-      techStack: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn UI"],
-      liveUrl: "https://yourportfolio.com",
-      codeUrl: "https://github.com/yourusername/portfolio",
-      image: "/projects/portfolio.jpg"
-    }
+    // {
+    //   title: "Portfolio Website",
+    //   description: "Modern portfolio built with Next.js 15 and Shadcn UI components",
+    //   techStack: ["Next.js", "TypeScript", "TailwindCSS", "Shadcn UI"],
+    //   liveUrl: "https://yourportfolio.com",
+    //   codeUrl: "https://github.com/yourusername/portfolio",
+    //   image: "/projects/portfolio.jpg"
+    // }
   ]
 };

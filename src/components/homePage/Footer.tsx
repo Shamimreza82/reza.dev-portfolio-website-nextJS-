@@ -14,9 +14,9 @@ export function Footer() {
   ]
 
   const socialLinks = [
-    { icon: <Github className="h-5 w-5" />, href: "#" },
-    { icon: <Linkedin className="h-5 w-5" />, href: "#" },
-    { icon: <Twitter className="h-5 w-5" />, href: "#" },
+    { icon: <Github className="h-5 w-5" />, href: "https://github.com/Shamimreza82", label: "GitHub" },
+    { icon: <Linkedin className="h-5 w-5" />, href: "https://www.linkedin.com/in/shamim--reza/", label: "LinkedIn" },
+    { icon: <Twitter className="h-5 w-5" />, href: "https://x.com/reza_shamim1", label: "Twitter"  },
   ]
 
   return (
@@ -26,7 +26,7 @@ export function Footer() {
           {/* Branding Section */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl font-bold">DevPortfolio</span>
+              <span className="text-2xl font-bold">Reza.dev</span>
             </Link>
             <p className="text-muted-foreground max-w-sm text-sm">
               Building digital experiences with modern web technologies.
@@ -70,7 +70,7 @@ export function Footer() {
 
         {/* Copyright */}
         <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          © {currentYear} DevPortfolio. All rights reserved.
+          © {currentYear} Reza.dev All rights reserved.
         </div>
       </div>
     </footer>

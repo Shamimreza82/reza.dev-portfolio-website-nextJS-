@@ -22,19 +22,21 @@ const fadeIn = {
 export default function About() {
   const skills = [
     { name: "TypeScript", icon: <Code className="h-4 w-4" /> },
+    { name: "Javascript", icon: <Code className="h-4 w-4" /> },
     { name: "React", icon: <Rocket className="h-4 w-4" /> },
     { name: "Next.js", icon: <Server className="h-4 w-4" /> },
     { name: "Node.js", icon: <Code className="h-4 w-4" /> },
     { name: "Tailwind CSS", icon: <Rocket className="h-4 w-4" /> },
-    { name: "GraphQL", icon: <Server className="h-4 w-4" /> },
-    { name: "PostgreSQL", icon: <Code className="h-4 w-4" /> },
-    { name: "AWS", icon: <Rocket className="h-4 w-4" /> },
+    { name: "Mongodb", icon: <Server className="h-4 w-4" /> },
+    { name: "Mongoose", icon: <Code className="h-4 w-4" /> },
+    { name: "Prosgress", icon: <Rocket className="h-4 w-4" /> },
+    { name: "Prisma", icon: <Code className="h-4 w-4" /> },
   ]
 
   const socialLinks = [
-    { icon: <Github className="h-5 w-5" />, href: "#", label: "GitHub" },
-    { icon: <Linkedin className="h-5 w-5" />, href: "#", label: "LinkedIn" },
-    { icon: <File className="h-5 w-5" />, href: "#", label: "Resume" },
+    { icon: <Github className="h-5 w-5" />, href: "https://github.com/Shamimreza82", label: "GitHub" },
+    { icon: <Linkedin className="h-5 w-5" />, href: "https://www.linkedin.com/in/shamim--reza/", label: "LinkedIn" },
+    { icon: <File className="h-5 w-5" />, href: "https://drive.google.com/file/d/1V4v3cIAmBX7VvkypTz9QRATk5lOtsi7A/view?usp=sharing", label: "Resume" },
   ]
 
   return (
@@ -101,7 +103,7 @@ export default function About() {
                         className="gap-2 hover:-translate-y-1 transition-transform"
                         asChild
                       >
-                        <Link href={link.href}>
+                        <Link href={link.href} target="_blank">
                           {link.icon}
                           {link.label}
                         </Link>
@@ -159,8 +161,8 @@ export default function About() {
                   
                   <div className="relative pl-8">
                     <div className="absolute left-0 top-2 w-4 h-4 bg-purple-600 rounded-full"></div>
-                    <h3 className="font-semibold text-lg">Senior Full-Stack Developer @ TechCorp</h3>
-                    <p className="text-sm text-muted-foreground mb-2">2021 - Present</p>
+                    <h3 className="font-semibold text-lg">Backend Developer at FinupsBD</h3>
+                    <p className="text-sm text-muted-foreground mb-2">2024 - Present</p>
                     <p className="text-muted-foreground">
                       Led development of enterprise SaaS platform handling 1M+ MAU using Next.js and Node.js
                     </p>
@@ -168,7 +170,7 @@ export default function About() {
 
                   <div className="relative pl-8">
                     <div className="absolute left-0 top-2 w-4 h-4 bg-pink-600 rounded-full"></div>
-                    <h3 className="font-semibold text-lg">Frontend Developer @ StartupHub</h3>
+                    <h3 className="font-semibold text-lg">Frontend Developer at Desh Universal LTD</h3>
                     <p className="text-sm text-muted-foreground mb-2">2019 - 2021</p>
                     <p className="text-muted-foreground">
                       Built customer-facing applications with React + TypeScript, improving performance by 40%
