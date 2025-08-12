@@ -76,7 +76,7 @@ export default function AIChat() {
           setIsTyping(false)
           addMessage(
             "ai",
-            "Hello! I'm Reza's Assistant — here to help you learn about Shamim Reza, a skilled full-stack developer. Whether you’re just starting to think about your website or have a detailed plan, I’m happy to guide you step-by-step. What would you like to know or build today?"
+            "Hello! I'm Reza's Assistant — here to help you explore Reza’s skills, profile, education, and services. How can I assist you today?"
           )
         }, 1000)
       }

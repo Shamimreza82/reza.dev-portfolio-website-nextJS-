@@ -49,6 +49,7 @@ const AiAssistant = () => {
  useEffect(() => {
     setOpen(true)
     const timer = setTimeout(() => setOpen(false), 5000)
+    
     return () => clearTimeout(timer)
   }, [])
 

@@ -65,6 +65,10 @@ const Navbar = () => {
       path: "/contact",
       name: "Contact",
     },
+    {
+      path: "/services",
+      name: "Services",
+    },
   ]
 
 
