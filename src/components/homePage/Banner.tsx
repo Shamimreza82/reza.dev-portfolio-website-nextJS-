@@ -1,28 +1,43 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { motion } from 'framer-motion';
-import { CodeBracketIcon } from '@heroicons/react/24/outline';
-import bannerImage1 from '../../asset/photo/protolio1.jpg'; // Adjust the path as necessary
-import StatusBadge from '../ui/status-badge';
-import Link from 'next/link';
+"use client";
 
+import { motion } from "framer-motion";
+import { CodeBracketIcon } from "@heroicons/react/24/outline";
+import bannerImage1 from "../../asset/photo/protolio1.jpg";
+import StatusBadge from "../ui/status-badge";
+import Link from "next/link";
+import Particles from "../visuals/Particles"; // <-- import
 
 const Banner = () => {
   return (
-    <section className="flex  flex-col md:flex-row pt-24 min-h-screen items-center px-4 py-12 gap-5 md:gap-10 lg:gap-20 bg-gradient-to-b" >
+    <section
+      className="relative flex flex-col md:flex-row pt-24 min-h-screen items-center px-4 py-12 gap-5 md:gap-10 lg:gap-20
+                 bg-gradient-to-b  overflow-hidden"
+    >
+      {/* Particle background */}
+      <Particles
+        count={110}
+        linkDistance={120}
+        parallax={34}
+        className="text-cyan-300/60" // sets particle color via currentColor
+      />
 
+      {/* soft glow overlay (optional) */}
+      {/* <div className="pointer-events-none absolute -top-40 -left-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
+      <div className="pointer-events-none absolute -bottom-40 -right-40 h-[28rem] w-[28rem] rounded-full bg-blue-500/10 blur-3xl" /> */}
 
       <div className="relative z-10 w-full max-w-4xl text-center md:text-left">
+        {/* ...the rest of your existing content remains unchanged... */}
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2, delay: 0.2 }}
           className="space-y-8 md:space-y-12"
         >
-          {/* Animated Header */}
           <div className="flex items-center justify-center md:justify-start gap-3 mb-6 md:mb-8 group">
             <motion.div
               animate={{ rotate: 360 }}
-              transition={{ duration: 8, repeat: Infinity, ease: 'linear' }}
+              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
               className="neon-light"
             >
               <CodeBracketIcon className="w-10 h-10 text-cyan-400/80 group-hover:text-cyan-300 transition-colors" />
@@ -32,61 +47,42 @@ const Banner = () => {
             </span>
           </div>
 
-          {/* Main Headline */}
           <motion.h1
             className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-gray-100 leading-tight"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-
             <span className="inline-block bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
               Hi,
               <br />
               I am Reza,
-              <br />Web developer
+              <br />
+              Web developer
             </span>
-            {/* You can add a second line here if needed */}
           </motion.h1>
 
-          {/* Animated Description */}
           <motion.p
             className="text-base sm:text-base md:text-xl text-gray-300 max-w-3xl mx-auto md:mx-0 leading-relaxed"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.6 }}
           >
-            <span className="text-cyan-300">Passionate full-stack developer</span> dedicated{' '}
+            <span className="text-cyan-300">Passionate full-stack developer</span> dedicated{" "}
             <span className="text-blue-300">to crafting seamless, high-performance web experiences.</span>
           </motion.p>
 
-          {/* Interactive Tech Grid */}
-          {/* <motion.div
-            className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4 mt-8 md:mt-12"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.8 }}
-          >
-            {['MongoDB', 'ExtressJS', 'React', 'Node.JS', 'TypeScript', 'Prosgress', 'Prisma'].map((tech) => (
-              <motion.div
-                key={tech}
-                whileHover={{ scale: 1.05, y: -4 }}
-                className="lg:p-4 p-2 rounded-xl bg-gray-900/50 backdrop-blur-sm border border-gray-800 hover:border-cyan-400/30 transition-all cursor-pointer relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/10 to-blue-500/10 opacity-0 hover:opacity-100 transition-opacity" />
-                <span className="font-medium text-gray-300 text-sm sm:text-base">{tech}</span>
-              </motion.div>
-            ))}
-          </motion.div> */}
-
-          {/* Dynamic CTA Section */}
           <motion.div
             className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10 md:mt-16 justify-center md:justify-start"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1 }}
           >
-            <Link className='flex justify-center' href={'https://drive.google.com/file/d/1V4v3cIAmBX7VvkypTz9QRATk5lOtsi7A/view?usp=sharing'} target='_blank'>
+            <Link
+              className="flex justify-center"
+              href={"https://drive.google.com/file/d/1V4v3cIAmBX7VvkypTz9QRATk5lOtsi7A/view?usp=sharing"}
+              target="_blank"
+            >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -97,38 +93,37 @@ const Banner = () => {
               </motion.button>
             </Link>
 
-            <Link href='/projects' className="text-sm sm:text-base bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+            <Link
+              href="/projects"
+              className="text-sm sm:text-base bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
+            >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 sm:px-10 py-4 border-2 border-cyan-500/30 bg-gray-900/50 text-cyan-300 rounded-xl font-bold backdrop-blur-sm hover:border-cyan-400/60 transition-all relative overflow-hidden"
               >
                 <div className="absolute inset-0 bg-cyan-500/10 opacity-0 hover:opacity-100 transition-opacity" />
-
                 View my work
-
               </motion.button>
             </Link>
           </motion.div>
         </motion.div>
       </div>
-      <div>
-        <div className="relative  rounded-2xl lg:ml-28 ">
+
+      <div className="relative z-10">
+        <div className="relative rounded-2xl lg:ml-28">
           <motion.img
             src={bannerImage1.src}
             alt="Portfolio"
-            className="max-w-md mx-auto w-80 md:max-w-lg lg:max-w-xl shadow-2xl shadow-cyan-500/50 rounded-2xl   mt-8 md:mt-0"
+            className="max-w-md mx-auto w-80 md:max-w-lg lg:max-w-xl shadow-2xl shadow-cyan-500/50 rounded-2xl mt-8 md:mt-0"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.02, delay: 1.2, ease: 'easeOut' }}
+            transition={{ duration: 1.02, delay: 1.2, ease: "easeOut" }}
             whileHover={{ scale: 1.01, rotate: 2 }}
           />
         </div>
-        <div className='lg:ml-48 mt-8'>
-          <StatusBadge
-            text='Available for projects'
-            colorClass='bg-green-500'
-          />
+        <div className="lg:ml-48 mt-8">
+          <StatusBadge text="Available for projects" colorClass="bg-green-500" />
         </div>
       </div>
     </section>

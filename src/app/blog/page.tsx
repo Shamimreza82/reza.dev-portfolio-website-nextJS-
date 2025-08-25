@@ -4,7 +4,7 @@ import React from 'react';
 const Blog = () => {
 
     return (
-        <section id="blogs" className="bg-slate-900 text-white py-20">
+        <section id="blogs" className=" text-white py-20">
         {/* <div className="container mx-auto px-6 text-center">
           <h2 className="text-4xl md:text-5xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-blue-500 ">
             My Blogs
@@ -30,7 +30,7 @@ const Blog = () => {
             ))}
           </div>
         </div> */}
-         <div className="min-h-screen bg-slate-900 text-white">
+         <div className="min-h-screen text-white">
       <header className="py-10 text-center">
         <h1 className="text-4xl font-bold">Blogs</h1>
         <p className="text-gray-400 mt-2">Stay updated with our recent posts</p>
@@ -40,7 +40,7 @@ const Blog = () => {
         {blogs.map((blog) => (
           <div
             key={blog.id}
-            className="bg-slate-800 rounded-lg overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
+            className=" rounded-lg border overflow-hidden shadow-lg hover:scale-105 transition-transform duration-300"
           >
             <div className="relative h-48">
               <Image

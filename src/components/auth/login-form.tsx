@@ -58,7 +58,7 @@ export function LoginForm() {
 
 
   return (
-    <div> 
+    <div > 
       <form onSubmit={handleSubmit} className="space-y-4 ">
         <div className="space-y-2">
           <Label htmlFor="email">Email</Label>
@@ -70,7 +70,7 @@ export function LoginForm() {
             onChange={(e) => setEmail(e.target.value)}
             required
             disabled={isLoading}
-            className="h-11 text-slate-700"
+            className="h-11 "
           />
         </div>
 
@@ -89,7 +89,7 @@ export function LoginForm() {
             required
             placeholder="Password"
             disabled={isLoading}
-            className="h-11 text-slate-700"
+            className="h-11 "
           />
         </div>
 

@@ -32,7 +32,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       try {
         // 1. Parse the cookie string to find your token (e.g. "authToken")
         setLoading(true)
-         const token = await getCookie('accessTokenAuth')
+        const token = await getCookie('accessTokenAuth')
 
         const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/auth/user`, {
           method: 'GET',
@@ -135,7 +135,15 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     }
   }
 
-  return <AuthContext.Provider value={{ user, loading, login, register, logout }}>{children}</AuthContext.Provider>
+  const data = {
+    user,
+    loading,
+    login,
+    register,
+    logout
+  }
+
+  return <AuthContext.Provider value={data}>{children}</AuthContext.Provider>
 }
 
 
