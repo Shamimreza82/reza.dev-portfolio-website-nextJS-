@@ -7,6 +7,7 @@ import bannerImage1 from "../../asset/photo/protolio1.jpg";
 import StatusBadge from "../ui/status-badge";
 import Link from "next/link";
 import Particles from "../visuals/Particles"; // <-- import
+import RightSocialRail from "../banner/RightSocialRail";
 
 const Banner = () => {
   return (
@@ -126,6 +127,7 @@ const Banner = () => {
           <StatusBadge text="Available for projects" colorClass="bg-green-500" />
         </div>
       </div>
+      <RightSocialRail />
     </section>
   );
 };
