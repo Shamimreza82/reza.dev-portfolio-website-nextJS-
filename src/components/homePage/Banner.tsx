@@ -5,23 +5,53 @@ import { motion } from "framer-motion";
 import { CodeBracketIcon } from "@heroicons/react/24/outline";
 import bannerImage1 from "../../asset/photo/protolio1.jpg";
 import StatusBadge from "../ui/status-badge";
-import Particles from "../visuals/Particles"; // <-- import
+
 import RightSocialRail from "../banner/RightSocialRail";
 import SoundButton from "../small-component/SoundButton";
+
+import CosmosRealistic from "../visuals/CosmosRealistic";
 
 const Banner = () => {
   return (
     <section
-      className="relative flex flex-col md:flex-row pt-24 min-h-screen items-center px-4 py-12 gap-5 md:gap-10 lg:gap-20
+      className="flex flex-col md:flex-row pt-24 min-h-screen items-center px-4 py-12 gap-5 md:gap-10 lg:gap-20
                  bg-gradient-to-b  overflow-hidden"
     >
-      {/* Particle background */}
-      <Particles
-        count={110}
-        linkDistance={120}
-        parallax={34}
-        className="text-cyan-300/60" // sets particle color via currentColor
-      />
+
+
+
+      <div className="">
+        {/* <Particles
+          count={110}
+          linkDistance={120}
+          parallax={34}
+          className="text-cyan-300/60" // sets particle color via currentColor
+        /> */}
+      </div>
+      <div className="">
+        {/* <Starfield
+          count={200}
+          parallax={34}
+          twinkle={0.4}
+          shootingEverySec={1}   // set to 0 to disable shooters
+          className="text-cyan-300/50" // sets star color if you didn't pass color prop
+        /> */}
+      </div>
+      
+        <CosmosRealistic
+          quality="low"        // "low" | "med" | "high"
+          bloom={1.12}
+          sunPos={[0.6, 0.3]}
+          galaxyPos={[0.1, 0.7]}
+          sunRadius={5}
+          galaxyRotation={0.20}
+          parallax={30}
+          planets={true}
+
+        />
+
+
+
 
       {/* soft glow overlay (optional) */}
       {/* <div className="pointer-events-none absolute -top-40 -left-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
@@ -83,37 +113,21 @@ const Banner = () => {
 
             <SoundButton
               href="https://drive.google.com/file/d/1V4v3cIAmBX7VvkypTz9QRATk5lOtsi7A/view?usp=sharing"
-              name="Resume" 
+              name="Resume"
               target="_blank"
               size={"lg"}
               variant={"default"}
               className="mx-auto"
-              />
+            />
 
 
-
-
-            {/* <Link
+            <SoundButton
               href="/projects"
-              className="text-sm sm:text-base bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
-            >
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 sm:px-10 py-4 border-2 border-cyan-500/30 bg-gray-900/50 text-cyan-300 rounded-xl font-bold backdrop-blur-sm hover:border-cyan-400/60 transition-all relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-cyan-500/10 opacity-0 hover:opacity-100 transition-opacity" />
-                View my work
-              </motion.button>
-            </Link> */}
-
-             <SoundButton
-              href="/projects"
-              name=" View my work" 
+              name=" View my work"
               size={"lg"}
               variant={"outline"}
               className="mx-auto"
-              />
+            />
 
           </motion.div>
         </motion.div>
