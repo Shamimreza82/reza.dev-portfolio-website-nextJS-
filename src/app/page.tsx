@@ -4,16 +4,27 @@ import Banner from "@/components/homePage/Banner";
 import Faq from "@/components/homePage/Faq";
 import Services from "@/components/homePage/Services";
 import AiAssistant from "@/components/homePage/assistent/AiAssistant";
-import TechLoaderOverlay from "@/components/small-component/LoadingScreen";
+
+
 
 
 
 export default function Home() {
 
+  // const { isPlaying, toggleMusic } = useMusic()
+
+  // console.log(isPlaying)
+
+  // useEffect(() => {
+  //   if (isPlaying) {
+  //     toggleMusic()
+  //   }
+  // }, [])
+
 
   return (
     <div className="container mx-auto">
-      <TechLoaderOverlay
+      {/* <TechLoaderOverlay
         duration={2600}
         messages={[
           "Booting UI kernel",
@@ -23,13 +34,12 @@ export default function Home() {
           "Ready to launch",
         ]}
       >
+
+      </TechLoaderOverlay> */}
         <Banner />
         <Services />
         <Faq />
         <AiAssistant />
-
-      </TechLoaderOverlay>
-
     </div>
   );
 }

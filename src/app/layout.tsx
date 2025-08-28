@@ -4,6 +4,8 @@ import "./globals.css";
 import Navber from "@/components/Navber";
 import { Toaster } from "sonner";
 import { Footer } from "@/components/homePage/Footer";
+import { MusicProvider } from "@/providers/MusicProvider";
+import ClickSoundProvider from "@/providers/ClickSoundProvider";
 
 
 
@@ -24,12 +26,15 @@ export default function RootLayout({
       <body
         className={`antialiased font-Roboto `}
       >
-        <AuthProvider>
-          <Navber/>
-          {children}
-          <Toaster />
-          <Footer />
-        </AuthProvider>
+        <MusicProvider>
+          <AuthProvider>
+            <Navber />
+             <ClickSoundProvider />
+            {children}
+            <Toaster />
+            <Footer />
+          </AuthProvider>
+        </MusicProvider>
       </body>
     </html>
   );

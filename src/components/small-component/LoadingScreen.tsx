@@ -38,7 +38,7 @@ export default function TechLoaderOverlay({
   duration = 2000,
   messages = defaultMessages,
   showOnReloadOnly = false,
-  soundSrc = "/sounds/loader-ambience.mp3",
+  soundSrc = "/sounds/superspacy-atmosphere-106826.mp3",
   soundVolume = 0.35,
   soundEnabled = true,
   children,
@@ -102,7 +102,7 @@ export default function TechLoaderOverlay({
       .play()
       .then(() => {
         setAutoplayBlocked(false)
-        fadeVolumeTo(soundVolume, 700) // fade in
+        fadeVolumeTo(soundVolume, 900) // fade in
       })
       .catch(() => {
         // blocked by autoplay policy; show toggle

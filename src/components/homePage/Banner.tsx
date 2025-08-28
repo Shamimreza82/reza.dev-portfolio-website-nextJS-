@@ -5,9 +5,9 @@ import { motion } from "framer-motion";
 import { CodeBracketIcon } from "@heroicons/react/24/outline";
 import bannerImage1 from "../../asset/photo/protolio1.jpg";
 import StatusBadge from "../ui/status-badge";
-import Link from "next/link";
 import Particles from "../visuals/Particles"; // <-- import
 import RightSocialRail from "../banner/RightSocialRail";
+import SoundButton from "../small-component/SoundButton";
 
 const Banner = () => {
   return (
@@ -79,22 +79,21 @@ const Banner = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.5 }}
           >
-            <Link
-              className="flex justify-center"
-              href={"https://drive.google.com/file/d/1V4v3cIAmBX7VvkypTz9QRATk5lOtsi7A/view?usp=sharing"}
-              target="_blank"
-            >
-              <motion.button
-                whileHover={{ scale: 0.5 }}
-                whileTap={{ scale: 0.95 }}
-                className="px-8 sm:px-10 py-4 bg-gradient-to-br from-cyan-500 to-blue-600 text-gray-950 rounded-xl font-bold flex items-center gap-2 sm:gap-3 group relative overflow-hidden"
-              >
-                <div className="absolute inset-0 bg-white/10 opacity-0 group-hover:opacity-100 transition-opacity" />
-                <span className="text-sm sm:text-base">Resume</span>
-              </motion.button>
-            </Link>
 
-            <Link
+
+            <SoundButton
+              href="https://drive.google.com/file/d/1V4v3cIAmBX7VvkypTz9QRATk5lOtsi7A/view?usp=sharing"
+              name="Resume" 
+              target="_blank"
+              size={"lg"}
+              variant={"default"}
+              className="mx-auto"
+              />
+
+
+
+
+            {/* <Link
               href="/projects"
               className="text-sm sm:text-base bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent"
             >
@@ -106,7 +105,16 @@ const Banner = () => {
                 <div className="absolute inset-0 bg-cyan-500/10 opacity-0 hover:opacity-100 transition-opacity" />
                 View my work
               </motion.button>
-            </Link>
+            </Link> */}
+
+             <SoundButton
+              href="/projects"
+              name=" View my work" 
+              size={"lg"}
+              variant={"outline"}
+              className="mx-auto"
+              />
+
           </motion.div>
         </motion.div>
       </div>

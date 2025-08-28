@@ -245,3 +245,26 @@ Neon Text Effect
 }
 
 
+@layer utilities {
+  /* Ripple */
+  @keyframes ripple {
+    from { width: 0; height: 0; opacity: 0.5; transform: translate(-50%, -50%) }
+    to   { width: 440px; height: 440px; opacity: 0; transform: translate(-50%, -50%) }
+  }
+  .animate-\[ripple_520ms_ease-out_forwards\] { animation: ripple 520ms ease-out forwards }
+
+  /* Rotating conic gradient for border ring */
+  @keyframes spin-slow { to { transform: rotate(360deg) } }
+
+  /* Tiny sparkles */
+  .sparkle {
+    width: 6px; height: 6px; border-radius: 9999px;
+    background: radial-gradient(circle, rgba(255,255,255,.95), rgba(255,255,255,0));
+    filter: drop-shadow(0 0 6px rgba(255,255,255,.5));
+    animation: sparkle-pulse 1.6s ease-in-out infinite;
+  }
+  @keyframes sparkle-pulse {
+    0%,100% { transform: scale(0.8); opacity: .6 }
+    50%     { transform: scale(1.25); opacity: 1 }
+  }
+}

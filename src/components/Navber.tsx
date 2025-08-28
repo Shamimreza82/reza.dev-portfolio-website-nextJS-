@@ -2,8 +2,8 @@
 
 import Link from "next/link"
 import { usePathname } from "next/navigation"
-import { useState, useEffect } from "react"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { useState, useEffect, useRef } from "react"
+import { Menu, X, ChevronDown, Volume2, VolumeX } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "./auth-provider"
@@ -19,14 +19,26 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
 } from "./ui/dropdown-menu"
+import { useMusic } from "@/providers/MusicProvider"
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
+  const { isPlaying, toggleMusic } = useMusic()
   const pathname = usePathname()
-  const { user} = useAuth()
+  const { user } = useAuth()
 
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
+  const handleClick = () => {
+    if (audioRef.current) {
+      audioRef.current.currentTime = 0 // restart if clicked fast
+      audioRef.current.play()
+    }
+    // your other logic here...
+    console.log("Button clicked!")
+  }
 
 
   // Close mobile menu when route changes
@@ -50,7 +62,7 @@ const Navbar = () => {
       name: "Ai Tools",
       dropdown: [
         { path: "/aiTools/pdfChat", name: "Chat With PDF" },
-       
+
       ],
     },
     {
@@ -124,7 +136,7 @@ const Navbar = () => {
                     >
                       <div className="py-1">
                         {item.dropdown.map((dropdownItem) => (
-                          <Link key={dropdownItem.name} href={dropdownItem.path}>
+                          <Link onClick={handleClick} key={dropdownItem.name} href={dropdownItem.path}>
                             <p
                               className={cn(
                                 "block px-4 py-2 text-sm transition-colors",
@@ -134,8 +146,10 @@ const Navbar = () => {
                               )}
                             >
                               {dropdownItem.name}
+                              <audio ref={audioRef} src="/click.mp3" preload="auto" />
                             </p>
                           </Link>
+
                         ))}
                       </div>
                     </div>
@@ -169,7 +183,7 @@ const Navbar = () => {
             user ? <Link href='/dashboard'>
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
-                   <Button className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white">Dashboard</Button>
+                  <Button className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white">Dashboard</Button>
                 </DropdownMenuTrigger>
                 <DropdownMenuContent className="w-56">
                   <DropdownMenuLabel>My Account</DropdownMenuLabel>
@@ -222,26 +236,33 @@ const Navbar = () => {
                   </DropdownMenuItem>
                 </DropdownMenuContent>
               </DropdownMenu>
-             
+
             </Link> : <Link href='/login'>
               <Button className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white">Login</Button>
             </Link>
           }
+          <Button onClick={toggleMusic} variant="outline" size="icon">
+            {isPlaying ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+          </Button>
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-4">
           {/* Dark/Light Mode Toggle - Mobile */}
 
-
+          <Button onClick={toggleMusic} variant="outline" size="icon">
+            {isPlaying ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
+          </Button>
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-white p-2 rounded-md hover:bg-slate-800 transition-colors"
             aria-label="Toggle menu"
             aria-expanded={isOpen}
           >
+
             <Menu className="h-6 w-6" />
           </button>
+
         </div>
       </div>
 
@@ -261,6 +282,7 @@ const Navbar = () => {
           isOpen ? "translate-x-0" : "translate-x-full",
         )}
       >
+
         <div className="flex items-center justify-between p-4 border-b border-slate-700">
           <p className="text-xl font-bold text-emerald-400">Menu</p>
           <button
@@ -270,6 +292,7 @@ const Navbar = () => {
           >
             <X className="h-6 w-6" />
           </button>
+
         </div>
 
         <ul className="flex flex-col gap-1 p-4">
