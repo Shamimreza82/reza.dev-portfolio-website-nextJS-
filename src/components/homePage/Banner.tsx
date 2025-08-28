@@ -77,7 +77,7 @@ const Banner = () => {
             className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10 md:mt-16 justify-center md:justify-start"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ delay: 1 }}
+            transition={{ delay: 0.5 }}
           >
             <Link
               className="flex justify-center"
@@ -85,7 +85,7 @@ const Banner = () => {
               target="_blank"
             >
               <motion.button
-                whileHover={{ scale: 1.05 }}
+                whileHover={{ scale: 0.5 }}
                 whileTap={{ scale: 0.95 }}
                 className="px-8 sm:px-10 py-4 bg-gradient-to-br from-cyan-500 to-blue-600 text-gray-950 rounded-xl font-bold flex items-center gap-2 sm:gap-3 group relative overflow-hidden"
               >

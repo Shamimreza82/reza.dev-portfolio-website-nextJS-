@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { cn } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { Twitter, Linkedin, Github, Codepen, Dribbble } from "lucide-react";
+import { Twitter, Linkedin, Github, Facebook} from "lucide-react";
 
 type Item = {
   href: string;
@@ -12,11 +12,10 @@ type Item = {
 };
 
 const ITEMS: Item[] = [
-  { href: "https://twitter.com/yourhandle", label: "Twitter / X", Icon: Twitter },
-  { href: "https://www.linkedin.com/in/yourprofile", label: "LinkedIn", Icon: Linkedin },
-  { href: "https://github.com/yourname", label: "GitHub", Icon: Github },
-  { href: "https://codepen.io/yourname", label: "CodePen", Icon: Codepen },
-  { href: "https://dribbble.com/yourname", label: "Dribbble", Icon: Dribbble },
+  { href: "https://x.com/reza_shamim1", label: "Twitter / X", Icon: Twitter },
+  { href: "https://www.linkedin.com/in/shamim--reza/", label: "LinkedIn", Icon: Linkedin },
+  { href: "https://github.com/Shamimreza82", label: "GitHub", Icon: Github },
+  { href: "https://www.facebook.com/rezashamimone/", label: "Facebook", Icon: Facebook },
 ];
 
 export default function RightSocialRail({
@@ -32,7 +31,7 @@ export default function RightSocialRail({
         aria-label="Social links"
         className={cn(
           // layout / position
-          "pointer-events-auto fixed right-4 top-1/2 -translate-y-1/2 z-40",
+          "pointer-events-auto fixed left-2 top-1/2 -translate-y-1/2 z-40",
           // hide on very small screens (show >= md)
           "hidden md:block",
           className
@@ -61,7 +60,7 @@ export default function RightSocialRail({
                     rel="noreferrer"
                     aria-label={label}
                     className={cn(
-                      "group grid h-11 w-11 place-items-center",
+                      "group grid h-8 w-8 place-items-center",
                       "rounded-xl border border-white/10",
                       "bg-neutral-900/60 hover:bg-neutral-900",
                       "outline-none ring-offset-2 focus-visible:ring-2 focus-visible:ring-cyan-400/70 focus-visible:ring-offset-neutral-950",
@@ -71,7 +70,7 @@ export default function RightSocialRail({
                     <Icon
                       className={cn(
                         "h-5 w-5",
-                        "text-neutral-400 group-hover:text-white",
+                        "text-cyan-400 group-hover:text-white",
                         "transition-colors"
                       )}
                       strokeWidth={1.75}
