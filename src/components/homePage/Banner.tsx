@@ -10,6 +10,7 @@ import RightSocialRail from "../banner/RightSocialRail";
 import SoundButton from "../small-component/SoundButton";
 
 import CosmosRealistic from "../visuals/CosmosRealistic";
+import Particles from "../visuals/Particles";
 
 const Banner = () => {
   return (
@@ -18,28 +19,28 @@ const Banner = () => {
                  bg-gradient-to-b  overflow-hidden"
     >
 
-
-
-      <div className="">
-        {/* <Particles
-          count={110}
+      <div className="block lg:hidden">
+        <Particles
+          count={80}
           linkDistance={120}
           parallax={34}
-          className="text-cyan-300/60" // sets particle color via currentColor
-        /> */}
+          className="text-cyan-300/60"
+        />
       </div>
-      <div className="">
+
+      <div className="hidden">
         {/* <Starfield
-          count={200}
-          parallax={34}
-          twinkle={0.4}
-          shootingEverySec={1}   // set to 0 to disable shooters
-          className="text-cyan-300/50" // sets star color if you didn't pass color prop
-        /> */}
+    count={200}
+    parallax={34}
+    twinkle={0.4}
+    shootingEverySec={1}
+    className="text-cyan-300/50"
+  /> */}
       </div>
-      
+
+      <div className="hidden lg:block">
         <CosmosRealistic
-          quality="low"        // "low" | "med" | "high"
+          quality="low"
           bloom={1.12}
           sunPos={[0.6, 0.3]}
           galaxyPos={[0.1, 0.7]}
@@ -47,8 +48,9 @@ const Banner = () => {
           galaxyRotation={0.20}
           parallax={30}
           planets={true}
-
         />
+      </div>
+
 
 
 

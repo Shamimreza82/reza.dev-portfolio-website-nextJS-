@@ -33,16 +33,16 @@ export default function RightSocialRail({
           // layout / position
           "pointer-events-auto fixed left-2 top-1/2 -translate-y-1/2 z-40",
           // hide on very small screens (show >= md)
-          "hidden md:block",
+          "",
           className
         )}
       >
         <ul
           className={cn(
-            "flex flex-col items-center gap-5",
+            "flex flex-col items-center gap-2",
             // container style
             "rounded-2xl border border-white/10 bg-black/20 backdrop-blur",
-            "p-3 shadow-xl shadow-black/20"
+            "p-2 shadow-xl shadow-black/30"
           )}
         >
           {/* small top accent arrow/marker */}
