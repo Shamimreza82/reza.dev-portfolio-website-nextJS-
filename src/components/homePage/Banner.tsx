@@ -43,7 +43,7 @@ const Banner = () => {
           quality="low"
           bloom={1.12}
           sunPos={[0.6, 0.3]}
-          galaxyPos={[0.1, 0.7]}
+          galaxyPos={[0.1, 0.9]}
           sunRadius={5}
           galaxyRotation={0.20}
           parallax={30}
@@ -86,7 +86,7 @@ const Banner = () => {
             animate={{ opacity: 1 }}
             transition={{ delay: 0.4 }}
           >
-            <span className="inline-block bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent">
+            <span className="inline-block bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent ">
               Hi,
               <br />
               I am Reza,
