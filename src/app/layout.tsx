@@ -30,6 +30,7 @@ export default function RootLayout({
           <AuthProvider>
             <Navber />
              <ClickSoundProvider />
+             
             {children}
             <Toaster />
             <Footer />

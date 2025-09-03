@@ -7,6 +7,7 @@ import { Menu, X, ChevronDown, Volume2, VolumeX } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Button } from "@/components/ui/button"
 import { useAuth } from "./auth-provider"
+import logo from "../../public/rezahub.png"
 import {
   DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
   DropdownMenuGroup,
@@ -20,6 +21,7 @@ import {
   DropdownMenuSubTrigger,
 } from "./ui/dropdown-menu"
 import { useMusic } from "@/providers/MusicProvider"
+import Image from "next/image"
 
 
 const Navbar = () => {
@@ -93,7 +95,7 @@ const Navbar = () => {
         <div className="text-2xl font-bold">
           <Link href="/">
             <p className="hover:text-emerald-400 transition duration-300">
-              Reza<span className="text-emerald-400">.dev</span>
+              <Image src={logo} height={150} width={150} alt="logo"></Image>
             </p>
           </Link>
         </div>
