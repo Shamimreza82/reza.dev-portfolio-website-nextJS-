@@ -2,6 +2,8 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Twitter } from "lucide-react"
+import Image from "next/image"
+import logo from "../../asset/rezahub.png"
 
 
 export function Footer() {
@@ -26,7 +28,7 @@ export function Footer() {
           {/* Branding Section */}
           <div className="space-y-4">
             <Link href="/" className="flex items-center gap-2">
-              <span className="text-2xl font-bold">Reza.dev</span>
+              <Image src={logo} height={100} width={100} alt="logoFooter"></Image>
             </Link>
             <p className="text-muted-foreground max-w-sm text-sm">
               Building digital experiences with modern web technologies.
