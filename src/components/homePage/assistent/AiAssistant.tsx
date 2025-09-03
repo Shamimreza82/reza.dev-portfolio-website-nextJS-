@@ -1,3 +1,5 @@
+"use client"
+
 import { ChatBubbleOvalLeftEllipsisIcon } from '@heroicons/react/24/outline'
 import { motion, AnimatePresence } from 'framer-motion'
 import React, { useState, useRef, useEffect } from 'react'

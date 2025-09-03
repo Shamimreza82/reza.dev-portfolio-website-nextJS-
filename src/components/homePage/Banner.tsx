@@ -139,7 +139,7 @@ const Banner = () => {
         <div className="relative rounded-2xl lg:ml-28">
           <motion.img
             src={bannerImage1.src}
-            alt="Portfolio"
+            alt="A picture of Reza, the full-stack web developer"
             className="max-w-md mx-auto w-80 md:max-w-lg lg:max-w-xl shadow-2xl shadow-cyan-500/50 rounded-2xl mt-8 md:mt-0"
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
