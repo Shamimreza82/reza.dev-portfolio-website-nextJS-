@@ -24,26 +24,7 @@ export default function Home() {
 
   return (
     <div className="container mx-auto">
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{
-          __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            "name": "Reza",
-            "url": "https://www.reza.dev",
-            "sameAs": [
-              "https://www.linkedin.com/in/reza-c/",
-              "https://github.com/reza-c/",
-            ],
-            "jobTitle": "Full-Stack Web Developer",
-            "worksFor": {
-              "@type": "Organization",
-              "name": "Reza.dev",
-            },
-          }),
-        }}
-      />
+      
       {/* <TechLoaderOverlay
         duration={2600}
         messages={[

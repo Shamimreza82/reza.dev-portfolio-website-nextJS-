@@ -12,6 +12,8 @@ import SoundButton from "../small-component/SoundButton";
 import CosmosRealistic from "../visuals/CosmosRealistic";
 import Particles from "../visuals/Particles";
 
+import Image from "next/image";
+
 const Banner = () => {
   return (
     <section
@@ -137,15 +139,19 @@ const Banner = () => {
 
       <div className="relative z-10">
         <div className="relative rounded-2xl lg:ml-28">
-          <motion.img
-            src={bannerImage1.src}
-            alt="A picture of Reza, the full-stack web developer"
-            className="max-w-md mx-auto w-80 md:max-w-lg lg:max-w-xl shadow-2xl shadow-cyan-500/50 rounded-2xl mt-8 md:mt-0"
+          <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 1.02, delay: 1.2, ease: "easeOut" }}
             whileHover={{ scale: 1.01, rotate: 2 }}
-          />
+          >
+            <Image
+              src={bannerImage1}
+              alt="A picture of Reza, the full-stack web developer"
+              className="max-w-md mx-auto w-80 md:max-w-lg lg:max-w-xl shadow-2xl shadow-cyan-500/50 rounded-2xl mt-8 md:mt-0"
+              priority
+            />
+          </motion.div>
         </div>
         <div className="lg:ml-48 mt-8">
           <StatusBadge text="Available for projects" colorClass="bg-green-500" />
