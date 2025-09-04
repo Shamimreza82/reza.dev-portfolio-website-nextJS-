@@ -15,7 +15,7 @@ import { webSiteSchema } from "@/lib/seo/schema/website";
 import { faqSchema } from "@/lib/seo/schema/faq";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://yourdomain.com"),
+  metadataBase: new URL("https://rezahub.com"),
   title: {
     default: "Reza | Full-Stack Web Developer (Next.js, React, Node.js)",
     template: "%s | Reza — Full-Stack Developer",
@@ -31,16 +31,16 @@ export const metadata: Metadata = {
     "Hire Web Developer",
   ],
   alternates: {
-    canonical: "/",
+    canonical: "https://rezahub.com/",
     languages: { "en": "/", "bn": "/bn" }, // if you add Bangla later
   },
   openGraph: {
     type: "website",
-    url: "https://rezahub.com",
+    url: "https://rezahub.com/",
     title: "Reza — Full-Stack Developer Portfolio",
     description:
       "Next.js, React & Node.js specialist. High-performance web apps for startups & SMBs.",
-    images: ["/rezahub.png"], // put this in /public
+    images: ["https://rezahub.com/rezahub.png"], // put this in /public
     siteName: "rezahub",
     locale: "en_US",
   },
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     title: "Reza — Full-Stack Developer",
     description:
       "Hire me to build scalable, SEO-friendly web apps (Next.js, React, Node).",
-    images: ["/og-image.png"],
+    images: ["https://rezahub.com/og-image.png"],
   },
   category: "technology",
   authors: [{ name: "Reza", url: "https://rezahub.com" }],
