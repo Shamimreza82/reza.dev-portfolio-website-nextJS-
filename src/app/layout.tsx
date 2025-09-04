@@ -1,4 +1,3 @@
-
 import { AuthProvider } from "@/components/auth-provider";
 import "./globals.css";
 import Navber from "@/components/Navber";
@@ -32,7 +31,7 @@ export const metadata: Metadata = {
   ],
   alternates: {
     canonical: "https://rezahub.com/",
-    languages: { "en": "/", "bn": "/bn" }, // if you add Bangla later
+    languages: { en: "/", bn: "/bn" },
   },
   openGraph: {
     type: "website",
@@ -40,7 +39,7 @@ export const metadata: Metadata = {
     title: "Reza — Full-Stack Developer Portfolio",
     description:
       "Next.js, React & Node.js specialist. High-performance web apps for startups & SMBs.",
-    images: ["https://rezahub.com/rezahub.png"], // put this in /public
+    images: ["https://rezahub.com/rezahub.png"],
     siteName: "rezahub",
     locale: "en_US",
   },
@@ -53,31 +52,41 @@ export const metadata: Metadata = {
   },
   category: "technology",
   authors: [{ name: "Reza", url: "https://rezahub.com" }],
+  other: {
+    // Adds AdSense meta verification
+    "google-adsense-account": "ca-pub-4704565974989640",
+  },
 };
-
-
-
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
       <head>
         <link rel="manifest" href="/manifest.json" />
+
+        {/* ✅ Google AdSense verification script (must be in <head>) */}
+        <Script
+          id="adsense"
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704565974989640"
+          crossOrigin="anonymous"
+          strategy="beforeInteractive"
+        />
       </head>
+
       <body className="antialiased font-Roboto">
         <MusicProvider>
           <AuthProvider>
             <Navber />
             <ClickSoundProvider />
+
+            {children}
+
+            {/* ✅ Google Analytics */}
             <Script
-              async
-              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704565974989640"
-              crossOrigin="anonymous"
+              src="https://www.googletagmanager.com/gtag/js?id=G-NE4D2QJFXX"
               strategy="afterInteractive"
             />
-            {children}
-            {/* Google Analytics */}
-            <Script src="https://www.googletagmanager.com/gtag/js?id=G-NE4D2QJFXX" strategy="afterInteractive" />
             <Script id="google-analytics" strategy="afterInteractive">
               {`
                 window.dataLayer = window.dataLayer || [];
@@ -87,9 +96,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               `}
             </Script>
 
+            {/* ✅ JSON-LD Schemas */}
             <JsonLd id="person-schema" data={personSchema()} />
             <JsonLd id="website-schema" data={webSiteSchema()} />
-            {/* Global FAQ (optional). Prefer one FAQ per page. */}
             <JsonLd
               id="faq-schema"
               data={faqSchema([
@@ -107,6 +116,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
                 },
               ])}
             />
+
             <Toaster />
             <Footer />
           </AuthProvider>
