@@ -69,6 +69,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <AuthProvider>
             <Navber />
             <ClickSoundProvider />
+            <Script
+              async
+              src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4704565974989640"
+              crossOrigin="anonymous"
+              strategy="afterInteractive"
+            />
             {children}
             {/* Google Analytics */}
             <Script src="https://www.googletagmanager.com/gtag/js?id=G-NE4D2QJFXX" strategy="afterInteractive" />
