@@ -13,6 +13,7 @@ import CosmosRealistic from "../visuals/CosmosRealistic";
 import Particles from "../visuals/Particles";
 
 import Image from "next/image";
+import WhatsAppFloat from "../small-component/WhatsappFloatButton";
 
 const Banner = () => {
   return (
@@ -158,6 +159,11 @@ const Banner = () => {
         </div>
       </div>
       <RightSocialRail />
+      <WhatsAppFloat
+        phone="8801531297879"
+        message="Hello! I’m interested in your services."
+        // floats inside the banner only
+      />
     </section>
   );
 };
