@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { serviceSchema } from "@/lib/seo/schema/service";
-import { breadcrumbsSchema } from "@/lib/seo/schema/breadcrumbs";
+
 
 export const metadata: Metadata = {
   title: "React Development Services | Reza — Full-Stack Developer",
@@ -46,22 +44,6 @@ export default function Page() {
         Book a Free Consultation
       </a>
 
-      {/* JSON-LD */}
-      <JsonLd
-        id="service-react"
-        data={serviceSchema({
-          serviceType: "React Development",
-          pagePath: "/react-development",
-          startingPriceUSD: 800,
-        })}
-      />
-      <JsonLd
-        id="breadcrumbs-react"
-        data={breadcrumbsSchema([
-          { name: "Home", path: "/" },
-          { name: "React Development", path: "/react-development" },
-        ])}
-      />
     </main>
   );
 }

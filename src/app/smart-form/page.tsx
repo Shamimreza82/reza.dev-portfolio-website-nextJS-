@@ -27,7 +27,7 @@ export default function SmartForm() {
         // Update only the specific field with AI suggestion
         setFormData((prev) => ({
           ...prev,
-          [typingField]: data.suggestion || prev[typingField],
+          [typingField]: data.suggestion ,
         }));
       } catch (error) {
         console.error("AI suggestion failed:", error);

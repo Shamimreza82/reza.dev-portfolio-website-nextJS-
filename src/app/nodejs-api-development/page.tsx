@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { serviceSchema } from "@/lib/seo/schema/service";
-import { breadcrumbsSchema } from "@/lib/seo/schema/breadcrumbs";
+
 
 export const metadata: Metadata = {
   title: "Node.js & API Development Services | Reza — Full-Stack Developer",
@@ -46,22 +44,6 @@ export default function Page() {
         Get Started Today
       </a>
 
-      {/* JSON-LD */}
-      <JsonLd
-        id="service-nodejs"
-        data={serviceSchema({
-          serviceType: "Node.js & API Development",
-          pagePath: "/nodejs-api-development",
-          startingPriceUSD: 1000,
-        })}
-      />
-      <JsonLd
-        id="breadcrumbs-nodejs"
-        data={breadcrumbsSchema([
-          { name: "Home", path: "/" },
-          { name: "Node.js & API Development", path: "/nodejs-api-development" },
-        ])}
-      />
     </main>
   );
 }

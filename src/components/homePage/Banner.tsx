@@ -14,8 +14,7 @@ import Particles from "../visuals/Particles";
 
 import Image from "next/image";
 import WhatsAppFloat from "../small-component/WhatsappFloatButton";
-import { Button } from "../ui/button";
-import Link from "next/link";
+
 
 const Banner = () => {
   return (

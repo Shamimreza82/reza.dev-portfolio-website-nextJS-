@@ -8,10 +8,6 @@ import ClickSoundProvider from "@/providers/ClickSoundProvider";
 
 import { Metadata } from "next";
 import Script from "next/script";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { personSchema } from "@/lib/seo/schema/person";
-import { webSiteSchema } from "@/lib/seo/schema/website";
-import { faqSchema } from "@/lib/seo/schema/faq";
 import LayoutProvider from "@/providers/LayoutProvider";
 
 export const metadata: Metadata = {
@@ -88,25 +84,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
 
         {/* ✅ JSON-LD Schemas */}
-        <JsonLd id="person-schema" data={personSchema()} />
-        <JsonLd id="website-schema" data={webSiteSchema()} />
-        <JsonLd
-          id="faq-schema"
-          data={faqSchema([
-            {
-              q: "What services do you provide as a Full-Stack Developer?",
-              a: "I build modern web applications using Next.js, React, Node.js, and PostgreSQL. Services include SEO-friendly Next.js apps, React frontends, Node.js APIs, auth, and custom dashboards.",
-            },
-            {
-              q: "How much does a project cost?",
-              a: "Depends on scope and complexity. I offer a free consultation and a clear estimate before starting.",
-            },
-            {
-              q: "Why should I hire you?",
-              a: "I deliver end-to-end solutions (frontend + backend) optimized for speed, SEO, and scalability—ideal for startups and SMEs.",
-            },
-          ])}
-        />
+
       </head>
 
       <body className="antialiased font-Roboto">
@@ -118,8 +96,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             <LayoutProvider>
               {children}
             </LayoutProvider>
-
-
             <Toaster />
             <Footer />
           </AuthProvider>

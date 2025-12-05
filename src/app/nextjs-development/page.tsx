@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
-import { JsonLd } from "@/components/seo/JsonLd";
-import { serviceSchema } from "@/lib/seo/schema/service";
-import { breadcrumbsSchema } from "@/lib/seo/schema/breadcrumbs";
+
 
 
 export const metadata: Metadata = {
@@ -19,22 +17,6 @@ export default function Page() {
         I build SEO-friendly, high-performance Next.js applications for startups and businesses.
       </p>
 
-      {/* JSON-LD for this page */}
-      <JsonLd
-        id="service-nextjs"
-        data={serviceSchema({
-          serviceType: "Next.js Development",
-          pagePath: "/nextjs-development",
-          startingPriceUSD: 1000, // or omit
-        })}
-      />
-      <JsonLd
-        id="breadcrumbs-nextjs"
-        data={breadcrumbsSchema([
-          { name: "Home", path: "/" },
-          { name: "Next.js Development", path: "/nextjs-development" },
-        ])}
-      />
     </main>
   );
 }
