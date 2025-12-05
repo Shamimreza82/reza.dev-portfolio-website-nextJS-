@@ -5,6 +5,8 @@ import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import Link from "next/link"
 import { Code, Palette, Smartphone, Database, Cloud, Laptop } from "lucide-react"
+import { useRouter } from "next/navigation"
+
 
 const fadeIn = {
   initial: { opacity: 0, y: 20 },
@@ -54,7 +56,47 @@ const services = [
   }
 ]
 
+
+
+
 export default function Services() {
+
+const router = useRouter()
+
+
+const handlePayment = async () => {
+  try {
+    // Call your backend API to initiate the payment
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/payment/init`, {
+      method: 'GET', // Usually payment init is POST
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // body: JSON.stringify({ /* optional payload if needed */ }),
+    });
+
+    if (!res.ok) {
+      throw new Error(`Payment init failed: ${res.status}`);
+    }
+
+    const url = await res.json();
+
+    // Check if the GatewayPageURL exists
+    if (!url?.data?.GatewayPageURL) {
+      throw new Error('GatewayPageURL not found in response');
+    }
+
+    console.log('Redirecting to payment gateway:', url.data.GatewayPageURL);
+
+    // Redirect user to the payment page
+    router.push(url.data.GatewayPageURL);
+  } catch (error) {
+    console.error('Payment initiation error:', error);
+    alert('Payment initiation failed. Please try again.');
+  }
+};
+
+
   return (
     <section className="container mx-auto px-4 py-20 md:px-6">
       <motion.div
@@ -105,6 +147,9 @@ export default function Services() {
                     See More
                   </Button>
                 </Link>
+                <Button onClick={handlePayment}>
+                  Payment
+                </Button>
               </CardContent>
             </Card>
           </motion.div>

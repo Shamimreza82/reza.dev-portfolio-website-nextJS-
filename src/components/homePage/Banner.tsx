@@ -14,6 +14,8 @@ import Particles from "../visuals/Particles";
 
 import Image from "next/image";
 import WhatsAppFloat from "../small-component/WhatsappFloatButton";
+import { Button } from "../ui/button";
+import Link from "next/link";
 
 const Banner = () => {
   return (
@@ -21,6 +23,7 @@ const Banner = () => {
       className="flex flex-col md:flex-row pt-24 min-h-screen items-center px-4 py-12 gap-5 md:gap-10 lg:gap-20
                  bg-gradient-to-b  overflow-hidden"
     >
+    
 
       <div className="block lg:hidden">
         <Particles

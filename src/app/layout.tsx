@@ -12,6 +12,7 @@ import { JsonLd } from "@/components/seo/JsonLd";
 import { personSchema } from "@/lib/seo/schema/person";
 import { webSiteSchema } from "@/lib/seo/schema/website";
 import { faqSchema } from "@/lib/seo/schema/faq";
+import LayoutProvider from "@/providers/LayoutProvider";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://rezahub.com"),
@@ -48,7 +49,7 @@ export const metadata: Metadata = {
     title: "Reza — Full-Stack Developer",
     description:
       "Hire me to build scalable, SEO-friendly web apps (Next.js, React, Node).",
-    images: ["https://rezahub.com/og-image.png"],
+    images: ["httpshttps://rezahub.com/rezahub.png"],
   },
   category: "technology",
   authors: [{ name: "Reza", url: "https://rezahub.com" }],
@@ -72,56 +73,59 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           crossOrigin="anonymous"
           strategy="beforeInteractive"
         />
+        {/* ✅ Google Analytics */}
+        <Script
+          src="https://www.googletagmanager.com/gtag/js?id=G-NE4D2QJFXX"
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-NE4D2QJFXX');
+          `}
+        </Script>
+
+        {/* ✅ JSON-LD Schemas */}
+        <JsonLd id="person-schema" data={personSchema()} />
+        <JsonLd id="website-schema" data={webSiteSchema()} />
+        <JsonLd
+          id="faq-schema"
+          data={faqSchema([
+            {
+              q: "What services do you provide as a Full-Stack Developer?",
+              a: "I build modern web applications using Next.js, React, Node.js, and PostgreSQL. Services include SEO-friendly Next.js apps, React frontends, Node.js APIs, auth, and custom dashboards.",
+            },
+            {
+              q: "How much does a project cost?",
+              a: "Depends on scope and complexity. I offer a free consultation and a clear estimate before starting.",
+            },
+            {
+              q: "Why should I hire you?",
+              a: "I deliver end-to-end solutions (frontend + backend) optimized for speed, SEO, and scalability—ideal for startups and SMEs.",
+            },
+          ])}
+        />
       </head>
 
       <body className="antialiased font-Roboto">
+
         <MusicProvider>
           <AuthProvider>
             <Navber />
             <ClickSoundProvider />
+            <LayoutProvider>
+              {children}
+            </LayoutProvider>
 
-            {children}
-
-            {/* ✅ Google Analytics */}
-            <Script
-              src="https://www.googletagmanager.com/gtag/js?id=G-NE4D2QJFXX"
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-                gtag('config', 'G-NE4D2QJFXX');
-              `}
-            </Script>
-
-            {/* ✅ JSON-LD Schemas */}
-            <JsonLd id="person-schema" data={personSchema()} />
-            <JsonLd id="website-schema" data={webSiteSchema()} />
-            <JsonLd
-              id="faq-schema"
-              data={faqSchema([
-                {
-                  q: "What services do you provide as a Full-Stack Developer?",
-                  a: "I build modern web applications using Next.js, React, Node.js, and PostgreSQL. Services include SEO-friendly Next.js apps, React frontends, Node.js APIs, auth, and custom dashboards.",
-                },
-                {
-                  q: "How much does a project cost?",
-                  a: "Depends on scope and complexity. I offer a free consultation and a clear estimate before starting.",
-                },
-                {
-                  q: "Why should I hire you?",
-                  a: "I deliver end-to-end solutions (frontend + backend) optimized for speed, SEO, and scalability—ideal for startups and SMEs.",
-                },
-              ])}
-            />
 
             <Toaster />
             <Footer />
           </AuthProvider>
         </MusicProvider>
-      </body>
-    </html>
+
+    </body>
+    </html >
   );
 }

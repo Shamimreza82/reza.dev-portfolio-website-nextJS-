@@ -1,21 +1,22 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
+// src/components/seo/JsonLd.tsx
 "use client";
 
 import Script from "next/script";
+import type { Thing, WithContext } from "schema-dts";
 
-type JsonLdProps = {
+type JsonLdProps<T extends Thing> = {
   id: string;
-  data: Record<string, any>;
+  data: WithContext<T>;
 };
 
-export function JsonLd({ id, data }: JsonLdProps) {
+export function JsonLd<T extends Thing>({ id, data }: JsonLdProps<T>) {
   return (
     <Script
       id={id}
       type="application/ld+json"
-      strategy="afterInteractive"
-    >
-      {JSON.stringify(data)}
-    </Script>
+      dangerouslySetInnerHTML={{
+        __html: JSON.stringify(data),
+      }}
+    />
   );
 }
