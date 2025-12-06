@@ -81,7 +81,7 @@ const Banner = () => {
               <CodeBracketIcon className="w-10 h-10 text-cyan-400/80 group-hover:text-cyan-300 transition-colors" />
             </motion.div>
             <span className="text-lg md:text-xl font-mono text-cyan-400/80 group-hover:text-cyan-300 transition-colors neon-light">
-              High-performance web experiences
+              High-performance
             </span>
           </div>
 
