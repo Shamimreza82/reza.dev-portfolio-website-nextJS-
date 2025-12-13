@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 export default function Page() {
   return (
     <main className="container mx-auto px-4 py-12">
-      <h1 className="text-3xl font-bold">Next.js Development Services</h1>
+      <h1 className="text-3xl font-bold">Next.js Development Services.</h1>
       <p className="mt-4">
         I build SEO-friendly, high-performance Next.js applications for startups and businesses.
       </p>
