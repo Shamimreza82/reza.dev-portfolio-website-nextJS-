@@ -25,7 +25,7 @@ export default function AIChat() {
   const [chat, setChat] = useState<Message[]>([])
   const [isConnected, setIsConnected] = useState(false)
   const [isTyping, setIsTyping] = useState(false)
-  const socketRef = useRef<Socket>()
+  const socketRef = useRef<Socket>(null)
   const lastMsgRef = useRef<HTMLDivElement>(null)
 
 

@@ -20,14 +20,14 @@ import {
   DropdownMenuSubContent,
   DropdownMenuSubTrigger,
 } from "./ui/dropdown-menu"
-import { useMusic } from "@/providers/MusicProvider"
+// import { useMusic } from "@/providers/MusicProvider"
 import Image from "next/image"
 
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
   const [servicesOpen, setServicesOpen] = useState(false)
-  const { isPlaying, toggleMusic } = useMusic()
+  // const { isPlaying, toggleMusic } = useMusic()
   const pathname = usePathname()
   const { user } = useAuth()
 
@@ -243,18 +243,18 @@ const Navbar = () => {
               <Button className="ml-4 bg-emerald-500 hover:bg-emerald-600 text-white">Login</Button>
             </Link>
           }
-          <Button onClick={toggleMusic} variant="outline" size="icon">
+          {/* <Button onClick={toggleMusic} variant="outline" size="icon">
             {isPlaying ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
-          </Button>
+          </Button> */}
         </div>
 
         {/* Mobile Menu Button */}
         <div className="md:hidden flex items-center space-x-4">
           {/* Dark/Light Mode Toggle - Mobile */}
 
-          <Button onClick={toggleMusic} variant="outline" size="icon">
+          {/* <Button onClick={toggleMusic} variant="outline" size="icon">
             {isPlaying ? <Volume2 className="h-5 w-5" /> : <VolumeX className="h-5 w-5" />}
-          </Button>
+          </Button> */}
           <button
             onClick={() => setIsOpen(!isOpen)}
             className="text-white p-2 rounded-md hover:bg-slate-800 transition-colors"

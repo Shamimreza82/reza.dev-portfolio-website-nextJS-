@@ -3,17 +3,22 @@
 
 import { motion } from "framer-motion";
 import { CodeBracketIcon } from "@heroicons/react/24/outline";
+import dynamic from "next/dynamic";
 import bannerImage1 from "../../asset/photo/protolio1.jpg";
 import StatusBadge from "../ui/status-badge";
 
 import RightSocialRail from "../banner/RightSocialRail";
 import SoundButton from "../small-component/SoundButton";
 
-import CosmosRealistic from "../visuals/CosmosRealistic";
-import Particles from "../visuals/Particles";
-
 import Image from "next/image";
 import WhatsAppFloat from "../small-component/WhatsappFloatButton";
+
+const CosmosRealistic = dynamic(() => import("../visuals/CosmosRealistic"), {
+  ssr: false,
+});
+const Particles = dynamic(() => import("../visuals/Particles"), {
+  ssr: false,
+});
 
 
 const Banner = () => {

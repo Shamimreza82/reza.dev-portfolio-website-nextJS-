@@ -1,6 +1,6 @@
 "use client"
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion"
+import { AnimatePresence, motion, useReducedMotion, easeInOut } from "framer-motion"
 import { useEffect, useMemo, useRef, useState } from "react"
 import { Loader2, Volume2, VolumeX } from "lucide-react"
 
@@ -141,7 +141,7 @@ export default function TechLoaderOverlay({
   const ringAnim = useMemo(
     () => ({
       animate: prefersReduced ? {} : { rotateX: [12, 12], rotateY: [0, 360] },
-      transition: prefersReduced ? {} : { repeat: Infinity, duration: 8, ease: "linear" },
+      transition: prefersReduced ? {} : { repeat: Infinity, duration: 8, ease: easeInOut },
     }),
     [prefersReduced]
   )

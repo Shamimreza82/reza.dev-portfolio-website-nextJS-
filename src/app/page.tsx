@@ -10,37 +10,12 @@ export const metadata: Metadata = {
 };
 
 export default function Home() {
-
-  // const { isPlaying, toggleMusic } = useMusic()
-
-  // console.log(isPlaying)
-
-  // useEffect(() => {
-  //   if (isPlaying) {
-  //     toggleMusic()
-  //   }
-  // }, [])
-
-
   return (
     <div className="container mx-auto">
-      
-      {/* <TechLoaderOverlay
-        duration={2600}
-        messages={[
-          "Booting UI kernel",
-          "Loading assets",
-          "Negotiating frames",
-          "Syncing state",
-          "Ready to launch",
-        ]}
-      >
-
-      </TechLoaderOverlay> */}
-        <Banner />
-        <Services />
-        <Faq />
-        <AiAssistant />
+      <Banner />
+      <Services />
+      <Faq />
+      <AiAssistant />
     </div>
   );
 }
