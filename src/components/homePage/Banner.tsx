@@ -1,14 +1,52 @@
 "use client";
 
-import { motion, Variants } from "framer-motion";
+import { motion, Variants, useScroll, useTransform, useMotionValue, useSpring } from "framer-motion";
 import { ArrowRight, Github, Code2, Rocket, Sparkles, Server, Download } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import bannerImage1 from "../../asset/photo/protolio1.jpg";
 import StatusBadge from "../ui/status-badge";
+import { useRef } from "react";
 
 const Banner = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  
+  // Scroll Parallax
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"]
+  });
+
+  const yHeading = useTransform(scrollYProgress, [0, 1], [0, 100]);
+  const yGlow1 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const yGlow2 = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const opacityScroll = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  // Mouse Tilt Parallax
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const mouseXSpring = useSpring(mouseX, { stiffness: 150, damping: 20 });
+  const mouseYSpring = useSpring(mouseY, { stiffness: 150, damping: 20 });
+
+  const rotateX = useTransform(mouseYSpring, [-0.5, 0.5], ["7deg", "-7deg"]);
+  const rotateY = useTransform(mouseXSpring, [-0.5, 0.5], ["-7deg", "7deg"]);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    if (!sectionRef.current) return;
+    const rect = sectionRef.current.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width - 0.5;
+    const y = (e.clientY - rect.top) / rect.height - 0.5;
+    mouseX.set(x);
+    mouseY.set(y);
+  };
+
+  const handleMouseLeave = () => {
+    mouseX.set(0);
+    mouseY.set(0);
+  };
+
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -30,13 +68,24 @@ const Banner = () => {
   };
 
   return (
-    <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden">
+    <section 
+      ref={sectionRef}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden perspective-1000"
+    >
       {/* Dynamic Background Elements */}
-      <div className="absolute inset-0 -z-10">
-        <div className="absolute top-[10%] left-[-5%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
-        <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[120px]" />
+      <motion.div style={{ opacity: opacityScroll }} className="absolute inset-0 -z-10">
+        <motion.div 
+          style={{ y: yGlow1 }}
+          className="absolute top-[10%] left-[-5%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] animate-pulse" 
+        />
+        <motion.div 
+          style={{ y: yGlow2 }}
+          className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[120px]" 
+        />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--primary-rgb),0.05)_0%,transparent_70%)]" />
-      </div>
+      </motion.div>
 
       {/* Modern Grid/Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] -z-20" />
@@ -49,6 +98,7 @@ const Banner = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
+            style={{ y: yHeading }}
             className="lg:col-span-7 flex flex-col space-y-8 text-center lg:text-left"
           >
             <motion.div variants={itemVariants} className="flex justify-center lg:justify-start">
@@ -122,11 +172,12 @@ const Banner = () => {
           <motion.div
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
+            style={{ rotateX, rotateY, transformStyle: "preserve-3d" }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
             className="lg:col-span-5 relative flex justify-center lg:justify-end"
           >
             {/* Smart Container - More compact (80% width) */}
-            <div className="relative z-10 w-full max-w-[320px] md:max-w-[380px] p-1.5 rounded-[2.5rem] bg-gradient-to-br from-primary/20 via-transparent to-blue-500/20 backdrop-blur-md border border-white/10 shadow-2xl group">
+            <div className="relative z-10 w-full max-w-[320px] md:max-w-[380px] p-1.5 rounded-[2.5rem] bg-gradient-to-br from-primary/20 via-transparent to-blue-500/20 backdrop-blur-md border border-white/10 shadow-2xl group transition-transform duration-200" style={{ transform: "translateZ(50px)" }}>
               <div className="relative rounded-[2rem] overflow-hidden aspect-[4/5] bg-muted">
                 <Image
                   src={bannerImage1}
@@ -145,6 +196,7 @@ const Banner = () => {
               <motion.div 
                 animate={{ y: [0, -8, 0], x: [0, 5, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                style={{ transform: "translateZ(80px)" }}
                 className="absolute -top-4 -left-6 p-3 rounded-xl bg-background/80 backdrop-blur-xl border border-primary/20 shadow-lg z-20 hidden md:flex items-center gap-2"
               >
                 <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
@@ -154,6 +206,7 @@ const Banner = () => {
               <motion.div 
                 animate={{ y: [0, 8, 0], x: [0, -5, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                style={{ transform: "translateZ(60px)" }}
                 className="absolute top-1/2 -right-10 -translate-y-1/2 p-4 rounded-2xl bg-background/80 backdrop-blur-xl border border-blue-500/20 shadow-xl z-20 hidden md:block w-32"
               >
                 <div className="space-y-2">
@@ -173,7 +226,7 @@ const Banner = () => {
               </motion.div>
 
               {/* Status Badge Integrated into frame */}
-              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[85%] p-3 rounded-2xl bg-background/90 backdrop-blur-md border border-border/50 shadow-xl z-20 flex items-center justify-between gap-3">
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[85%] p-3 rounded-2xl bg-background/90 backdrop-blur-md border border-border/50 shadow-xl z-20 flex items-center justify-between gap-3" style={{ transform: "translateZ(100px)" }}>
                 <div className="flex -space-x-2">
                   {[1, 2, 3].map((i) => (
                     <div key={i} className="w-6 h-6 rounded-full border-2 border-background bg-muted overflow-hidden">
