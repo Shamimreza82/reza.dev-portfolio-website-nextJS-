@@ -1,5 +1,6 @@
-import bloodDobation from '@/asset/projects/blood.jpg'
-import ECommerce from '@/asset/projects/ecommerce.jpg'
+import fintechMain from '@/asset/projects/fintech/mainpage.jpg'
+import inventoryShop from '@/asset/projects/inventory/public-shop.jpg'
+import fintechDash from '@/asset/projects/fintech/dashboard.jpg'
 
 export const data = {
   personalInfo: {
@@ -78,7 +79,7 @@ export const data = {
       techStack: ["Node.js", "Express", "Prisma", "PostgreSQL", "Redis", "Cloudinary"],
       liveUrl: "https://e-commerce-fronend-alpha.vercel.app/", // Placeholder or actual if different
       codeUrl: "#",
-      image: ECommerce
+      image: fintechMain
     },
     {
       title: "Inventory Management SaaS",
@@ -93,7 +94,7 @@ export const data = {
       techStack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Docker", "Zod"],
       liveUrl: "#",
       codeUrl: "#",
-      image: ECommerce // Placeholder
+      image: inventoryShop
     },
     {
       title: "Blood Donation Application (Life Lines)",
@@ -107,7 +108,7 @@ export const data = {
       techStack: ["React", "Node.js", "MongoDB", "Mongoose", "TailwindCSS"],
       liveUrl: "https://blood-donation-28936.web.app/",
       codeUrl: "#",
-      image: bloodDobation
+      image: fintechDash
     }
   ]
 };

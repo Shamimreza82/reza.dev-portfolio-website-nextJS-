@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { GitHubCalendar } from "react-github-calendar";
 import { motion } from "framer-motion";
 import { Github, Activity, GitCommit, Code } from "lucide-react";
@@ -9,7 +9,22 @@ import { useTheme } from "next-themes";
 
 const GitHubStatus = () => {
   const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const username = "Shamimreza82"; // Extracted from projects data
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) {
+    return (
+      <section className="py-24 px-6 bg-background/30 border-y border-border/50">
+        <div className="max-w-6xl mx-auto h-[400px] flex items-center justify-center">
+          <Activity className="w-8 h-8 animate-pulse text-muted-foreground" />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section className="py-24 px-6 bg-background/30 border-y border-border/50">

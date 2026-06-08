@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { ArrowRight, Github, Code2, Rocket, Sparkles, Server } from "lucide-react";
+import { ArrowRight, Github, Code2, Rocket, Sparkles, Server, Download } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -89,6 +89,11 @@ const Banner = () => {
                   <Github className="mr-2 h-5 w-5" /> GitHub
                 </Link>
               </Button>
+              <Button variant="secondary" size="lg" className="h-14 px-10 rounded-2xl text-base font-bold shadow-lg hover:-translate-y-1 transition-all duration-300" asChild>
+                <a href="/Shamim_Reza_Resume.pdf" download="Shamim_Reza_Resume.pdf">
+                  <Download className="mr-2 h-5 w-5" /> Resume
+                </a>
+              </Button>
             </motion.div>
 
             {/* Tech Stack Pills */}
@@ -118,88 +123,74 @@ const Banner = () => {
             initial={{ opacity: 0, scale: 0.9, y: 20 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-            className="lg:col-span-5 relative"
+            className="lg:col-span-5 relative flex justify-center lg:justify-end"
           >
-            {/* Main Image Container with Modern Frame */}
-            <div className="relative z-10 p-2 rounded-[3rem] bg-gradient-to-br from-primary/20 via-transparent to-blue-500/20 backdrop-blur-sm border border-white/10 shadow-2xl group">
-              <div className="relative rounded-[2.5rem] overflow-hidden aspect-[4/5] lg:aspect-square">
+            {/* Smart Container - More compact (80% width) */}
+            <div className="relative z-10 w-full max-w-[320px] md:max-w-[380px] p-1.5 rounded-[2.5rem] bg-gradient-to-br from-primary/20 via-transparent to-blue-500/20 backdrop-blur-md border border-white/10 shadow-2xl group">
+              <div className="relative rounded-[2rem] overflow-hidden aspect-[4/5] bg-muted">
                 <Image
                   src={bannerImage1}
                   alt="SHAMIM REZA - Backend Specialist"
-                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
+                  className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   priority
-                  sizes="(max-width: 768px) 100vw, 40vw"
-                  quality={90}
+                  sizes="(max-width: 768px) 100vw, 30vw"
+                  quality={95}
                 />
                 
-                {/* Modern Overlays */}
-                <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-60 group-hover:opacity-40 transition-opacity duration-500" />
-                
-                {/* Decorative Inner Border */}
-                <div className="absolute inset-4 border border-white/5 rounded-[2rem] pointer-events-none" />
+                {/* Clean Subtle Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-background/40 via-transparent to-transparent opacity-60" />
               </div>
 
-              {/* Floating UI Elements for Tech Feel */}
+              {/* Floating UI Elements - Repositioned for a "Smart" feel */}
               <motion.div 
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -top-6 -right-6 p-4 rounded-2xl bg-background/60 backdrop-blur-xl border border-primary/20 shadow-xl z-20 hidden md:block"
+                animate={{ y: [0, -8, 0], x: [0, 5, 0] }}
+                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+                className="absolute -top-4 -left-6 p-3 rounded-xl bg-background/80 backdrop-blur-xl border border-primary/20 shadow-lg z-20 hidden md:flex items-center gap-2"
               >
-                <div className="flex items-center gap-3">
-                  <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground">API Status: 200 OK</span>
-                </div>
+                <div className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                <span className="text-[10px] font-bold tracking-tight uppercase text-muted-foreground whitespace-nowrap">Node.js Engine Active</span>
               </motion.div>
 
               <motion.div 
-                animate={{ y: [0, 10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -bottom-8 -left-8 p-5 rounded-3xl bg-background/80 backdrop-blur-2xl border border-blue-500/20 shadow-2xl z-20 hidden md:block max-w-[180px]"
+                animate={{ y: [0, 8, 0], x: [0, -5, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+                className="absolute top-1/2 -right-10 -translate-y-1/2 p-4 rounded-2xl bg-background/80 backdrop-blur-xl border border-blue-500/20 shadow-xl z-20 hidden md:block w-32"
               >
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase">System Scale</span>
-                    <span className="text-xs font-black text-primary">10k+</span>
+                    <span className="text-[9px] font-bold text-muted-foreground uppercase">Load</span>
+                    <span className="text-[10px] font-black text-primary">14ms</span>
                   </div>
-                  <div className="h-1.5 w-full bg-primary/10 rounded-full overflow-hidden">
+                  <div className="h-1 w-full bg-primary/10 rounded-full overflow-hidden">
                     <motion.div 
                       initial={{ width: 0 }}
-                      animate={{ width: "95%" }}
+                      animate={{ width: "85%" }}
                       transition={{ duration: 2, delay: 1.5 }}
                       className="h-full bg-primary"
                     />
                   </div>
                 </div>
               </motion.div>
+
+              {/* Status Badge Integrated into frame */}
+              <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 w-[85%] p-3 rounded-2xl bg-background/90 backdrop-blur-md border border-border/50 shadow-xl z-20 flex items-center justify-between gap-3">
+                <div className="flex -space-x-2">
+                  {[1, 2, 3].map((i) => (
+                    <div key={i} className="w-6 h-6 rounded-full border-2 border-background bg-muted overflow-hidden">
+                      <div className="w-full h-full bg-gradient-to-br from-primary/20 to-blue-500/20" />
+                    </div>
+                  ))}
+                </div>
+                <div className="h-4 w-px bg-border" />
+                <span className="text-[10px] font-bold uppercase tracking-tighter text-muted-foreground">Trusted by Teams</span>
+              </div>
             </div>
 
-            {/* Background Aesthetic Elements */}
-            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] -z-10">
-              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-[100px] animate-pulse" />
-              <div className="absolute bottom-0 left-0 w-64 h-64 bg-blue-600/10 rounded-full blur-[100px]" />
-              
-              {/* Geometric Accents */}
-              <div className="absolute top-1/4 -right-4 w-12 h-12 border-2 border-primary/20 rounded-lg rotate-12 animate-spin-slow" />
-              <div className="absolute bottom-1/4 -left-4 w-8 h-8 border-2 border-blue-500/20 rounded-full" />
+            {/* Background Aesthetic Elements - Refined */}
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[110%] h-[110%] -z-10">
+              <div className="absolute top-1/4 right-0 w-48 h-48 bg-primary/10 rounded-full blur-[80px]" />
+              <div className="absolute bottom-1/4 left-0 w-48 h-48 bg-blue-600/5 rounded-full blur-[80px]" />
             </div>
-            
-            {/* Performance Metric Badge */}
-            <motion.div
-              initial={{ x: 50, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ delay: 1.2, duration: 0.8 }}
-              className="absolute right-4 bottom-20 z-30 hidden xl:block p-4 rounded-2xl bg-primary/10 backdrop-blur-xl border border-primary/20 shadow-2xl rotate-3 hover:rotate-0 transition-transform duration-500"
-            >
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full bg-primary/20 flex items-center justify-center">
-                  <Rocket className="w-5 h-5 text-primary" />
-                </div>
-                <div>
-                  <p className="text-[10px] font-bold text-primary/80 uppercase tracking-tighter">Response Time</p>
-                  <p className="text-sm font-black italic">14ms</p>
-                </div>
-              </div>
-            </motion.div>
           </motion.div>
 
         </div>

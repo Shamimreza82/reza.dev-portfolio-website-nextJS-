@@ -5,8 +5,6 @@ import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import Image from "next/image"
-import logo from "../../public/rezahub.png"
 import { ModeToggle } from "./mode-toggle"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -52,15 +50,9 @@ const Navbar = () => {
           {/* Logo */}
           <div className="flex-shrink-0">
             <Link href="/" className="flex items-center group">
-              <div className="relative overflow-hidden rounded-lg">
-                <Image 
-                  src={logo} 
-                  height={40} 
-                  width={120} 
-                  alt="logo" 
-                  className="h-9 w-auto transition-transform duration-300 group-hover:scale-105" 
-                />
-              </div>
+              <span className="text-xl md:text-2xl font-black tracking-tighter transition-all duration-300 group-hover:tracking-tight">
+                reza<span className="text-primary group-hover:animate-pulse">.</span>dev
+              </span>
             </Link>
           </div>
 

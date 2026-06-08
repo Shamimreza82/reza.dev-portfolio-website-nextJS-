@@ -3,8 +3,6 @@
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Twitter, Mail, ArrowRight, ExternalLink } from "lucide-react"
-import Image from "next/image"
-import logo from "../../asset/rezahub.png"
 import { data } from "@/lib/data"
 
 export function Footer() {
@@ -39,7 +37,9 @@ export function Footer() {
           <div className="space-y-6 lg:col-span-1">
             <div className="space-y-4">
               <Link href="/" className="inline-block transition-opacity hover:opacity-80">
-                <Image src={logo} height={40} width={120} alt="logoFooter" className="h-10 w-auto" />
+                <span className="text-xl md:text-2xl font-black tracking-tighter">
+                  reza<span className="text-primary">.</span>dev
+                </span>
               </Link>
               <p className="text-muted-foreground text-sm leading-relaxed max-w-xs">
                 Building scalable, high-performance backend systems and elegant full-stack applications with a focus on modern architectures.
