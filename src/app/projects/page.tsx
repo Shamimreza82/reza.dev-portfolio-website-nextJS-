@@ -161,32 +161,20 @@ export default function PortfolioPage() {
 
           {Object.entries(data.skills).map(([category, skills]) => (
             <TabsContent key={category} value={category} className="mt-8">
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {skills.map((skill) => (
-                  <Card key={skill.name} className="relative overflow-hidden group">
-                    <CardHeader className="flex flex-row items-center gap-4">
-                      <span className="text-3xl">{skill.icon}</span>
-                      <div>
-                        <CardTitle>{skill.name}</CardTitle>
-                        <CardDescription className="mt-1">
-                          {/* <Progress 
-                            value={skill.levelPercentage} 
-                            className="h-2 bg-muted w-[120px]"
-                            indicatorClassName="bg-primary"
-                          /> */}
-                        </CardDescription>
-                      </div>
-                    </CardHeader>
-                    <CardContent>
-                      <p className="text-muted-foreground text-sm">{skill.description}</p>
-                    </CardContent>
-                    <CardFooter className="flex justify-between text-sm">
-                      <span className="text-muted-foreground">
-                        {skill.projects}+ projects
-                      </span>
-                      <Badge variant="outline">{skill.level}</Badge>
-                    </CardFooter>
-                  </Card>
+                  <motion.div
+                    key={skill}
+                    whileHover={{ y: -5 }}
+                    className="group"
+                  >
+                    <Card className="relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5">
+                      <CardHeader className="p-4 flex flex-row items-center gap-3">
+                        <div className="h-2 w-2 rounded-full bg-primary/60 group-hover:bg-primary transition-colors" />
+                        <CardTitle className="text-sm font-medium leading-none">{skill}</CardTitle>
+                      </CardHeader>
+                    </Card>
+                  </motion.div>
                 ))}
               </div>
             </TabsContent>

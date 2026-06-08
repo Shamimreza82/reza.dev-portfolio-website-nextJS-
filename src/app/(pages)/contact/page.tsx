@@ -1,13 +1,7 @@
 "use client";
 
 import React from 'react'
-
-
-import dynamic from "next/dynamic";
-
-const Contact = dynamic(() => import("@/components/homePage/Contact"), {
-  ssr: false, // ⬅️ disables server-side rendering
-});
+import Contact from "@/components/homePage/Contact";
 
 const ContactPage = () => {
   return (

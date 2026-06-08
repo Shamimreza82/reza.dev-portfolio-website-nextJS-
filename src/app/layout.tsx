@@ -21,17 +21,18 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://rezahub.com"),
   title: {
-    default: "Reza | Full-Stack Web Developer (Next.js, React, Node.js)",
-    template: "%s | Reza - Full-Stack Developer",
+    default: "SHAMIM REZA | Full-Stack Developer (Backend Focused)",
+    template: "%s | SHAMIM REZA - Backend Specialist",
   },
   description:
-    "Hire Reza, a full-stack web developer specializing in Next.js, React, Node.js, and APIs.",
+    "Portfolio of SHAMIM REZA, a Full-Stack Developer specializing in Node.js, PostgreSQL, and AI-powered backend systems.",
   keywords: [
     "Full-Stack Web Developer Bangladesh",
-    "Next.js Developer",
-    "React Developer",
-    "Node.js API Developer",
-    "Freelance Web Developer",
+    "Backend Specialist",
+    "Node.js Developer",
+    "PostgreSQL Expert",
+    "AI Integration Developer",
+    "SaaS Architect",
   ],
   alternates: {
     canonical: "https://rezahub.com/",
@@ -39,20 +40,20 @@ export const metadata: Metadata = {
   openGraph: {
     type: "website",
     url: "https://rezahub.com/",
-    title: "Reza - Full-Stack Developer Portfolio",
-    description: "Next.js, React, and Node.js specialist for fast web apps.",
+    title: "SHAMIM REZA - Full-Stack Developer Portfolio",
+    description: "Backend-focused developer specializing in scalable architectures and AI automation.",
     images: ["https://rezahub.com/rezahub.png"],
     siteName: "rezahub",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Reza - Full-Stack Developer",
-    description: "Hire me to build scalable, SEO-friendly web apps.",
+    title: "SHAMIM REZA - Backend Specialist",
+    description: "Hire me to build scalable, high-performance backend systems.",
     images: ["https://rezahub.com/rezahub.png"],
   },
   category: "technology",
-  authors: [{ name: "Reza", url: "https://rezahub.com" }],
+  authors: [{ name: "SHAMIM REZA", url: "https://rezahub.com" }],
   other: {
     "google-adsense-account": "ca-pub-4704565974989640",
   },

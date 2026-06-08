@@ -1,7 +1,7 @@
 "use client";
 
 import { motion, Variants } from "framer-motion";
-import { ArrowRight, Github, Code2, Rocket, Sparkles } from "lucide-react";
+import { ArrowRight, Github, Code2, Rocket, Sparkles, Server } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
@@ -63,15 +63,15 @@ const Banner = () => {
                 variants={itemVariants}
                 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tight leading-[1.1]"
               >
-                Crafting <span className="text-gradient">Digital</span><br /> 
-                Masterpieces.
+                Engineering <span className="text-gradient">Backend</span><br /> 
+                Systems.
               </motion.h1>
               
               <motion.p 
                 variants={itemVariants}
                 className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium"
               >
-                I'm <span className="text-foreground font-bold underline decoration-primary/30 underline-offset-4">Reza</span>, a Full-Stack Engineer who blends aesthetic design with robust architecture to build world-class web experiences.
+                I'm <span className="text-foreground font-bold underline decoration-primary/30 underline-offset-4">SHAMIM REZA</span>, a Full-Stack Developer specializing in scalable backend architectures and intelligent AI-powered solutions.
               </motion.p>
             </div>
 
@@ -81,7 +81,7 @@ const Banner = () => {
             >
               <Button asChild size="lg" className="h-14 px-10 rounded-2xl text-base font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300">
                 <Link href="/projects">
-                  Explore Work <ArrowRight className="ml-2 h-5 w-5" />
+                  View Projects <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
               <Button variant="outline" size="lg" className="h-14 px-10 rounded-2xl text-base font-bold bg-background/50 backdrop-blur-sm border-border/50 hover:bg-accent/50 hover:-translate-y-1 transition-all duration-300" asChild>
@@ -97,10 +97,10 @@ const Banner = () => {
               className="flex flex-wrap justify-center lg:justify-start items-center gap-3 pt-6"
             >
               {[
+                { name: "Node.js", icon: <Server className="w-3 h-3" /> },
+                { name: "PostgreSQL", icon: <Code2 className="w-3 h-3" /> },
                 { name: "Next.js", icon: <Rocket className="w-3 h-3" /> },
-                { name: "TypeScript", icon: <Code2 className="w-3 h-3" /> },
-                { name: "Node.js", icon: <Sparkles className="w-3 h-3" /> },
-                { name: "PostgreSQL", icon: <Code2 className="w-3 h-3" /> }
+                { name: "AI Tech", icon: <Sparkles className="w-3 h-3" /> }
               ].map((tech) => (
                 <div 
                   key={tech.name}
@@ -125,7 +125,7 @@ const Banner = () => {
               <div className="relative rounded-[2.5rem] overflow-hidden aspect-[4/5] lg:aspect-square">
                 <Image
                   src={bannerImage1}
-                  alt="Reza - Full Stack Developer"
+                  alt="SHAMIM REZA - Backend Specialist"
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110 group-hover:rotate-1"
                   priority
                   sizes="(max-width: 768px) 100vw, 40vw"
@@ -147,7 +147,7 @@ const Banner = () => {
               >
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-                  <span className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground">System Online</span>
+                  <span className="text-[10px] font-bold tracking-widest uppercase text-muted-foreground">API Status: 200 OK</span>
                 </div>
               </motion.div>
 
@@ -158,13 +158,13 @@ const Banner = () => {
               >
                 <div className="space-y-2">
                   <div className="flex justify-between items-center">
-                    <span className="text-[10px] font-bold text-muted-foreground uppercase">Projects</span>
-                    <span className="text-xs font-black text-primary">40+</span>
+                    <span className="text-[10px] font-bold text-muted-foreground uppercase">System Scale</span>
+                    <span className="text-xs font-black text-primary">10k+</span>
                   </div>
                   <div className="h-1.5 w-full bg-primary/10 rounded-full overflow-hidden">
                     <motion.div 
                       initial={{ width: 0 }}
-                      animate={{ width: "85%" }}
+                      animate={{ width: "95%" }}
                       transition={{ duration: 2, delay: 1.5 }}
                       className="h-full bg-primary"
                     />
@@ -195,7 +195,7 @@ const Banner = () => {
                   <Rocket className="w-5 h-5 text-primary" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold text-primary/80 uppercase tracking-tighter">Latency</p>
+                  <p className="text-[10px] font-bold text-primary/80 uppercase tracking-tighter">Response Time</p>
                   <p className="text-sm font-black italic">14ms</p>
                 </div>
               </div>

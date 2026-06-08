@@ -1,6 +1,9 @@
 import Banner from "@/components/homePage/Banner";
 import AiAssistant from "@/components/homePage/assistent/AiAssistant";
 import ScrollProgress from "@/components/small-component/ScrollProgress";
+import ProjectsSection from "@/components/homePage/ProjectsSection";
+import JourneySection from "@/components/homePage/JourneySection";
+import GitHubStatus from "@/components/homePage/GitHubStatus";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -13,6 +16,9 @@ export default function Home() {
     <div className="flex flex-col">
       <ScrollProgress />
       <Banner />
+      <ProjectsSection />
+      <JourneySection />
+      <GitHubStatus />
       <AiAssistant />
     </div>
   );
