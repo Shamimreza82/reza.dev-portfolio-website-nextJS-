@@ -1,11 +1,10 @@
 'use client'
 
-import { Card, CardContent } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle, CardDescription } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { motion } from "framer-motion"
 import Link from "next/link"
-import { Code, Palette, Smartphone, Database, Cloud, Laptop } from "lucide-react"
-import { useRouter } from "next/navigation"
+import { Code, Palette, Smartphone, Database, Cloud, Laptop, ArrowRight } from "lucide-react"
 
 
 const fadeIn = {
@@ -19,141 +18,104 @@ const fadeIn = {
 
 const services = [
   {
-    icon: <Code className="h-10 w-10 text-purple-500" />,
+    icon: <Code className="h-8 w-8 text-blue-500" />,
     title: "Web Development",
-    description: "Dynamic, responsive websites using Next.js, React, and Node.js.",
+    description: "Building fast, SEO-optimized, and scalable web applications using Next.js and Node.js.",
     link: "/services-ditiles/web-development"
   },
   {
-    icon: <Palette className="h-10 w-10 text-pink-500" />,
+    icon: <Palette className="h-8 w-8 text-indigo-500" />,
     title: "Web Design",
-    description: "Modern, user-friendly designs that enhance user experience.",
+    description: "Creating modern, user-centric designs that convert visitors into customers.",
     link: "/services/web-design"
   },
   {
-    icon: <Smartphone className="h-10 w-10 text-green-500" />,
-    title: "Mobile Development",
-    description: "Cross-platform apps & mobile-friendly sites for all devices.",
+    icon: <Smartphone className="h-8 w-8 text-emerald-500" />,
+    title: "Mobile Solutions",
+    description: "Developing responsive and intuitive mobile-first experiences for all platforms.",
     link: "/services/mobile-development"
   },
   {
-    icon: <Database className="h-10 w-10 text-yellow-500" />,
-    title: "Database Management",
-    description: "Efficient database design & optimization with PostgreSQL, MySQL, MongoDB.",
+    icon: <Database className="h-8 w-8 text-amber-500" />,
+    title: "Backend & API",
+    description: "Architecting robust backend systems and secure RESTful/GraphQL APIs.",
     link: "/services/database-management"
   },
   {
-    icon: <Cloud className="h-10 w-10 text-blue-500" />,
-    title: "Cloud Solutions",
-    description: "Scalable cloud hosting, storage & computing solutions.",
+    icon: <Cloud className="h-8 w-8 text-sky-500" />,
+    title: "Cloud & DevOps",
+    description: "Seamless deployment and infrastructure management on AWS, Vercel, or DigitalOcean.",
     link: "/services/cloud-solutions"
   },
   {
-    icon: <Laptop className="h-10 w-10 text-indigo-500" />,
+    icon: <Laptop className="h-8 w-8 text-violet-500" />,
     title: "Custom Software",
-    description: "Tailor-made software to match your business needs.",
+    description: "Tailor-made software solutions to solve your specific business challenges.",
     link: "/services/custom-software"
   }
 ]
 
 
-
-
 export default function Services() {
-
-const router = useRouter()
-
-
-const handlePayment = async () => {
-  try {
-    // Call your backend API to initiate the payment
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/payment/init`, {
-      method: 'GET', // Usually payment init is POST
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      // body: JSON.stringify({ /* optional payload if needed */ }),
-    });
-
-    if (!res.ok) {
-      throw new Error(`Payment init failed: ${res.status}`);
-    }
-
-    const url = await res.json();
-
-    // Check if the GatewayPageURL exists
-    if (!url?.data?.GatewayPageURL) {
-      throw new Error('GatewayPageURL not found in response');
-    }
-
-    console.log('Redirecting to payment gateway:', url.data.GatewayPageURL);
-
-    // Redirect user to the payment page
-    router.push(url.data.GatewayPageURL);
-  } catch (error) {
-    console.error('Payment initiation error:', error);
-    alert('Payment initiation failed. Please try again.');
-  }
-};
-
-
   return (
-    <section className="container mx-auto px-4 py-20 md:px-6">
-      <motion.div
-        initial="initial"
-        animate="animate"
-        className="text-center space-y-4 mb-12"
-      >
-        <motion.h2
-          variants={fadeIn}
-          custom={0}
-          className="text-4xl md:text-5xl font-bold  inline-block bg-gradient-to-r from-cyan-300 to-blue-400  bg-clip-text text-transparent"
-        >
-          My Services
-        </motion.h2>
-        <motion.p
-          variants={fadeIn}
-          custom={1}
-          className="text-lg text-muted-foreground max-w-2xl mx-auto"
-        >
-          From design to deployment — I provide full-stack solutions that bring ideas to life.
-        </motion.p>
-      </motion.div>
+    <section className="py-24 relative overflow-hidden">
+      {/* Decorative background element */}
+      <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-[500px] h-[500px] bg-primary/5 rounded-full blur-[120px] -z-10" />
 
-      {/* Services Grid */}
-      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-        {services.map((service, index) => (
-          <motion.div
-            key={index}
+      <div className="container mx-auto px-4 md:px-6">
+        <motion.div
+          initial="initial"
+          whileInView="animate"
+          viewport={{ once: true }}
+          className="text-center space-y-4 mb-16"
+        >
+          <motion.h2
             variants={fadeIn}
-            custom={index}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
+            custom={0}
+            className="text-3xl md:text-5xl font-bold tracking-tight"
           >
-            <Card className="hover:shadow-lg transition-shadow duration-300 hover:-translate-y-1 group">
-              <CardContent className="pt-6 space-y-4">
-                <div className="p-4 rounded-xl flex items-center group-hover:scale-110 transition-transform">
-                  {service.icon}
-                </div>
-                <h3 className="text-xl font-semibold">{service.title}</h3>
-                <p className="text-muted-foreground text-sm">{service.description}</p>
+            Core <span className="text-gradient">Services</span>
+          </motion.h2>
+          <motion.p
+            variants={fadeIn}
+            custom={1}
+            className="text-lg text-muted-foreground max-w-2xl mx-auto"
+          >
+            Delivering high-quality digital solutions tailored to your business needs, from concept to deployment.
+          </motion.p>
+        </motion.div>
 
-                {/* See More Button */}
-                <Link href={service.link}>
-                  <Button
-                    className="px-8 sm:px-10 py-4 mt-3 w-full bg-gradient-to-br from-cyan-500 to-blue-600 text-gray-950 rounded-xl font-bold flex items-center gap-2 sm:gap-3 group relative overflow-hidden"
-                  >
-                    See More
-                  </Button>
-                </Link>
-                <Button onClick={handlePayment}>
-                  Payment
-                </Button>
-              </CardContent>
-            </Card>
-          </motion.div>
-        ))}
+        {/* Services Grid */}
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {services.map((service, index) => (
+            <motion.div
+              key={index}
+              variants={fadeIn}
+              custom={index}
+              initial="initial"
+              whileInView="animate"
+              viewport={{ once: true }}
+            >
+              <Card className="h-full border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/50 transition-all duration-300 group">
+                <CardHeader>
+                  <div className="p-3 w-fit rounded-xl bg-primary/5 group-hover:bg-primary/10 transition-colors mb-4">
+                    {service.icon}
+                  </div>
+                  <CardTitle className="text-xl">{service.title}</CardTitle>
+                </CardHeader>
+                <CardContent className="space-y-4">
+                  <CardDescription className="text-sm leading-relaxed min-h-[60px]">
+                    {service.description}
+                  </CardDescription>
+                  
+                  <Link href={service.link} className="inline-flex items-center text-sm font-medium text-primary hover:underline group-hover:gap-2 transition-all">
+                    Learn more <ArrowRight className="ml-1 h-4 w-4" />
+                  </Link>
+                </CardContent>
+              </Card>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   )

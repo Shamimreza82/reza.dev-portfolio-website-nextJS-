@@ -11,21 +11,13 @@ export default {
   theme: {
   	fontFamily: {
   		sans: [
-  			'Graphik',
+  			'var(--font-geist-sans)',
   			'sans-serif'
   		],
-  		serif: [
-  			'Merriweather',
-  			'serif'
+  		mono: [
+  			'var(--font-geist-mono)',
+  			'monospace'
   		],
-  		Oswald: [
-  			'Oswald',
-  			'serif'
-  		],
-  		Roboto: [
-  			'Roboto',
-  			'serif'
-  		]
   	},
   	extend: {
   		colors: {

@@ -1,4 +1,5 @@
 import Banner from "@/components/homePage/Banner";
+import About from "@/components/homePage/About";
 import Faq from "@/components/homePage/Faq";
 import Services from "@/components/homePage/Services";
 import AiAssistant from "@/components/homePage/assistent/AiAssistant";
@@ -11,8 +12,9 @@ export const metadata: Metadata = {
 
 export default function Home() {
   return (
-    <div className="container mx-auto">
+    <div className="flex flex-col">
       <Banner />
+      <About />
       <Services />
       <Faq />
       <AiAssistant />

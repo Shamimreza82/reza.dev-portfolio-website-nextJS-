@@ -5,7 +5,19 @@ import Navber from "@/components/Navber";
 import { Footer } from "@/components/homePage/Footer";
 import { Toaster } from "sonner";
 import LayoutProvider from "@/providers/LayoutProvider";
+import { ThemeProvider } from "@/providers/ThemeProvider";
+import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+
+const geistSans = Geist({
+  variable: "--font-geist-sans",
+  subsets: ["latin"],
+});
+
+const geistMono = Geist_Mono({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://rezahub.com"),
@@ -57,7 +69,7 @@ export default function RootLayout({
       <head>
         <link rel="manifest" href="/manifest.json" />
       </head>
-      <body className="antialiased font-Roboto">
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-NE4D2QJFXX"
           strategy="afterInteractive"
@@ -78,10 +90,12 @@ export default function RootLayout({
           strategy="lazyOnload"
         />
         <AuthProvider>
-          <Navber />
-          <LayoutProvider>{children}</LayoutProvider>
-          <Toaster />
-          <Footer />
+          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+            <Navber />
+            <LayoutProvider>{children}</LayoutProvider>
+            <Toaster />
+            <Footer />
+          </ThemeProvider>
         </AuthProvider>
       </body>
     </html>

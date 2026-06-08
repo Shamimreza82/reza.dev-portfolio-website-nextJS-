@@ -2,269 +2,82 @@
 @tailwind components;
 @tailwind utilities;
 
-
-Neon Text Effect
-.neon-text {
-    text-shadow: 
-      0 0 5px rgba(255, 0, 150, 0.7), 
-      0 0 10px rgba(255, 0, 150, 0.7), 
-      0 0 15px rgba(255, 0, 150, 0.7), 
-      0 0 20px rgba(0, 0, 255, 0.7), 
-      0 0 30px rgba(0, 0, 255, 0.7), 
-      0 0 40px rgba(0, 0, 255, 0.7);
-    animation: neon 1.5s ease-in-out infinite alternate;
-  }
-  
-  @keyframes neon {
-    0% {
-      text-shadow: 
-        0 0 5px rgba(255, 0, 150, 0.7), 
-        0 0 10px rgba(255, 0, 150, 0.7), 
-        0 0 15px rgba(255, 0, 150, 0.7), 
-        0 0 20px rgba(0, 0, 255, 0.7), 
-        0 0 30px rgba(0, 0, 255, 0.7), 
-        0 0 40px rgba(0, 0, 255, 0.7);
-    }
-    100% {
-      text-shadow: 
-        0 0 5px rgba(255, 0, 150, 1), 
-        0 0 10px rgba(255, 0, 150, 1), 
-        0 0 15px rgba(255, 0, 150, 1), 
-        0 0 20px rgba(0, 0, 255, 1), 
-        0 0 30px rgba(0, 0, 255, 1), 
-        0 0 40px rgba(0, 0, 255, 1);
-    }
-  }
-  
-  /* Neon Icon Effect */
-  .neon-icon {
-    color: rgba(255, 0, 150, 0.8);
-    transition: color 0.3s ease-in-out;
-  }
-  
-  .neon-icon:hover {
-    color: rgba(0, 0, 255, 1);
-    text-shadow: 
-      0 0 10px rgba(255, 0, 150, 1), 
-      0 0 20px rgba(0, 0, 255, 1);
-  }
-  
-  /* Service Card Styling */
-  .service-card {
-    background-color: rgba(0, 0, 0, 0.7); 
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 4px 20px rgba(0, 0, 255, 0.3);
-    transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  }
-  
-  .service-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 8px 30px rgba(0, 0, 255, 0.5);
-  }
-  
-  .icon-container {
-    display: inline-block;
-    padding: 15px;
-    border-radius: 50%;
-    background-color: rgba(255, 0, 150, 0.2);
-    margin-bottom: 10px;
-  }
-  
-  .service-icon {
-    font-size: 3rem;
-    color: rgba(255, 0, 150, 1);
-  }
-
-
-
-
-
-
-  /* Neon Text Effect */
-.neon-text {
-  text-shadow: 
-    0 0 5px rgba(255, 0, 150, 0.7), 
-    0 0 10px rgba(255, 0, 150, 0.7), 
-    0 0 15px rgba(255, 0, 150, 0.7), 
-    0 0 20px rgba(0, 0, 255, 0.7), 
-    0 0 30px rgba(0, 0, 255, 0.7), 
-    0 0 40px rgba(0, 0, 255, 0.7);
-  animation: neon 1.5s ease-in-out infinite alternate;
-}
-
-@keyframes neon {
-  0% {
-    text-shadow: 
-      0 0 5px rgba(255, 0, 150, 0.7), 
-      0 0 10px rgba(255, 0, 150, 0.7), 
-      0 0 15px rgba(255, 0, 150, 0.7), 
-      0 0 20px rgba(0, 0, 255, 0.7), 
-      0 0 30px rgba(0, 0, 255, 0.7), 
-      0 0 40px rgba(0, 0, 255, 0.7);
-  }
-  100% {
-    text-shadow: 
-      0 0 5px rgba(255, 0, 150, 1), 
-      0 0 10px rgba(255, 0, 150, 1), 
-      0 0 15px rgba(255, 0, 150, 1), 
-      0 0 20px rgba(0, 0, 255, 1), 
-      0 0 30px rgba(0, 0, 255, 1), 
-      0 0 40px rgba(0, 0, 255, 1);
-  }
-}
-
-/* Blog Card Styling */
-.blog-card {
-  background-color: rgba(0, 0, 0, 0.8);
-  border-radius: 10px;
-  box-shadow: 0 4px 20px rgba(0, 0, 255, 0.3);
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-}
-
-.blog-card:hover {
-  transform: translateY(-10px);
-  box-shadow: 0 8px 30px rgba(0, 0, 255, 0.5);
-}
-
-/* Blog Icon Styling */
-.blog-icon {
-  font-size: 3rem;
-  color: rgba(255, 0, 150, 1);
-  transition: color 0.3s ease-in-out;
-}
-
-.blog-icon:hover {
-  color: rgba(0, 0, 255, 1);
-  text-shadow: 
-    0 0 10px rgba(255, 0, 150, 1), 
-    0 0 20px rgba(0, 0, 255, 1);
-}
-
-/* Blog Link Styling */
-.blog-card a {
-  transition: color 0.3s ease-in-out;
-}
-
-.blog-card a:hover {
-  color: rgba(0, 0, 255, 1);
-}
-
-
-/* @layer utilities {
-  .text-shadow-neon {
-    text-shadow: 
-      0 0 5px rgba(0, 162, 255, 0.9), 
-      0 0 10px rgba(0, 162, 255, 0.8), 
-      0 0 20px rgba(0, 162, 255, 0.8);
-  }
-
-  .shadow-lg-neon {
-    box-shadow: 
-      0 0 10px rgba(0, 162, 255, 0.5), 
-      0 0 20px rgba(0, 162, 255, 0.5), 
-      0 0 40px rgba(73, 25, 90, 0.7);
-  }
-} */
-
-
-
-
-
-
-
 @layer base {
   :root {
-    --background: 220 10% 10%;
-    --foreground: 0 0% 95%;
-    --card: 220 10% 12%;
-    --card-foreground: 0 0% 95%;
-    --popover: 220 10% 12%;
-    --popover-foreground: 0 0% 95%;
-    --primary: 142.1 70.6% 45.3%;
-    --primary-foreground: 144.9 80.4% 10%;
-    --secondary: 240 3.7% 20%;
-    --secondary-foreground: 0 0% 95%;
-    --muted: 240 3.7% 25%;
-    --muted-foreground: 240 5% 64.9%;
-    --accent: 210 10% 20%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 70% 40%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 30%;
-    --input: 240 3.7% 30%;
-    --ring: 142.4 71.8% 29.2%;
-    --radius: 0.5rem;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
+    --background: 0 0% 100%;
+    --foreground: 222.2 84% 4.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+    --primary: 221.2 83.2% 53.3%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 210 40% 96.1%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 221.2 83.2% 53.3%;
+    --radius: 0.75rem;
   }
 
   .dark {
-    --background: 220 10% 6%;
-    --foreground: 0 0% 90%;
-    --card: 220 10% 8%;
-    --card-foreground: 0 0% 90%;
-    --popover: 220 10% 8%;
-    --popover-foreground: 0 0% 90%;
-    --primary: 142.1 70.6% 40%;
-    --primary-foreground: 144.9 80.4% 10%;
-    --secondary: 240 3.7% 13%;
-    --secondary-foreground: 0 0% 98%;
-    --muted: 240 3.7% 14%;
-    --muted-foreground: 240 5% 60%;
-    --accent: 210 10% 12%;
-    --accent-foreground: 0 0% 98%;
-    --destructive: 0 70% 30%;
-    --destructive-foreground: 0 0% 98%;
-    --border: 240 3.7% 20%;
-    --input: 240 3.7% 20%;
-    --ring: 142.4 71.8% 25%;
-    --chart-1: 220 80% 40%;
-    --chart-2: 160 65% 35%;
-    --chart-3: 30 85% 45%;
-    --chart-4: 280 70% 50%;
-    --chart-5: 340 80% 45%;
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+    --card: 222.2 84% 6.9%;
+    --card-foreground: 210 40% 98%;
+    --popover: 222.2 84% 6.9%;
+    --popover-foreground: 210 40% 98%;
+    --primary: 217.2 91.2% 59.8%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+    --accent: 217.2 32.6% 17.5%;
+    --accent-foreground: 210 40% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 224.3 76.3% 48%;
   }
 }
-
-
-
-
-
 
 @layer base {
   * {
     @apply border-border;
-    }
+  }
   body {
-    @apply bg-background text-foreground;
-    }
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
 }
 
-
+/* Custom modern utilities */
 @layer utilities {
-  /* Ripple */
-  @keyframes ripple {
-    from { width: 0; height: 0; opacity: 0.5; transform: translate(-50%, -50%) }
-    to   { width: 440px; height: 440px; opacity: 0; transform: translate(-50%, -50%) }
+  .glass {
+    @apply bg-background/60 backdrop-blur-md border border-border/50;
   }
-  .animate-\[ripple_520ms_ease-out_forwards\] { animation: ripple 520ms ease-out forwards }
-
-  /* Rotating conic gradient for border ring */
-  @keyframes spin-slow { to { transform: rotate(360deg) } }
-
-  /* Tiny sparkles */
-  .sparkle {
-    width: 6px; height: 6px; border-radius: 9999px;
-    background: radial-gradient(circle, rgba(255,255,255,.95), rgba(255,255,255,0));
-    filter: drop-shadow(0 0 6px rgba(255,255,255,.5));
-    animation: sparkle-pulse 1.6s ease-in-out infinite;
+  
+  .text-gradient {
+    @apply bg-gradient-to-br from-foreground to-foreground/60 bg-clip-text text-transparent;
   }
-  @keyframes sparkle-pulse {
-    0%,100% { transform: scale(0.8); opacity: .6 }
-    50%     { transform: scale(1.25); opacity: 1 }
+
+  .hero-glow {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, hsla(var(--primary) / 0.15), transparent 70%);
+    pointer-events: none;
+    z-index: -1;
   }
 }

@@ -1,176 +1,111 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
 import { motion } from "framer-motion";
-import { CodeBracketIcon } from "@heroicons/react/24/outline";
-import dynamic from "next/dynamic";
+import { ArrowRight, Github } from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { Button } from "@/components/ui/button";
 import bannerImage1 from "../../asset/photo/protolio1.jpg";
 import StatusBadge from "../ui/status-badge";
 
-import RightSocialRail from "../banner/RightSocialRail";
-import SoundButton from "../small-component/SoundButton";
-
-import Image from "next/image";
-import WhatsAppFloat from "../small-component/WhatsappFloatButton";
-
-const CosmosRealistic = dynamic(() => import("../visuals/CosmosRealistic"), {
-  ssr: false,
-});
-const Particles = dynamic(() => import("../visuals/Particles"), {
-  ssr: false,
-});
-
-
 const Banner = () => {
   return (
-    <section
-      className="flex flex-col md:flex-row pt-24 min-h-screen items-center px-4 py-12 gap-5 md:gap-10 lg:gap-20
-                 bg-gradient-to-b  overflow-hidden"
-    >
-    
+    <section className="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+      {/* Background Glows */}
+      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/20 rounded-full blur-[128px] -z-10 animate-pulse" />
+      <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-blue-500/10 rounded-full blur-[128px] -z-10" />
+      
+      {/* Grid Pattern */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#80808012_1px,transparent_1px),linear-gradient(to_bottom,#80808012_1px,transparent_1px)] bg-[size:24px_24px] -z-20" />
 
-      <div className="block lg:hidden">
-        <Particles
-          count={80}
-          linkDistance={120}
-          parallax={34}
-          className="text-cyan-300/60"
-        />
-      </div>
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+            className="flex flex-col space-y-8"
+          >
+            <div className="space-y-4">
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.2 }}
+              >
+                <StatusBadge text="Available for new projects" colorClass="bg-emerald-500" />
+              </motion.div>
+              
+              <motion.h1 
+                className="text-5xl md:text-7xl font-bold tracking-tight"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.3 }}
+              >
+                Building <span className="text-gradient">exceptional</span> digital experiences.
+              </motion.h1>
+              
+              <motion.p 
+                className="text-xl text-muted-foreground max-w-lg leading-relaxed"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.4 }}
+              >
+                Hi, I'm <span className="font-semibold text-foreground">Reza</span>. A Full-Stack Developer specialized in building modern, scalable, and high-performance web applications.
+              </motion.p>
+            </div>
 
-      <div className="hidden">
-        {/* <Starfield
-    count={200}
-    parallax={34}
-    twinkle={0.4}
-    shootingEverySec={1}
-    className="text-cyan-300/50"
-  /> */}
-      </div>
-
-      <div className="hidden lg:block">
-        <CosmosRealistic
-          quality="low"
-          bloom={1.12}
-          sunPos={[0.6, 0.3]}
-          galaxyPos={[0.1, 1.0]}
-          sunRadius={5}
-          galaxyRotation={0.20}
-          parallax={50}
-          planets={true}
-        />
-      </div>
-
-
-
-
-
-      {/* soft glow overlay (optional) */}
-      {/* <div className="pointer-events-none absolute -top-40 -left-40 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
-      <div className="pointer-events-none absolute -bottom-40 -right-40 h-[28rem] w-[28rem] rounded-full bg-blue-500/10 blur-3xl" /> */}
-
-      <div className="relative z-10 w-full max-w-4xl text-center md:text-left">
-        {/* ...the rest of your existing content remains unchanged... */}
-        <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1.2, delay: 0.2 }}
-          className="space-y-8 md:space-y-12"
-        >
-          <div className="flex items-center justify-center md:justify-start gap-3 mb-6 md:mb-8 group">
-            <motion.div
-              animate={{ rotate: 360 }}
-              transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-              className="neon-light"
+            <motion.div 
+              className="flex flex-wrap gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.5 }}
             >
-              <CodeBracketIcon className="w-10 h-10 text-cyan-400/80 group-hover:text-cyan-300 transition-colors" />
+              <Button asChild size="lg" className="h-12 px-8 rounded-full">
+                <Link href="/projects">
+                  View Projects <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+              <Button variant="outline" size="lg" className="h-12 px-8 rounded-full" asChild>
+                <Link href="https://github.com/Shamimreza82" target="_blank">
+                  <Github className="mr-2 h-4 w-4" /> GitHub
+                </Link>
+              </Button>
             </motion.div>
-            <span className="text-lg md:text-xl font-mono text-cyan-400/80 group-hover:text-cyan-300 transition-colors neon-light">
-              High-performance
-            </span>
-          </div>
 
-          <motion.h1
-            className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold text-gray-100 leading-tight"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.4 }}
-          >
-            <span className="inline-block bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent text-shadow-lg/30">
-              Hi,
-              <br />
-              I am Reza,
-              <br />
-              Web developer
-            </span>
-          </motion.h1>
-
-          <motion.p
-            className="text-base sm:text-base md:text-xl text-gray-300 max-w-3xl mx-auto md:mx-0 leading-relaxed"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.6 }}
-          >
-            <span className="text-cyan-300 text-shadow-lg/60 ">Passionate full-stack developer</span> dedicated{" "}
-            <span className="text-blue-300">to crafting seamless, high-performance web experiences.</span>
-          </motion.p>
-
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 sm:gap-6 mt-10 md:mt-16 justify-center md:justify-start"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.5 }}
-          >
-
-
-            <SoundButton
-              href="https://drive.google.com/file/d/1V4v3cIAmBX7VvkypTz9QRATk5lOtsi7A/view?usp=sharing"
-              name="Resume"
-              target="_blank"
-              size={"lg"}
-              variant={"default"}
-              className="mx-auto"
-            />
-
-
-            <SoundButton
-              href="/projects"
-              name=" View my work"
-              size={"lg"}
-              variant={"outline"}
-              className="mx-auto"
-            />
-
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 0.6 }}
+              className="flex items-center gap-8 pt-4 grayscale opacity-50"
+            >
+              {/* Add some tech stack icons or simplified text here */}
+              <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Next.js</span>
+              <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">React</span>
+              <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">Node.js</span>
+              <span className="text-sm font-medium uppercase tracking-widest text-muted-foreground">PostgreSQL</span>
+            </motion.div>
           </motion.div>
-        </motion.div>
-      </div>
 
-      <div className="relative z-10">
-        <div className="relative rounded-2xl lg:ml-28">
           <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
+            initial={{ opacity: 0, scale: 0.9 }}
             animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.02, delay: 1.2, ease: "easeOut" }}
-            whileHover={{ scale: 1.01, rotate: 2 }}
+            transition={{ duration: 1, delay: 0.2 }}
+            className="relative"
           >
-            <Image
-              src={bannerImage1}
-              alt="A picture of Reza, the full-stack web developer"
-              className="max-w-md mx-auto w-80 md:max-w-lg lg:max-w-xl shadow-2xl shadow-cyan-500/50 rounded-2xl mt-8 md:mt-0"
-              priority
-            />
+            <div className="relative z-10 rounded-2xl overflow-hidden border border-border/50 shadow-2xl">
+              <Image
+                src={bannerImage1}
+                alt="Reza - Full Stack Developer"
+                className="w-full h-auto object-cover hover:scale-105 transition-transform duration-700"
+                priority
+              />
+            </div>
+            {/* Decorative element */}
+            <div className="absolute -bottom-6 -left-6 w-24 h-24 bg-primary/20 rounded-full blur-2xl -z-10" />
+            <div className="absolute -top-6 -right-6 w-32 h-32 bg-blue-500/20 rounded-full blur-3xl -z-10" />
           </motion.div>
         </div>
-        <div className="lg:ml-48 mt-8">
-          <StatusBadge text="Available for projects" colorClass="bg-green-500" />
-        </div>
       </div>
-      <RightSocialRail />
-      <WhatsAppFloat
-        phone="8801531297879"
-        message="Hello! I’m interested in your services."
-        // floats inside the banner only
-      />
     </section>
   );
 };

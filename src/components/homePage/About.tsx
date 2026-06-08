@@ -1,12 +1,11 @@
 'use client'
 
 import { Button } from "@/components/ui/button"
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
-
 import { motion } from "framer-motion"
 import Image from "next/image"
-import { Code, File, Github, Linkedin, Rocket, Server } from "lucide-react"
+import { Code, File, Github, Linkedin, Rocket, Server, User } from "lucide-react"
 import Link from "next/link"
 import reza from '@/asset/photo/reza.jpg'
 
@@ -22,166 +21,139 @@ const fadeIn = {
 export default function About() {
   const skills = [
     { name: "TypeScript", icon: <Code className="h-4 w-4" /> },
-    { name: "Javascript", icon: <Code className="h-4 w-4" /> },
     { name: "React", icon: <Rocket className="h-4 w-4" /> },
     { name: "Next.js", icon: <Server className="h-4 w-4" /> },
     { name: "Node.js", icon: <Code className="h-4 w-4" /> },
     { name: "Tailwind CSS", icon: <Rocket className="h-4 w-4" /> },
-    { name: "Mongodb", icon: <Server className="h-4 w-4" /> },
-    { name: "Mongoose", icon: <Code className="h-4 w-4" /> },
-    { name: "Prosgress", icon: <Rocket className="h-4 w-4" /> },
+    { name: "MongoDB", icon: <Server className="h-4 w-4" /> },
+    { name: "PostgreSQL", icon: <Rocket className="h-4 w-4" /> },
     { name: "Prisma", icon: <Code className="h-4 w-4" /> },
   ]
 
   const socialLinks = [
-    { icon: <Github className="h-5 w-5" />, href: "https://github.com/Shamimreza82", label: "GitHub" },
-    { icon: <Linkedin className="h-5 w-5" />, href: "https://www.linkedin.com/in/shamim--reza/", label: "LinkedIn" },
-    { icon: <File className="h-5 w-5" />, href: "https://drive.google.com/file/d/1V4v3cIAmBX7VvkypTz9QRATk5lOtsi7A/view?usp=sharing", label: "Resume" },
+    { icon: <Github className="h-4 w-4" />, href: "https://github.com/Shamimreza82", label: "GitHub" },
+    { icon: <Linkedin className="h-4 w-4" />, href: "https://www.linkedin.com/in/shamim--reza/", label: "LinkedIn" },
+    { icon: <File className="h-4 w-4" />, href: "https://drive.google.com/file/d/1V4v3cIAmBX7VvkypTz9QRATk5lOtsi7A/view?usp=sharing", label: "Resume" },
   ]
 
   return (
-    <section className="container mx-auto px-4 py-12 md:px-6 pt-24">
-      <motion.div 
-        initial="initial"
-        animate="animate"
-        className="flex flex-col gap-12 md:flex-row md:items-start"
-      >
-        {/* Profile Image with Gradient Border */}
-        <div className="md:w-1/3 relative group">
-          <div className="absolute -inset-1 bg-gradient-to-r from-sky-400 to-sky-800 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000"></div>
-          <div className="relative aspect-square overflow-hidden rounded-2xl border-2 border-transparent bg-gradient-to-br from-background to-muted">
-            <Image
-              src={reza}
-              alt="Developer Profile"
-              fill
-              className="object-cover hover:scale-105 transition-transform duration-300"
-              placeholder="blur"
-              blurDataURL="/placeholder-profile.jpg"
-            />
+    <section className="py-24 relative overflow-hidden">
+      {/* Decorative background element */}
+      <div className="absolute bottom-0 left-0 -translate-x-1/2 translate-y-1/2 w-[600px] h-[600px] bg-primary/5 rounded-full blur-[120px] -z-10" />
+
+      <div className="container mx-auto px-4 md:px-6">
+        <div className="flex flex-col lg:flex-row gap-16 items-start">
+          {/* Profile Image Section */}
+          <motion.div 
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
+            className="lg:w-1/3 w-full max-w-md mx-auto"
+          >
+            <div className="relative aspect-square rounded-3xl overflow-hidden border border-border shadow-2xl group">
+              <Image
+                src={reza}
+                alt="Reza - Full Stack Developer"
+                fill
+                className="object-cover transition-transform duration-500 group-hover:scale-110"
+                priority
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-8">
+                <div className="flex gap-4">
+                   {socialLinks.map((link, idx) => (
+                     <Button key={idx} size="icon" variant="secondary" className="rounded-full h-10 w-10" asChild>
+                       <Link href={link.href} target="_blank" aria-label={link.label}>{link.icon}</Link>
+                     </Button>
+                   ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Content Section */}
+          <div className="lg:w-2/3 w-full space-y-12">
+            <motion.div 
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              className="space-y-6"
+            >
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 border border-primary/20 text-primary text-xs font-semibold tracking-wider uppercase">
+                <User className="h-3 w-3" /> About Me
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold tracking-tight">
+                Crafting robust <span className="text-gradient">digital solutions</span> with purpose.
+              </h2>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                I am a passionate Full-Stack Developer with over 5 years of experience in the digital world. I specialize in building highly scalable, performant, and user-friendly web applications using the modern JavaScript ecosystem. My goal is to transform complex business requirements into elegant software solutions.
+              </p>
+            </motion.div>
+
+            <div className="grid md:grid-cols-2 gap-8">
+              {/* Technical Expertise */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+              >
+                <Card className="border-border/50 bg-card/50 backdrop-blur-sm h-full">
+                  <CardHeader>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Code className="h-5 w-5 text-primary" /> Technical Stack
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="flex flex-wrap gap-2">
+                      {skills.map((skill) => (
+                        <Badge key={skill.name} variant="secondary" className="px-3 py-1 font-medium bg-primary/5 hover:bg-primary/10 border-primary/10 transition-colors">
+                          {skill.name}
+                        </Badge>
+                      ))}
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+
+              {/* Experience Highlights */}
+              <motion.div 
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 }}
+              >
+                <Card className="border-border/50 bg-card/50 backdrop-blur-sm h-full">
+                  <CardHeader>
+                    <CardTitle className="text-lg flex items-center gap-2">
+                      <Rocket className="h-5 w-5 text-primary" /> Career Journey
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent className="space-y-4">
+                    <div className="border-l-2 border-primary/20 pl-4 space-y-1">
+                      <h4 className="font-semibold text-sm">Backend Developer at FinupsBD</h4>
+                      <p className="text-xs text-muted-foreground">2024 - Present</p>
+                    </div>
+                    <div className="border-l-2 border-primary/20 pl-4 space-y-1">
+                      <h4 className="font-semibold text-sm">Frontend Developer at Desh Universal LTD</h4>
+                      <p className="text-xs text-muted-foreground">2019 - 2021</p>
+                    </div>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            </div>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+            >
+              <Button size="lg" className="rounded-full px-8" asChild>
+                <Link href="/contact">Let's work together</Link>
+              </Button>
+            </motion.div>
           </div>
         </div>
-
-        {/* Content Section */}
-        <div className="md:w-2/3 space-y-8">
-          <motion.div 
-            variants={fadeIn}
-            className="space-y-4"
-          >
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-sky-400 to-green-600 bg-clip-text text-transparent">
-              Full-Stack Web Developer
-            </h1>
-            <p className="text-lg text-muted-foreground font-light">
-              Crafting digital experiences with modern web technologies
-            </p>
-          </motion.div>
-
-          {/* Introduction Card */}
-          <motion.div variants={fadeIn}>
-            <Card className="hover:shadow-lg transition-shadow duration-300">
-              <CardHeader>
-                <h2 className="text-2xl font-semibold flex items-center gap-2">
-                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 w-2 h-6 block rounded-full"></span>
-                  About Me
-                </h2>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <p className="text-muted-foreground leading-relaxed">
-                  I am a passionate web developer with 5+ years of experience crafting 
-                  scalable web applications. Specializing in modern JavaScript ecosystems 
-                  and cloud-native architectures, I transform complex challenges into 
-                  elegant, performant solutions.
-                </p>
-                <div className="flex gap-4 flex-wrap">
-                  {socialLinks.map((link, index) => (
-                    <motion.div
-                      key={index}
-                      variants={fadeIn}
-                      custom={index}
-                    >
-                      <Button 
-                        variant="outline" 
-                        className="gap-2 hover:-translate-y-1 transition-transform"
-                        asChild
-                      >
-                        <Link href={link.href} target="_blank">
-                          {link.icon}
-                          {link.label}
-                        </Link>
-                      </Button>
-                    </motion.div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Skills Grid */}
-          <motion.div variants={fadeIn}>
-            <Card className="hover:shadow-lg transition-shadow duration-300">
-              <CardHeader>
-                <h2 className="text-2xl font-semibold flex items-center gap-2">
-                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 w-2 h-6 block rounded-full"></span>
-                  Technical Expertise
-                </h2>
-              </CardHeader>
-              <CardContent>
-                <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                  {skills.map((skill, index) => (
-                    <motion.div
-                      key={skill.name}
-                      variants={fadeIn}
-                      custom={index}
-                    >
-                      <Badge 
-                        variant="outline" 
-                        className="w-full px-4 py-3 flex items-center gap-2 hover:bg-muted/50 transition-colors"
-                      >
-                        {skill.icon}
-                        {skill.name}
-                      </Badge>
-                    </motion.div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-
-          {/* Experience Timeline */}
-          <motion.div variants={fadeIn}>
-            <Card className="hover:shadow-lg transition-shadow duration-300">
-              <CardHeader>
-                <h2 className="text-2xl font-semibold flex items-center gap-2">
-                  <span className="bg-gradient-to-r from-purple-600 to-pink-600 w-2 h-6 block rounded-full"></span>
-                  Professional Journey
-                </h2>
-              </CardHeader>
-              <CardContent>
-                <div className="relative space-y-8">
-                  <div className="absolute left-0 h-full w-px bg-gradient-to-b from-purple-600/20 to-pink-600/20"></div>
-                  
-                  <div className="relative pl-8">
-                    <div className="absolute left-0 top-2 w-4 h-4 bg-purple-600 rounded-full"></div>
-                    <h3 className="font-semibold text-lg">Backend Developer at FinupsBD</h3>
-                    <p className="text-sm text-muted-foreground mb-2">2024 - Present</p>
-                    <p className="text-muted-foreground">
-                      Led development of enterprise SaaS platform handling 1M+ MAU using Next.js and Node.js
-                    </p>
-                  </div>
-
-                  <div className="relative pl-8">
-                    <div className="absolute left-0 top-2 w-4 h-4 bg-pink-600 rounded-full"></div>
-                    <h3 className="font-semibold text-lg">Frontend Developer at Desh Universal LTD</h3>
-                    <p className="text-sm text-muted-foreground mb-2">2019 - 2021</p>
-                    <p className="text-muted-foreground">
-                      Built customer-facing applications with React + TypeScript, improving performance by 40%
-                    </p>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
-          </motion.div>
-        </div>
-      </motion.div>
+      </div>
     </section>
   )
 }

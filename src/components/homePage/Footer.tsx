@@ -1,4 +1,5 @@
 'use client'
+
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Github, Linkedin, Twitter } from "lucide-react"
@@ -22,43 +23,24 @@ export function Footer() {
   ]
 
   return (
-    <footer className="w-full border-t bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 py-8 md:px-6">
-        <div className="flex flex-col gap-8 md:flex-row md:justify-between">
+    <footer className="w-full border-t border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container mx-auto px-4 py-12 md:px-6">
+        <div className="grid grid-cols-1 md:grid-cols-4 gap-12">
           {/* Branding Section */}
-          <div className="space-y-4">
-            <Link href="/" className="flex items-center gap-2">
-              <Image src={logo} height={100} width={100} alt="logoFooter"></Image>
+          <div className="col-span-1 md:col-span-2 space-y-4">
+            <Link href="/" className="inline-block">
+              <Image src={logo} height={40} width={120} alt="logoFooter" className="h-10 w-auto" />
             </Link>
-            <p className="text-muted-foreground max-w-sm text-sm">
-              Building digital experiences with modern web technologies.
+            <p className="text-muted-foreground max-w-xs text-sm leading-relaxed">
+              Crafting high-performance web experiences with Next.js, React, and Node.js. Dedicated to quality and innovation.
             </p>
-          </div>
-
-          {/* Navigation Links */}
-          <div className="grid grid-cols-2 gap-8 sm:grid-cols-4">
-            {navLinks.map((link) => (
-              <div key={link.name} className="space-y-2">
-                <Link
-                  href={link.href}
-                  className="text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  {link.name}
-                </Link>
-              </div>
-            ))}
-          </div>
-
-          {/* Social Links */}
-          <div className="flex flex-col gap-4">
-            <h4 className="text-sm font-medium">Connect</h4>
-            <div className="flex gap-4">
+            <div className="flex gap-4 pt-2">
               {socialLinks.map((social, index) => (
                 <Button
                   key={index}
-                  variant="outline"
+                  variant="ghost"
                   size="icon"
-                  className="rounded-full"
+                  className="rounded-full hover:bg-primary/10 hover:text-primary transition-colors"
                   asChild
                 >
                   <Link href={social.href} target="_blank" rel="noopener noreferrer">
@@ -68,11 +50,45 @@ export function Footer() {
               ))}
             </div>
           </div>
+
+          {/* Navigation Links */}
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground">Sitemap</h4>
+            <ul className="space-y-2">
+              {navLinks.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    href={link.href}
+                    className="text-sm text-muted-foreground hover:text-primary transition-colors"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Contact Section or Quick Info */}
+          <div className="space-y-4">
+            <h4 className="text-sm font-semibold uppercase tracking-wider text-foreground">Contact</h4>
+            <p className="text-sm text-muted-foreground">
+              Based in Bangladesh, available worldwide.
+            </p>
+            <Button variant="outline" size="sm" asChild className="rounded-full">
+              <Link href="/contact">Get in touch</Link>
+            </Button>
+          </div>
         </div>
 
         {/* Copyright */}
-        <div className="mt-8 border-t pt-8 text-center text-sm text-muted-foreground">
-          © {currentYear} Reza.dev All rights reserved.
+        <div className="mt-12 border-t border-border/40 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+          <p className="text-sm text-muted-foreground text-center md:text-left">
+            © {currentYear} <span className="font-medium text-foreground">Reza.dev</span>. All rights reserved.
+          </p>
+          <div className="flex gap-6">
+            <Link href="/privacy-policy" className="text-xs text-muted-foreground hover:text-primary">Privacy Policy</Link>
+            <Link href="#" className="text-xs text-muted-foreground hover:text-primary">Terms of Service</Link>
+          </div>
         </div>
       </div>
     </footer>
