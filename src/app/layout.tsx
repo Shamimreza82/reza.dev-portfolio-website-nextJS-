@@ -1,6 +1,5 @@
 import { Metadata } from "next";
 import Script from "next/script";
-import { AuthProvider } from "@/components/auth-provider";
 import Navber from "@/components/Navber";
 import { Footer } from "@/components/homePage/Footer";
 import { Toaster } from "sonner";
@@ -89,14 +88,12 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="lazyOnload"
         />
-        <AuthProvider>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-            <Navber />
-            <LayoutProvider>{children}</LayoutProvider>
-            <Toaster />
-            <Footer />
-          </ThemeProvider>
-        </AuthProvider>
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+          <Navber />
+          <LayoutProvider>{children}</LayoutProvider>
+          <Toaster />
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );

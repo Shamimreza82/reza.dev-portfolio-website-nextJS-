@@ -3,38 +3,31 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
-import { Menu, X, ChevronDown } from "lucide-react"
+import { Menu, X } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { Button } from "@/components/ui/button"
-import { useAuth } from "./auth-provider"
-import logo from "../../public/rezahub.png"
-import {
-  DropdownMenu, DropdownMenuTrigger, DropdownMenuContent,
-  DropdownMenuGroup,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuPortal,
-  DropdownMenuSeparator,
-  DropdownMenuShortcut,
-  DropdownMenuSub,
-  DropdownMenuSubContent,
-  DropdownMenuSubTrigger,
-} from "./ui/dropdown-menu"
 import Image from "next/image"
+import logo from "../../public/rezahub.png"
 import { ModeToggle } from "./mode-toggle"
-
+import { motion, AnimatePresence } from "framer-motion"
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false)
-  const [servicesOpen, setServicesOpen] = useState(false)
+  const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
-  const { user } = useAuth()
+
+  // Handle scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 20)
+    }
+    window.addEventListener("scroll", handleScroll)
+    return () => window.removeEventListener("scroll", handleScroll)
+  }, [])
 
   // Close mobile menu when route changes
   useEffect(() => {
     setIsOpen(false)
   }, [pathname])
-
 
   const navLinks = [
     { path: "/", name: "Home" },
@@ -45,70 +38,69 @@ const Navbar = () => {
     { path: "/services", name: "Services" },
   ]
 
-
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 glass border-b border-border/40">
+    <nav
+      className={cn(
+        "fixed top-0 left-0 right-0 z-50 transition-all duration-300 ease-in-out",
+        scrolled 
+          ? "py-2 bg-background/80 backdrop-blur-lg border-b border-border/40 shadow-sm" 
+          : "py-4 bg-transparent"
+      )}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
+        <div className="flex items-center justify-between h-14">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center">
-              <Image src={logo} height={40} width={120} alt="logo" className="h-10 w-auto" />
+            <Link href="/" className="flex items-center group">
+              <div className="relative overflow-hidden rounded-lg">
+                <Image 
+                  src={logo} 
+                  height={40} 
+                  width={120} 
+                  alt="logo" 
+                  className="h-9 w-auto transition-transform duration-300 group-hover:scale-105" 
+                />
+              </div>
             </Link>
           </div>
 
           {/* Navigation Links - Desktop */}
-          <div className="hidden md:flex items-center space-x-4">
-            <div className="flex items-baseline space-x-4">
+          <div className="hidden md:flex items-center space-x-1">
+            <div className="flex items-center bg-accent/30 rounded-full px-1 py-1 border border-border/40">
               {navLinks.map((item) => (
                 <Link
                   key={item.name}
                   href={item.path}
                   className={cn(
-                    "px-3 py-2 rounded-md text-sm font-medium transition-colors",
+                    "relative px-4 py-1.5 rounded-full text-sm font-medium transition-all duration-300",
                     pathname === item.path
-                      ? "text-primary bg-primary/10"
-                      : "text-muted-foreground hover:text-primary hover:bg-accent"
+                      ? "text-primary-foreground"
+                      : "text-muted-foreground hover:text-primary"
                   )}
                 >
+                  {pathname === item.path && (
+                    <motion.div
+                      layoutId="nav-pill"
+                      className="absolute inset-0 bg-primary rounded-full -z-10"
+                      transition={{ type: "spring", bounce: 0.25, duration: 0.5 }}
+                    />
+                  )}
                   {item.name}
                 </Link>
               ))}
             </div>
 
-            <div className="flex items-center space-x-2 ml-4">
+            <div className="flex items-center ml-4 pl-4 border-l border-border/40">
               <ModeToggle />
-              
-              {user ? (
-                <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="default" size="sm">Dashboard</Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end" className="w-56">
-                    <DropdownMenuLabel>My Account</DropdownMenuLabel>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuGroup>
-                      <DropdownMenuItem>Profile</DropdownMenuItem>
-                      <DropdownMenuItem>Settings</DropdownMenuItem>
-                    </DropdownMenuGroup>
-                    <DropdownMenuSeparator />
-                    <DropdownMenuItem>Log out</DropdownMenuItem>
-                  </DropdownMenuContent>
-                </DropdownMenu>
-              ) : (
-                <Link href="/login">
-                  <Button variant="default" size="sm">Login</Button>
-                </Link>
-              )}
             </div>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden flex items-center space-x-2">
+          <div className="md:hidden flex items-center space-x-3">
             <ModeToggle />
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-muted-foreground hover:text-primary hover:bg-accent transition-colors"
+              className="inline-flex items-center justify-center p-2 rounded-xl text-muted-foreground hover:text-primary hover:bg-accent/50 transition-colors border border-transparent hover:border-border/40"
               aria-label="Toggle menu"
             >
               {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -118,37 +110,33 @@ const Navbar = () => {
       </div>
 
       {/* Mobile Menu */}
-      <div
-        className={cn(
-          "md:hidden absolute top-16 left-0 right-0 bg-background border-b border-border transition-all duration-300 ease-in-out overflow-hidden",
-          isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            className="md:hidden absolute top-full left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border shadow-xl overflow-hidden"
+          >
+            <div className="px-4 pt-2 pb-6 space-y-1">
+              {navLinks.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.path}
+                  className={cn(
+                    "block px-4 py-3 rounded-xl text-base font-medium transition-all",
+                    pathname === item.path
+                      ? "text-primary bg-primary/10 border-l-4 border-primary"
+                      : "text-muted-foreground hover:text-primary hover:bg-accent"
+                  )}
+                >
+                  {item.name}
+                </Link>
+              ))}
+            </div>
+          </motion.div>
         )}
-      >
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {navLinks.map((item) => (
-            <Link
-              key={item.name}
-              href={item.path}
-              className={cn(
-                "block px-3 py-2 rounded-md text-base font-medium",
-                pathname === item.path
-                  ? "text-primary bg-primary/10"
-                  : "text-muted-foreground hover:text-primary hover:bg-accent"
-              )}
-            >
-              {item.name}
-            </Link>
-          ))}
-          {!user && (
-            <Link
-              href="/login"
-              className="block px-3 py-2 rounded-md text-base font-medium text-muted-foreground hover:text-primary hover:bg-accent"
-            >
-              Login
-            </Link>
-          )}
-        </div>
-      </div>
+      </AnimatePresence>
     </nav>
   )
 }
