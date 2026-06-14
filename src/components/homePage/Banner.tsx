@@ -7,10 +7,45 @@ import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import bannerImage1 from "../../asset/photo/protolio1.webp";
 import StatusBadge from "../ui/status-badge";
-import { useRef } from "react";
+import { useState, useEffect, useRef, useCallback } from "react";
+
+const roles = [
+  "Backend Systems",
+  "AI Solutions",
+  "SaaS Platforms",
+  "RESTful APIs"
+];
 
 const Banner = () => {
   const sectionRef = useRef<HTMLElement>(null);
+  const [roleIndex, setRoleIndex] = useState(0);
+  const [charIndex, setCharIndex] = useState(0);
+  const [isDeleting, setIsDeleting] = useState(false);
+
+  const currentRole = roles[roleIndex];
+
+  const handleTyping = useCallback(() => {
+    if (!isDeleting) {
+      if (charIndex < currentRole.length) {
+        setCharIndex(prev => prev + 1);
+      } else {
+        setTimeout(() => setIsDeleting(true), 2000);
+      }
+    } else {
+      if (charIndex > 0) {
+        setCharIndex(prev => prev - 1);
+      } else {
+        setIsDeleting(false);
+        setRoleIndex(prev => (prev + 1) % roles.length);
+      }
+    }
+  }, [charIndex, isDeleting, currentRole]);
+
+  useEffect(() => {
+    const speed = isDeleting ? 40 : 80;
+    const timer = setTimeout(handleTyping, speed);
+    return () => clearTimeout(timer);
+  }, [handleTyping, isDeleting]);
   
   // Scroll Parallax
   const { scrollYProgress } = useScroll({
@@ -113,8 +148,11 @@ const Banner = () => {
                 variants={itemVariants}
                 className="text-5xl md:text-7xl xl:text-8xl font-black tracking-tight leading-[1.1]"
               >
-                Engineering <span className="text-gradient">Backend</span><br /> 
-                Systems.
+                Engineering<br />
+                <span className="text-gradient inline-flex">
+                  {currentRole.substring(0, charIndex)}
+                  <span className="animate-pulse ml-0.5 font-light">|</span>
+                </span>
               </motion.h1>
               
               <motion.p 

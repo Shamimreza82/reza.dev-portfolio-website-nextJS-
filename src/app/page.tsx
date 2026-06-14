@@ -2,6 +2,7 @@ import Banner from "@/components/homePage/Banner";
 import ScrollProgress from "@/components/small-component/ScrollProgress";
 import ProjectsSection from "@/components/homePage/ProjectsSection";
 import JourneySection from "@/components/homePage/JourneySection";
+import SkillsSection from "@/components/homePage/SkillsSection";
 import DynamicSections from "@/components/homePage/DynamicSections";
 import { Metadata } from "next";
 
@@ -16,6 +17,7 @@ export default function Home() {
       <ScrollProgress />
       <Banner />
       <ProjectsSection />
+      <SkillsSection />
       <JourneySection />
       <DynamicSections />
     </div>
