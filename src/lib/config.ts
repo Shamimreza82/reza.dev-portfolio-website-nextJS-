@@ -5,7 +5,7 @@ export const PERSON = {
   name: "Reza",
   altName: "Shamim Reza",
   jobTitle: "Full-Stack Web Developer",
-  image: `${SITE_URL}/profile.png`,   // update
+  image: `${SITE_URL}/profile.webp`,
   sameAs: [
     "https://www.linkedin.com/in/shamim--reza/",
     "https://github.com/Shamimreza82",

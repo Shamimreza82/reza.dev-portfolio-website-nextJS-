@@ -5,7 +5,7 @@ import { ArrowRight, Github, Code2, Rocket, Sparkles, Server, Download } from "l
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import bannerImage1 from "../../asset/photo/protolio1.jpg";
+import bannerImage1 from "../../asset/photo/protolio1.webp";
 import StatusBadge from "../ui/status-badge";
 import { useRef } from "react";
 
@@ -185,7 +185,7 @@ const Banner = () => {
                   className="w-full h-full object-cover transition-transform duration-1000 group-hover:scale-105"
                   priority
                   sizes="(max-width: 768px) 100vw, 30vw"
-                  quality={95}
+                  quality={80}
                 />
                 
                 {/* Clean Subtle Overlay */}

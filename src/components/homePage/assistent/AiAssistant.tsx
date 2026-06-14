@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChatBubbleOvalLeftEllipsisIcon } from "@heroicons/react/24/outline";
+import { MessageCircle } from "lucide-react";
 import { useRef } from "react";
 
 const floatTransition = {
@@ -46,7 +46,7 @@ export default function AiAssistant() {
         aria-label="Contact on WhatsApp"
       >
         <motion.div className="h-14 w-14 lg:h-20 lg:w-20 bg-gradient-to-br from-green-400 to-blue-500 rounded-full flex items-center justify-center shadow-xl">
-          <ChatBubbleOvalLeftEllipsisIcon className="lg:h-12 lg:w-12 h-8 w-8 text-white" />
+          <MessageCircle className="lg:h-12 lg:w-12 h-8 w-8 text-white" />
         </motion.div>
         <motion.span
           className="absolute top-1 right-1 h-3 w-3 bg-green-400 rounded-full"

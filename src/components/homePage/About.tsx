@@ -7,7 +7,7 @@ import { motion } from "framer-motion"
 import Image from "next/image"
 import { Code, File, Github, Linkedin, Rocket, Server, User, Brain, Database, Cloud } from "lucide-react"
 import Link from "next/link"
-import reza from '@/asset/photo/reza.jpg'
+import reza from '@/asset/photo/reza.webp'
 
 export default function About() {
   const skills = [

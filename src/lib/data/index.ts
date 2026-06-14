@@ -1,6 +1,6 @@
-import fintechMain from '@/asset/projects/fintech/mainpage.jpg'
-import inventoryShop from '@/asset/projects/inventory/public-shop.jpg'
-import fintechDash from '@/asset/projects/fintech/dashboard.jpg'
+import fintechMain from '@/asset/projects/fintech/mainpage.webp'
+import inventoryShop from '@/asset/projects/inventory/public-shop.webp'
+import fintechDash from '@/asset/projects/fintech/dashboard.webp'
 
 export const data = {
   personalInfo: {
@@ -77,7 +77,7 @@ export const data = {
       ],
       impact: "Integrated OpenAI and Google AI for intelligent financial assistance and automated smart eligibility processing.",
       techStack: ["Node.js", "Express", "Prisma", "PostgreSQL", "Redis", "Cloudinary"],
-      liveUrl: "https://e-commerce-fronend-alpha.vercel.app/", // Placeholder or actual if different
+      liveUrl: "https://finupsbd.com/",
       codeUrl: "#",
       image: fintechMain
     },
@@ -92,7 +92,7 @@ export const data = {
       ],
       impact: "Built with a focus on local business needs, featuring Zod validation and Docker deployment for reliability.",
       techStack: ["Next.js", "TypeScript", "Prisma", "PostgreSQL", "Docker", "Zod"],
-      liveUrl: "#",
+      liveUrl: "https://smartshop.toolsunlock.com/",
       codeUrl: "#",
       image: inventoryShop
     },
