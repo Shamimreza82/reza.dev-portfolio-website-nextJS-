@@ -174,7 +174,7 @@ const Banner = () => {
             {/* Tech Stack Pills */}
             <motion.div
               variants={itemVariants}
-              className="flex flex-wrap justify-center lg:justify-start items-center gap-3 pt-6"
+              className="flex flex-wrap justify-center lg:justify-start items-center gap-3 pt-8"
             >
               {[
                 { name: "Node.js", icon: <Server className="w-3 h-3" /> },
