@@ -1,13 +1,13 @@
 "use client";
 
-import { motion, Variants, useScroll, useTransform } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { ArrowRight, Github, Code2, Rocket, Sparkles, Server, Download } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import bannerImage1 from "../../asset/photo/protolio1.webp";
 import StatusBadge from "../ui/status-badge";
-import { useState, useEffect, useRef, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 const roles = [
   "Backend Systems",
@@ -17,7 +17,6 @@ const roles = [
 ];
 
 const Banner = () => {
-  const sectionRef = useRef<HTMLElement>(null);
   const [roleIndex, setRoleIndex] = useState(0);
   const [charIndex, setCharIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
@@ -47,17 +46,6 @@ const Banner = () => {
     return () => clearTimeout(timer);
   }, [handleTyping, isDeleting]);
   
-  // Scroll Parallax
-  const { scrollYProgress } = useScroll({
-    target: sectionRef,
-    offset: ["start start", "end start"]
-  });
-
-  const yHeading = useTransform(scrollYProgress, [0, 1], [0, 100]);
-  const yGlow1 = useTransform(scrollYProgress, [0, 1], [0, -150]);
-  const yGlow2 = useTransform(scrollYProgress, [0, 1], [0, 150]);
-  const opacityScroll = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
-
   const containerVariants: Variants = {
     hidden: { opacity: 0 },
     visible: {
@@ -79,22 +67,13 @@ const Banner = () => {
   };
 
   return (
-    <section 
-      ref={sectionRef}
-      className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden perspective-1000"
-    >
+    <section className="relative min-h-screen flex items-center pt-24 pb-16 overflow-hidden perspective-1000">
       {/* Dynamic Background Elements */}
-      <motion.div style={{ opacity: opacityScroll }} className="absolute inset-0 -z-10">
-        <motion.div 
-          style={{ y: yGlow1 }}
-          className="absolute top-[10%] left-[-5%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] animate-pulse" 
-        />
-        <motion.div 
-          style={{ y: yGlow2 }}
-          className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[120px]" 
-        />
+      <div className="absolute inset-0 -z-10">
+        <div className="absolute top-[10%] left-[-5%] w-[40%] h-[40%] bg-primary/10 rounded-full blur-[120px] animate-pulse" />
+        <div className="absolute bottom-[10%] right-[-5%] w-[40%] h-[40%] bg-blue-500/10 rounded-full blur-[120px]" />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--primary-rgb),0.05)_0%,transparent_70%)]" />
-      </motion.div>
+      </div>
 
       {/* Modern Grid/Pattern */}
       <div className="absolute inset-0 bg-[linear-gradient(to_right,#8080800a_1px,transparent_1px),linear-gradient(to_bottom,#8080800a_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_at_center,black,transparent_80%)] -z-20" />
@@ -120,7 +99,6 @@ const Banner = () => {
             variants={containerVariants}
             initial="hidden"
             animate="visible"
-            style={{ y: yHeading }}
             className="lg:col-span-7 flex flex-col space-y-8 text-center lg:text-left"
           >
             {/* <motion.div variants={itemVariants} className="flex justify-center lg:justify-start">

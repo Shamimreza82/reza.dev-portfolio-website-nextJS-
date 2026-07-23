@@ -59,7 +59,7 @@ export const metadata: Metadata = {
   },
 };
 
-import { SmoothScrollProvider } from "@/providers/SmoothScrollProvider";
+
 
 export default function RootLayout({
   children,
@@ -97,13 +97,11 @@ export default function RootLayout({
           crossOrigin="anonymous"
           strategy="lazyOnload"
         />
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
-          <SmoothScrollProvider>
-            <Navber />
-            <LayoutProvider><main id="main-content">{children}</main></LayoutProvider>
-            <Toaster />
-            <Footer />
-          </SmoothScrollProvider>
+        <ThemeProvider attribute="class" defaultTheme="dark" disableTransitionOnChange>
+          <Navber />
+          <LayoutProvider><main id="main-content">{children}</main></LayoutProvider>
+          <Toaster />
+          <Footer />
         </ThemeProvider>
       </body>
     </html>
