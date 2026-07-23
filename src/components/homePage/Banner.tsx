@@ -5,7 +5,7 @@ import { ArrowRight, Github, Code2, Rocket, Sparkles, Server, Download } from "l
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import bannerImage1 from "../../asset/photo/protolio1.webp";
+import bannerImage from "../../asset/banner.png";
 import StatusBadge from "../ui/status-badge";
 import { useState, useEffect, useCallback } from "react";
 
@@ -81,9 +81,9 @@ const Banner = () => {
       {/* Full-Screen Image on Right */}
       <div className="absolute top-0 right-0 w-1/2 h-full hidden lg:block">
         <Image
-          src={bannerImage1}
+          src={bannerImage}
           alt="SHAMIM REZA - Backend Specialist"
-          className="w-full h-full object-cover object-left"
+          className="w-full h-full object-cover object-left scale-x-[-1]"
           priority
           sizes="50vw"
           quality={100}
@@ -120,34 +120,9 @@ const Banner = () => {
                 </span>
               </motion.h1>
               
-              <motion.p 
-                variants={itemVariants}
-                className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0 leading-relaxed font-medium"
-              >
-                I'm <span className="text-foreground font-bold underline decoration-primary/30 underline-offset-4">SHAMIM REZA</span>, a Full-Stack Developer specializing in scalable backend architectures and intelligent AI-powered solutions.
-              </motion.p>
+
             </div>
 
-            {/* <motion.div 
-              variants={itemVariants}
-              className="flex flex-wrap justify-center lg:justify-start gap-4 pt-2"
-            >
-              <Button asChild size="lg" className="h-14 px-10 rounded-2xl text-base font-bold shadow-xl shadow-primary/20 hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300">
-                <Link href="/projects">
-                  View Projects <ArrowRight className="ml-2 h-5 w-5" />
-                </Link>
-              </Button>
-              <Button variant="outline" size="lg" className="h-14 px-10 rounded-2xl text-base font-bold bg-background/50 backdrop-blur-sm border-border/50 hover:bg-accent/50 hover:-translate-y-1 transition-all duration-300" asChild>
-                <Link href="https://github.com/Shamimreza82" target="_blank">
-                  <Github className="mr-2 h-5 w-5" /> GitHub
-                </Link>
-              </Button>
-              <Button variant="secondary" size="lg" className="h-14 px-10 rounded-2xl text-base font-bold shadow-lg hover:-translate-y-1 transition-all duration-300" asChild>
-                <a href="/Shamim_Reza_Resume.pdf" download="Shamim_Reza_Resume.pdf">
-                  <Download className="mr-2 h-5 w-5" /> Resume
-                </a>
-              </Button>
-            </motion.div> */}
 
             {/* Tech Stack Pills */}
             <motion.div
@@ -162,7 +137,7 @@ const Banner = () => {
               ].map((tech) => (
                 <div 
                   key={tech.name}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/50 border border-border/40 text-[10px] md:text-xs font-bold uppercase tracking-widest text-muted-foreground/80 hover:text-primary hover:border-primary/30 transition-colors"
+                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-accent/20 border border-border/40 text-[10px] md:text-xs font-bold uppercase tracking-widest text-muted-foreground/80 hover:text-primary hover:border-primary/30 transition-colors"
                 >
                   {tech.icon}
                   {tech.name}
