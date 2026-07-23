@@ -5,7 +5,7 @@ import { ArrowRight, Github, Code2, Rocket, Sparkles, Server, Download } from "l
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
-import bannerImage from "../../asset/banner.png";
+import bannerImage from "../../asset/banner.webp";
 import StatusBadge from "../ui/status-badge";
 import { useState, useEffect, useCallback } from "react";
 
