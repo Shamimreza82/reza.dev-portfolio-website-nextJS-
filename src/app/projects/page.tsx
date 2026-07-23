@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from "@/components/ui/card";
-import { Tabs, TabsList, TabsTrigger, TabsContent } from "@/components/ui/tabs";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
@@ -34,7 +34,6 @@ const itemVariants = {
 
 export default function PortfolioPage() {
   const [activeFilter, setActiveFilter] = useState('all');
-  const [activeTab, setActiveTab] = useState('frontend');
 
   const filteredProjects = activeFilter === 'all'
     ? data.projects
@@ -141,45 +140,6 @@ export default function PortfolioPage() {
             </motion.div>
           ))}
         </div>
-      </motion.section>
-
-      {/* Skills Section */}
-      <motion.section variants={itemVariants} className="mb-20 mt-20">
-        <h2 className="text-4xl font-bold mb-12 text-center">Technical Expertise</h2>
-        <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full md:w-2/3 mx-auto grid-cols-3 bg-muted/50">
-            {Object.keys(data.skills).map((category) => (
-              <TabsTrigger
-                key={category}
-                value={category}
-                className="data-[state=active]:bg-primary data-[state=active]:text-white"
-              >
-                {category.charAt(0).toUpperCase() + category.slice(1)}
-              </TabsTrigger>
-            ))}
-          </TabsList>
-
-          {Object.entries(data.skills).map(([category, skills]) => (
-            <TabsContent key={category} value={category} className="mt-8">
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {skills.map((skill) => (
-                  <motion.div
-                    key={skill}
-                    whileHover={{ y: -5 }}
-                    className="group"
-                  >
-                    <Card className="relative overflow-hidden border-border/50 bg-card/50 backdrop-blur-sm transition-all hover:border-primary/50 hover:shadow-lg hover:shadow-primary/5">
-                      <CardHeader className="p-4 flex flex-row items-center gap-3">
-                        <div className="h-2 w-2 rounded-full bg-primary/60 group-hover:bg-primary transition-colors" />
-                        <CardTitle className="text-sm font-medium leading-none">{skill}</CardTitle>
-                      </CardHeader>
-                    </Card>
-                  </motion.div>
-                ))}
-              </div>
-            </TabsContent>
-          ))}
-        </Tabs>
       </motion.section>
 
       {/* Services Section */}

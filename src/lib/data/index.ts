@@ -1,7 +1,5 @@
 import fintechMain from '@/asset/projects/fintech/mainpage.webp'
 import inventoryShop from '@/asset/projects/inventory/public-shop.webp'
-import fintechDash from '@/asset/projects/fintech/dashboard.webp'
-
 export const data = {
   personalInfo: {
     name: "SHAMIM REZA",
@@ -96,19 +94,5 @@ export const data = {
       codeUrl: "#",
       image: inventoryShop
     },
-    {
-      title: "Blood Donation Application (Life Lines)",
-      description: "A comprehensive platform connecting blood donors and recipients with real-time tracking.",
-      features: [
-        "Real-time donor search with location-based filtering",
-        "Automated emergency blood request notification system",
-        "Donor eligibility tracking and medical history logging"
-      ],
-      impact: "Facilitated over 500+ life-saving donations and reduced search time by 60%.",
-      techStack: ["React", "Node.js", "MongoDB", "Mongoose", "TailwindCSS"],
-      liveUrl: "https://blood-donation-28936.web.app/",
-      codeUrl: "#",
-      image: fintechDash
-    }
   ]
 };

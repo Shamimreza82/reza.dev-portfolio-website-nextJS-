@@ -72,6 +72,12 @@ export default function RootLayout({
         <link rel="manifest" href="/manifest.json" />
       </head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased font-sans`}>
+        <a
+          href="#main-content"
+          className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-50 focus:px-4 focus:py-2 focus:bg-primary focus:text-primary-foreground focus:rounded-md focus:outline-none"
+        >
+          Skip to main content
+        </a>
         <Script
           src="https://www.googletagmanager.com/gtag/js?id=G-NE4D2QJFXX"
           strategy="afterInteractive"
@@ -94,7 +100,7 @@ export default function RootLayout({
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <SmoothScrollProvider>
             <Navber />
-            <LayoutProvider>{children}</LayoutProvider>
+            <LayoutProvider><main id="main-content">{children}</main></LayoutProvider>
             <Toaster />
             <Footer />
           </SmoothScrollProvider>

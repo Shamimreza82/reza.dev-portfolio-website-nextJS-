@@ -3,7 +3,8 @@ import React from 'react'
 const WebServices = () => {
   return (
     <div>
-      Web Services Page
+      Web Services Page    Web Services Page
+      
     </div>
   )
 }
